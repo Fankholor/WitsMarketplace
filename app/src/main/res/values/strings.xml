@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">WitsMarketplace</string>
+    <string name="help">help</string>
+    <string name="new_game">new game</string>
+
+    <!--    <string-array name="departments">-->
+<!--        <menu>-->
+<!--        <item>Books-->
+<!--            <menu>-->
+<!--                <item>Fiction</item>-->
+<!--                <item>Non-Fiction</item>-->
+<!--            </menu>-->
+
+<!--        </item>-->
+<!--        <item>Computer &amp; Electronics</item>-->
+<!--        <item>Gaming</item>-->
+<!--        <item>Clothing</item>-->
+<!--        <item>Health &amp; Hygiene</item>-->
+<!--        <item>Sports &amp; Training</item>-->
+<!--        </menu>-->
+<!--    </string-array>-->
+</resources>

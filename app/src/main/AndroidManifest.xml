@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WitsMarketplace">
         <activity
-            android:name=".LandingPage"
+            android:name=".LandingPage.LandingPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

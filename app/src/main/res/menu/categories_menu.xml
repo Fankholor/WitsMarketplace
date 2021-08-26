@@ -8,8 +8,7 @@
         android:title="Categories"/>
 
     <item android:id="@+id/books"
-        app:showAsAction="always"
-        android:icon="@drawable/book_mobile"
+        app:showAsAction="never"
         android:title="Books">
 
         <menu>

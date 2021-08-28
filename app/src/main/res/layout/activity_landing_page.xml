@@ -35,14 +35,15 @@
             android:layout_marginBottom="12dp"
             android:background="@drawable/rectangle4"
             android:ems="10"
-            android:hint="search for products, brands..."
+            android:hint="@string/search_for_products_brands"
             android:inputType="textPersonName"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.533"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.138" />
+            app:layout_constraintVertical_bias="0.138"
+            android:importantForAutofill="no" />
 
         <ImageButton
             android:id="@+id/btn_search"
@@ -63,7 +64,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.139"
-            app:srcCompat="@drawable/search" />
+            app:srcCompat="@drawable/search"
+            android:contentDescription="@string/search_button" />
 
         <ImageView
             android:id="@+id/imageView5"
@@ -83,7 +85,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.138"
-            app:srcCompat="@drawable/rectangle6" />
+            app:srcCompat="@drawable/rectangle6"
+            android:contentDescription="@string/nada" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -103,7 +106,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.086"
-            app:srcCompat="@drawable/marketplace" />
+            app:srcCompat="@drawable/marketplace"
+            android:contentDescription="@string/logo" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -123,7 +127,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/wits" />
+            app:srcCompat="@drawable/wits"
+            android:contentDescription="@string/logo" />
 
         <ImageButton
             android:id="@+id/btn_categories"
@@ -146,7 +151,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.023"
             app:srcCompat="@drawable/yellow_categories"
-            tools:ignore="SpeakableTextPresentCheck" />
+            tools:ignore="SpeakableTextPresentCheck"
+            android:contentDescription="@string/categories_drawbar" />
 
 
     </RelativeLayout>
@@ -168,7 +174,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="284dp"
+                android:layout_height="290dp"
                 android:layout_alignParentStart="false"
                 android:layout_alignParentTop="false"
                 android:layout_alignParentEnd="false"
@@ -191,7 +197,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="255dp"
                     android:layout_marginBottom="239dp"
-                    android:text="Books"
+                    android:text="@string/books"
                     android:textColor="@color/blue"
                     android:textSize="25sp"
                     android:textStyle="bold" />
@@ -199,7 +205,7 @@
                 <HorizontalScrollView
                     android:id="@+id/horizontalScrollView"
                     android:layout_width="match_parent"
-                    android:layout_height="238dp"
+                    android:layout_height="245dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="false"
                     android:layout_alignParentEnd="false"
@@ -219,6 +225,7 @@
                     <RelativeLayout
                         android:layout_width="410dp"
                         android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
                         android:orientation="horizontal">
 
                         <androidx.recyclerview.widget.RecyclerView
@@ -238,34 +245,74 @@
 
                 </HorizontalScrollView>
 
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/vm_books"
+                    android:layout_width="100dp"
+                    android:layout_height="37dp"
+                    android:layout_alignParentStart="false"
+                    android:layout_alignParentTop="false"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignParentBottom="false"
+                    android:layout_marginStart="300dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:background="@color/cardview_light_background"
+                    android:elevation="50dp"
+                    android:shadowColor="@color/black"
+                    android:text="@string/view_more"
+                    android:textAllCaps="false"
+                    android:textColor="@color/blue"
+                    android:textSize="17sp" />
+
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="322dp"
+                android:layout_height="290dp"
                 android:layout_alignParentStart="false"
                 android:layout_alignParentTop="false"
                 android:layout_alignParentEnd="false"
                 android:layout_alignParentBottom="false"
                 android:layout_marginStart="0dp"
-                android:layout_marginTop="295dp"
+                android:layout_marginTop="300dp"
                 android:layout_marginEnd="0dp"
                 android:layout_marginBottom="0dp"
                 android:background="@color/white">
 
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/vm_computers"
+                    android:layout_width="100dp"
+                    android:layout_height="37dp"
+                    android:layout_alignParentStart="false"
+                    android:layout_alignParentTop="false"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignParentBottom="false"
+                    android:layout_marginStart="300dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:background="@color/cardview_light_background"
+                    android:elevation="50dp"
+                    android:shadowColor="@color/black"
+                    android:text="@string/view_more"
+                    android:textAllCaps="false"
+                    android:textColor="@color/blue"
+                    android:textSize="17sp" />
+
                 <TextView
                     android:id="@+id/lbl_computers"
-                    android:layout_width="220dp"
-                    android:layout_height="30dp"
+                    android:layout_width="225dp"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentStart="false"
                     android:layout_alignParentTop="false"
                     android:layout_alignParentEnd="false"
                     android:layout_alignParentBottom="false"
                     android:layout_marginStart="27dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="0dp"
-                    android:layout_marginBottom="259dp"
-                    android:text="Computer &amp; Electronics"
+                    android:layout_marginBottom="249dp"
+                    android:text="@string/computer_amp_electronics"
                     android:textColor="@color/blue"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -273,7 +320,7 @@
                 <HorizontalScrollView
                     android:id="@+id/horizontalScrollView2"
                     android:layout_width="match_parent"
-                    android:layout_height="244dp"
+                    android:layout_height="295dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
@@ -281,7 +328,7 @@
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="47dp"
                     android:layout_marginEnd="0dp"
-                    android:layout_marginBottom="22dp"
+                    android:layout_marginBottom="0dp"
                     android:background="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -292,7 +339,7 @@
 
                     <RelativeLayout
                         android:layout_width="25dp"
-                        android:layout_height="235dp"
+                        android:layout_height="280dp"
                         android:orientation="horizontal"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -304,15 +351,15 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_computers"
                             android:layout_width="wrap_content"
-                            android:layout_height="236dp"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentEnd="true"
-                            android:layout_alignParentBottom="true"
+                            android:layout_height="280dp"
+                            android:layout_alignParentStart="false"
+                            android:layout_alignParentTop="false"
+                            android:layout_alignParentEnd="false"
+                            android:layout_alignParentBottom="false"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="38dp"
-                            android:layout_marginEnd="365dp"
-                            android:layout_marginBottom="6dp"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginEnd="422dp"
+                            android:layout_marginBottom="0dp"
                             android:orientation="horizontal" />
 
                     </RelativeLayout>
@@ -320,6 +367,292 @@
                 </HorizontalScrollView>
 
             </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="295dp"
+                android:layout_alignParentStart="false"
+                android:layout_alignParentTop="false"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentBottom="false"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="600dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/lbl_clothes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="false"
+                    android:layout_alignParentTop="false"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignParentBottom="false"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="255dp"
+                    android:layout_marginBottom="239dp"
+                    android:text="@string/clothes"
+                    android:textColor="@color/blue"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <HorizontalScrollView
+                    android:id="@+id/horizontalScrollView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="245dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="false"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignParentBottom="false"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:background="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0">
+
+                    <RelativeLayout
+                        android:layout_width="410dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_clothes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="237dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginStart="6dp"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginEnd="364dp"
+                            android:layout_marginBottom="0dp"
+                            android:orientation="horizontal" />
+                    </RelativeLayout>
+
+                </HorizontalScrollView>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/vm_clothes"
+                    android:layout_width="100dp"
+                    android:layout_height="37dp"
+                    android:layout_alignParentStart="false"
+                    android:layout_alignParentTop="false"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignParentBottom="false"
+                    android:layout_marginStart="300dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:background="@color/cardview_light_background"
+                    android:elevation="50dp"
+                    android:shadowColor="@color/black"
+                    android:text="@string/view_more"
+                    android:textAllCaps="false"
+                    android:textColor="@color/blue"
+                    android:textSize="17sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="295dp"
+                android:layout_alignParentStart="false"
+                android:layout_alignParentTop="false"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentBottom="false"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="905dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/lbl_hygiene"
+                    android:layout_width="wrap_content"
+                    android:layout_height="31dp"
+                    android:layout_alignParentStart="false"
+                    android:layout_alignParentTop="false"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignParentBottom="false"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="215dp"
+                    android:layout_marginBottom="239dp"
+                    android:text="@string/health_amp_hygiene"
+                    android:textColor="@color/blue"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <HorizontalScrollView
+                    android:id="@+id/horizontalScrollView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="245dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="false"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignParentBottom="false"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:background="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0">
+
+                    <RelativeLayout
+                        android:layout_width="410dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_health"
+                            android:layout_width="wrap_content"
+                            android:layout_height="237dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginStart="6dp"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginEnd="364dp"
+                            android:layout_marginBottom="0dp"
+                            android:orientation="horizontal" />
+                    </RelativeLayout>
+
+                </HorizontalScrollView>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/vm_health"
+                    android:layout_width="100dp"
+                    android:layout_height="37dp"
+                    android:layout_alignParentStart="false"
+                    android:layout_alignParentTop="false"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignParentBottom="false"
+                    android:layout_marginStart="300dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:background="@color/cardview_light_background"
+                    android:elevation="50dp"
+                    android:shadowColor="@color/black"
+                    android:text="@string/view_more"
+                    android:textAllCaps="false"
+                    android:textColor="@color/blue"
+                    android:textSize="17sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_alignParentStart="false"
+                android:layout_alignParentTop="false"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentBottom="false"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="1210dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/lbl_sports"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_alignParentStart="false"
+                    android:layout_alignParentTop="false"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignParentBottom="false"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="255dp"
+                    android:layout_marginBottom="229dp"
+                    android:text="@string/sports"
+                    android:textColor="@color/blue"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <HorizontalScrollView
+                    android:id="@+id/horizontalScrollView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="245dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="false"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignParentBottom="false"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:background="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0">
+
+                    <RelativeLayout
+                        android:layout_width="410dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_sports"
+                            android:layout_width="wrap_content"
+                            android:layout_height="237dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginStart="6dp"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginEnd="364dp"
+                            android:layout_marginBottom="0dp"
+                            android:orientation="horizontal" />
+                    </RelativeLayout>
+
+                </HorizontalScrollView>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/vm_sports"
+                    android:layout_width="100dp"
+                    android:layout_height="37dp"
+                    android:layout_alignParentStart="false"
+                    android:layout_alignParentTop="false"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignParentBottom="false"
+                    android:layout_marginStart="300dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:background="@color/cardview_light_background"
+                    android:elevation="50dp"
+                    android:shadowColor="@color/black"
+                    android:text="@string/view_more"
+                    android:textAllCaps="false"
+                    android:textColor="@color/blue"
+                    android:textSize="17sp" />
+
+            </RelativeLayout>
+
 
         </RelativeLayout>
 

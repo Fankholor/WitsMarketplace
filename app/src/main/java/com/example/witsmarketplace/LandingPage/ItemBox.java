@@ -5,7 +5,7 @@ import android.graphics.drawable.Drawable;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ItemBox {
-    private String name, price, image, description;
+    private final String name, price, image, description;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;

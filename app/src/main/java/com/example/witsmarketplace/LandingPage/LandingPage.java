@@ -4,15 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
-import android.widget.ProgressBar;
-import android.widget.Spinner;
 
 import com.example.witsmarketplace.MainActivity;
 import com.example.witsmarketplace.R;
@@ -21,39 +16,29 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Build;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.ProgressBar;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class LandingPage extends AppCompatActivity implements RecyclerView.OnScrollChangeListener{
 
-    String webURL = "https://lamp.ms.wits.ac.za/home/s2172765/product.php?ID=";
+    String webURL = "https://lamp.ms.wits.ac.za/home/s2172765/product.php?ID="; // 1 = computer/electronics >>> 3 = books >>> 6 = clothing >>> 8 = health/hygiene >>> 10 = sports
     private RecyclerView recyclerView;
-    ArrayList<ItemBox> itemBoxes = new ArrayList<ItemBox>();
     private RequestQueue requestQueue;
 
+    ArrayList<ItemBox> books_list = new ArrayList<ItemBox>();
+    ArrayList<ItemBox> computers_list = new ArrayList<ItemBox>();
+    ArrayList<ItemBox> clothes_list = new ArrayList<ItemBox>();
+    ArrayList<ItemBox> sports_list = new ArrayList<ItemBox>();
+    ArrayList<ItemBox> health_list = new ArrayList<ItemBox>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,15 +47,7 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
 
         requestQueue = Volley.newRequestQueue(this);
 
-        getData();                  //get data from database
-
-//      display the data in a recyclerview which allows us to scroll through
-        recyclerView = findViewById(R.id.rv_books);
-        recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        RecyclerView.Adapter adapter = new Itembox_Adapter(itemBoxes);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+        renderCategories();         //render all categories with their items
 
 //      Categories draw-bar button
         ImageButton cat =(ImageButton)findViewById(R.id.btn_categories);
@@ -96,7 +73,7 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
     }
 
 //  Parsing data from database and adding it to an arraylist (for easy access)
-    private void parseData(JSONArray array) {
+    private void parseData(JSONArray array, int count) {
         String name="", price="", image="", description="";
         for (int i = 0; i < array.length(); i++) {
 
@@ -116,7 +93,11 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
                 e.printStackTrace();
             }
             //Adding the request object to the list
-            itemBoxes.add(new ItemBox(name, "R " + price, image, description));
+            if (count == 1) computers_list.add(new ItemBox(name, "R " + price, image, description));
+            else if (count == 3) books_list.add(new ItemBox(name, "R " + price, image, description));
+            else if (count == 6) clothes_list.add(new ItemBox(name, "R " + price, image, description));
+            else if (count == 8) health_list.add(new ItemBox(name, "R " + price, image, description));
+            else if (count == 10) sports_list.add(new ItemBox(name, "R " + price, image, description));
         }
         //Notifying the adapter that data has been added or changed
 //        adapter.notifyDataSetChanged();
@@ -126,12 +107,12 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
     private JsonArrayRequest getDataFromServer(int requestCount) {
 
         //JsonArrayRequest of volley
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(webURL + String.valueOf(1),
+        return new JsonArrayRequest(webURL + String.valueOf(requestCount),
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         //Calling method to parse the json response
-                        parseData(response);
+                        parseData(response, requestCount);
                     }
                 },
                 new Response.ErrorListener() {
@@ -140,21 +121,45 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
                         //If an error occurs that means end of the list has reached
                     }
                 });
-        //Returning the request
-        return jsonArrayRequest;
     }
 
-    private void getData(){
-        requestQueue.add(getDataFromServer(1));
+    private void getData(int count){
+
+        requestQueue.add(getDataFromServer(count));
     }
 
+    private void renderCategories(){
+        // 1 = computer/electronics >>> 3 = books >>> 6 = clothing >>> 8 = health/hygiene >>> 10 = sports
+        int[] arr = {1, 3, 6, 8, 10};
+
+        for (int i : arr){
+            //get data from database
+            getData(i);
+
+            //display the data in a recyclerview according to each category
+            if (i == 1) renderer(R.id.rv_computers, computers_list);
+            else if (i == 3) renderer(R.id.rv_books, books_list);
+            else if (i == 6) renderer(R.id.rv_clothes, clothes_list);
+            else if (i == 8) renderer(R.id.rv_health, health_list);
+            else if (i == 10) renderer(R.id.rv_sports, sports_list);
+        }
+    }
+
+    private void renderer(int rv, ArrayList<ItemBox> list){
+        //display the data in a recyclerview which allows us to scroll through
+        recyclerView = findViewById(rv);
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView.Adapter adapter = new Itembox_Adapter(list);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+    }
 
     private boolean isLastItemDisplaying(RecyclerView recyclerView) {
-        if (recyclerView.getAdapter().getItemCount() != 0) {
-            int lastVisibleItemPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
+        if (Objects.requireNonNull(recyclerView.getAdapter()).getItemCount() != 0) {
+            int lastVisibleItemPosition = ((LinearLayoutManager) Objects.requireNonNull(recyclerView.getLayoutManager())).findLastCompletelyVisibleItemPosition();
 
-            if (lastVisibleItemPosition != RecyclerView.NO_POSITION && lastVisibleItemPosition == recyclerView.getAdapter().getItemCount() - 1)
-                return true;
+            return lastVisibleItemPosition != RecyclerView.NO_POSITION && lastVisibleItemPosition == recyclerView.getAdapter().getItemCount() - 1;
         }
         return false;
     }
@@ -164,7 +169,7 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
         //if Scrolled to the end then fetch more data
         if (isLastItemDisplaying(recyclerView)) {
             //Calling the method getData again
-            getData();
+            renderCategories();
         }
     }
 

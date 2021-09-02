@@ -13,7 +13,7 @@ components:
   - sys-img-armeabi-v7a-android-17
 
 before_install:
-  - echo yes | sdkmanager "platforms;android-31.0.3"
+  - echo yes | sdkmanager "platforms;android-31"
 
 before_script:
   - echo no | android create avd --force -n test -t android-31 --abi armeabi-v7a

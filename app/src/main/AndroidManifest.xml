@@ -10,8 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WitsMarketplace">
         <activity
-            android:name=".LandingPage.LandingPage"
-            android:exported="true">
+            android:name=".LoginActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,13 +19,14 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".LandingPage.LandingPage"
+            android:exported="true">
+
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

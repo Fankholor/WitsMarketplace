@@ -13,7 +13,7 @@ import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.Spinner;
 
-public class LandingPage extends AppCompatActivity {
+public class LandingPageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

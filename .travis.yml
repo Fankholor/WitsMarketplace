@@ -4,13 +4,12 @@ sudo: false
 
 components:
   - tools
-  - tools
   - platform-tools
+  - build-tools-31.0.0
+  - android-31
   - extra-google-google_play_services
   - extra-google-m2repository
   - extra-android-m2repository
-  - build-tools-31.0.0
-  - android-31
   - sys-img-armeabi-v7a-android-17
 
 before_install:

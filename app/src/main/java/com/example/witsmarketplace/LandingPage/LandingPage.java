@@ -93,11 +93,14 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
                 e.printStackTrace();
             }
             //Adding the request object to the list
-            if (count == 1) computers_list.add(new ItemBox(name, "R " + price, image, description));
-            else if (count == 3) books_list.add(new ItemBox(name, "R " + price, image, description));
-            else if (count == 6) clothes_list.add(new ItemBox(name, "R " + price, image, description));
-            else if (count == 8) health_list.add(new ItemBox(name, "R " + price, image, description));
-            else if (count == 10) sports_list.add(new ItemBox(name, "R " + price, image, description));
+            String[] imageURLs = image.split(",");
+            String image_url = imageURLs[0];
+
+            if (count == 1) computers_list.add(new ItemBox(name, "R " + price, image_url, description));
+            else if (count == 3) books_list.add(new ItemBox(name, "R " + price, image_url, description));
+            else if (count == 6) clothes_list.add(new ItemBox(name, "R " + price, image_url, description));
+            else if (count == 8) health_list.add(new ItemBox(name, "R " + price, image_url, description));
+            else if (count == 10) sports_list.add(new ItemBox(name, "R " + price, image_url, description));
         }
         //Notifying the adapter that data has been added or changed
 //        adapter.notifyDataSetChanged();

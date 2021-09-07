@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout/activity_landing_page.xml" value="0.5" />
+        <entry key="app/src/main/res/drawable-xhdpi/ic_baseline_list_24.xml" value="0.24054054054054055" />
+        <entry key="app/src/main/res/layout/activity_landing_page.xml" value="0.22" />
         <entry key="app/src/main/res/layout/itembox.xml" value="0.67" />
+        <entry key="app/src/main/res/menu/bottom_navigation.xml" value="0.22657657657657657" />
       </map>
     </option>
   </component>

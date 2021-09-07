@@ -153,7 +153,7 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
         recyclerView = findViewById(rv);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        RecyclerView.Adapter adapter = new Itembox_Adapter(list);
+        RecyclerView.Adapter adapter = new Itembox_Adapter(list, this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
     }

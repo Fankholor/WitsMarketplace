@@ -70,9 +70,6 @@ before_script:
   - adb shell input keyevent 82 &
 
 #clean your environment if there is anything to clean, then build the project and run the tests and get the report.
-script:
-  - ./gradlew clean build connectedCheck createDebugCoverageReport jacocoTestReport
-
 #if the build is successful, send the generated reports to codecov
 after_success:
   - bash <(curl -s https://codecov.io/bash)

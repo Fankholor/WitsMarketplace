@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DesignSurface">
-    <option name="filePathToZoomLevelMap">
-      <map>
-        <entry key="app/src/main/res/drawable-xhdpi/ic_baseline_list_24.xml" value="0.24054054054054055" />
-        <entry key="app/src/main/res/layout/activity_landing_page.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/itembox.xml" value="0.67" />
-        <entry key="app/src/main/res/menu/bottom_navigation.xml" value="0.22657657657657657" />
-      </map>
-    </option>
-  </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

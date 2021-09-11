@@ -1,6 +1,6 @@
 language: android
 dist: trusty
-jdk: oraclejdk16
+jdk: oraclejdk11
 sudo: false
 
 
@@ -26,6 +26,7 @@ android:
 
 before_install:
     - chmod +x gradlew
+    - yes | ./sdkmanager --licenses
 
 before_script:
     - echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a

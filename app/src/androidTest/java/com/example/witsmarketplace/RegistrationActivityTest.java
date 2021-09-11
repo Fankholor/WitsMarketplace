@@ -1,4 +1,4 @@
-package com.example.witsmarketplace.Login;
+package com.example.witsmarketplace;
 
 import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
 import static org.junit.Assert.*;
@@ -8,9 +8,7 @@ import android.widget.EditText;
 
 import androidx.test.rule.ActivityTestRule;
 
-import com.example.witsmarketplace.LandingPageActivity;
-import com.example.witsmarketplace.R;
-import com.example.witsmarketplace.Registration;
+import com.example.witsmarketplace.Login.RegistrationActivity;
 
 import org.junit.After;
 import org.junit.Before;
@@ -19,7 +17,7 @@ import org.junit.Test;
 
 public class RegistrationActivityTest {
     @Rule
-    public ActivityTestRule<RegistrationActivity> rActivityTestRule = new ActivityTestRule<RegistrationActivity>(RegistrationActivity.class);
+    public ActivityTestRule<RegistrationActivity> rActivityTestRule = new ActivityTestRule<>(RegistrationActivity.class);
     private RegistrationActivity mActivity = null;
     public String wrongDetails = "you have already registered , Please Login";
     public String correctDetails = "Registered successfully";

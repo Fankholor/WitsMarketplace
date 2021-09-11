@@ -17,5 +17,5 @@ until [[ "$bootanim" =~ "stopped" ]]; do
   fi
   sleep 1
 done
-
+export QEMU_AUDIO_DRV=none && emulator -avd Nexus_4
 echo "Emulator is ready"

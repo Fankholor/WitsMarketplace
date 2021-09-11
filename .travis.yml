@@ -26,8 +26,8 @@ android:
 
 before_install:
     - chmod +x gradlew
-    - yes | sdkmanager --update
-    - echo yes | sdkmanager --licenses
+    - yes | sdkmanager "platforms;android-31"
+
 
 before_script:
     - echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a

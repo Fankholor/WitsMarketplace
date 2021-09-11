@@ -26,6 +26,7 @@ android:
 
 before_install:
     - chmod +x gradlew
+    - yes | sdkmanager --update
     - echo yes | sdkmanager --licenses
 
 before_script:

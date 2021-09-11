@@ -14,7 +14,6 @@ android:
     - sys-img-armeabi-v7a-android-17
 
 before_install:
-    - yes | sdkmanager "platforms;android-31.0.3"
     - chmod +x gradlew
 
 before_script:

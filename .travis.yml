@@ -6,6 +6,8 @@ sudo: false
 
 android:
   components:
+    - tools
+    - tools
     - platform-tools-31.0.0
     - build-tools-31.0.0
     - android-31
@@ -24,8 +26,7 @@ android:
 
 before_install:
     - chmod +x gradlew
-    - yes | sdkmanager "platforms;android-31"
-    - yes | sdkmanager "platforms;android-30"
+    - echo yes | sdkmanager "platforms;android-31"
 
 before_script:
     - echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a

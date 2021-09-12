@@ -1,14 +1,14 @@
 language: android
 dist: trusty
-
-jdk: oraclejdk11
+os: linux
+jdk: openjdk11
 
 android:
   components:
     - tools
+    - platform-tools
     - tools
-    - platform-tools-31.0.0
-    - build-tools-31.0.0
+    - extra-android-m2repository
     - android-31
     - android-24
     - extra-google-google_play_services
@@ -17,38 +17,24 @@ android:
     - sys-img-armeabi-v7a-android-24
     - sys-img-armeabi-v7a-addon-google_apis-google-31
     - sys-img-armeabi-v7a-addon-google_apis-google-24
-
-  licenses:
-    - android-sdk-preview-license-.+
-    - android-sdk-license-.+
-    - google-gdk-license-.+
-    - '.+'
+env:
+  global:
+    - TARGET_VERSION=31
+    - ANDROID_BUILD_TOOLS_VERSION=31.0.3
+    - ANDROID_HOME=~/android-sdk
 
 before_install:
-  - chmod +x gradlew
-  # download and unzip Android SDK command line tools
-#  - wget -nv https://dl.google.com/android/repository/$ANDROID_SDK_CMD_TOOLS
-#  - mkdir -p $HOME/sdk/cmdline-tools && unzip -q $ANDROID_SDK_CMD_TOOLS -d $HOME/sdk/cmdline-tools
-#  - mv $HOME/sdk/cmdline-tools/cmdline-tools $HOME/sdk/cmdline-tools/latest
-  # set SDK tools path variable and ANDROID_HOME
-  - export PATH=$ANDROID_HOME/cmdline-tools/latest/bin
-  #- export ANDROID_SDK_ROOT=$HOME/sdk
-  # create empty cfg file to prevent sdkmanager warning message
-  #- mkdir -p $HOME/.android && touch $HOME/.android/repositories.cfg
-  # decrypt private keystore
-install:
-  # accept licenses for all available packages that have not already been accepted
-  - yes | sdkmanager "platforms;android-31"
-  - yes | sdkmanager --licenses
+  - touch $HOME/.android/repositories.cfg
+  - wget "https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip" -O commandlinetools.zip
+  - unzip commandlinetools.zip -d $ANDROID_HOME/
+  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "platforms;android-${TARGET_VERSION}" --sdk_root=$ANDROID_HOME
+  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" --sdk_root=$ANDROID_HOME
 
-#before_cache:
-#  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
-#cache:
-#  directories:
-#    - $HOME/.gradle/caches/
-#    - $HOME/.gradle/wrapper/
+script:
+  - ./gradlew your_command_here
 
 before_script:
+    - chmod +x gradlew
     - echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a
     - emulator -avd test -no-window &
     - bash android-wait-for-emulator
@@ -59,54 +45,3 @@ before_script:
 
 after_success:
     - bash <(curl -s https://codecov.io/bash)
-#language: android
-## you MUST mention trusty https://docs.travis-ci.com/user/languages/android/
-#dist: trusty
-#env:
-#  global:
-#    # These parameters should match the parameters for build tools and sdk versions in the gradle file
-#    - ANDROID_BUILD_TOOLS=31.0.0 # should match gradle
-#    - ADB_INSTALL_TIMEOUT=5 # minutes
-#    - ANDROID_API=31 # api is same as gradle file
-#  matrix: # list the android device api you want to test.
-#    - EMULATOR_API=24
-##  - EMULATOR_API=28
-#android:
-#  components:
-#    - tools
-#    - platform-tools-$ANDROID_BUILD_TOOLS
-#    - build-tools-$ANDROID_BUILD_TOOLS
-#    - android-$ANDROID_API
-#    - android-$EMULATOR_API
-#    - extra-google-m2repository
-#    - extra-android-m2repository # for design library
-#    - addon-google_apis-google-19 # google play services
-#    - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API
-#    - sys-img-armeabi-v7a-addon-google_apis-google-$EMULATOR_API
-#    - sys-img-armeabi-v7a-android-$EMULATOR_API
-#  licenses:
-#    - android-sdk-preview-license-.+
-#    - android-sdk-license-.+
-#    - google-gdk-license-.+
-#jdk:
-#  - oraclejdk11
-#before_cache:
-#  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
-#cache:
-#  directories:
-#    - $HOME/.gradle/caches/
-#    - $HOME/.gradle/wrapper/
-#
-#before_script:
-#  - echo no | android create avd --force -n test -t android-$EMULATOR_API --abi armeabi-v7a # create an emulator for testing purposes
-#  - emulator -avd test -no-window & #do not let the emulator have sound or pop up on screen
-#  - android-wait-for-emulator # wait for the emulator to turn on fully
-#  - adb shell settings put global window_animation_scale 0 &
-#  - adb shell settings put global transition_animation_scale 0 &
-#  - adb shell settings put global animator_duration_scale 0 &
-#  - adb shell input keyevent 82 &
-#
-##clean your environment if there is anything to clean, then build the project and run the tests and get the report.
-##if the build is successful, send the generated reports to codecov
-#after_success:
-#  - bash <(curl -s https://codecov.io/bash)

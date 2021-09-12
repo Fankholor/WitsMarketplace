@@ -8,7 +8,7 @@ android:
   components:
     - tools
     - tools
-    - platform-tools-31.0.3
+    - platform-tools-31.0.0
     - build-tools-31.0.0
     - android-31
     - android-24
@@ -27,7 +27,7 @@ android:
 before_install:
     - chmod +x gradlew
     - mkdir "$ANDROID_HOME/licenses" || true
-    - cd ./Android/  "$ANDROID_HOME/licenses"
+    - cp ./licences/  "$ANDROID_HOME/licenses"
 before_script:
     - echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a
     - emulator -avd test -no-window &

@@ -39,7 +39,7 @@ before_install:
   # decrypt private keystore
 install:
   # accept licenses for all available packages that have not already been accepted
-  - yes | sdkmanager --licenses >/dev/null
+  - yes | sdkmanager "platform-tools" "platforms;android-31"
 
 before_script:
     - echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a

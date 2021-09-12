@@ -1,8 +1,7 @@
 language: android
 dist: trusty
-jdk: oraclejdk11
-sudo: false
 
+jdk: oraclejdk11
 
 android:
   components:
@@ -39,7 +38,14 @@ before_install:
   # decrypt private keystore
 install:
   # accept licenses for all available packages that have not already been accepted
-  - yes | sdkmanager "platform-tools" "platforms;android-31"
+  - echo yes | ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "platforms;android-31"
+
+#before_cache:
+#  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+#cache:
+#  directories:
+#    - $HOME/.gradle/caches/
+#    - $HOME/.gradle/wrapper/
 
 before_script:
     - echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a

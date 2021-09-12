@@ -1,7 +1,7 @@
 language: android
 dist: trusty
 
-jdk: oraclejdk11
+jdk: oraclejdk8
 
 android:
   components:
@@ -38,7 +38,7 @@ before_install:
   # decrypt private keystore
 install:
   # accept licenses for all available packages that have not already been accepted
-  - echo yes | ${ANDROID_HOME}cmdline-tools/latest/bin/sdkmanager "platforms;android-31"
+  - echo yes | sdkmanager "platforms;android-31"
 
 #before_cache:
 #  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock

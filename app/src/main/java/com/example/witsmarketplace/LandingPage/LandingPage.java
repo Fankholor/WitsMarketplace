@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 
@@ -46,10 +47,10 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
         setContentView(R.layout.activity_landing_page);
 
         requestQueue = Volley.newRequestQueue(this);
+        renderCategories();    //render all categories with their items
 
-        renderCategories();         //render all categories with their items
-
-//      Categories draw-bar button
+        EditText searchTxt = (EditText) findViewById(R.id.txt_search);
+        //Categories draw-bar button
         ImageButton cat =(ImageButton)findViewById(R.id.btn_categories);
         cat.setOnClickListener(new View.OnClickListener() {
             @Override

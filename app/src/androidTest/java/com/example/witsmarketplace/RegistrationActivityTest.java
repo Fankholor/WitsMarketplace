@@ -8,7 +8,6 @@ import android.widget.EditText;
 
 import androidx.test.rule.ActivityTestRule;
 
-import com.example.witsmarketplace.Login.LandingPageActivity;
 import com.example.witsmarketplace.Login.RegistrationActivity;
 
 import org.junit.After;

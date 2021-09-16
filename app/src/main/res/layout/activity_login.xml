@@ -12,6 +12,7 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:orientation="vertical"
+        android:paddingBottom="20dp"
         android:layout_height="match_parent">
     <ImageView
         android:id="@+id/imageView2"

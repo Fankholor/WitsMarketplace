@@ -18,7 +18,6 @@ import android.widget.TextView;
 import androidx.test.espresso.Espresso;
 import androidx.test.rule.ActivityTestRule;
 
-import com.example.witsmarketplace.Login.LandingPageActivity;
 import com.example.witsmarketplace.Login.LoginActivity;
 
 import org.junit.After;

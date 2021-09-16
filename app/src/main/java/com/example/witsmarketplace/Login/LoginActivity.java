@@ -47,14 +47,6 @@ public class LoginActivity extends AppCompatActivity {
         SpannableString ss = new SpannableString(text);
         ForegroundColorSpan fs = new ForegroundColorSpan(Color.YELLOW);
 
-//        ClickableSpan cs = new ClickableSpan() {
-//            @Override
-//            public void onClick(@NonNull View widget) {
-////                Toast.makeText(LoginActivity.this, "Sign Up", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(context, Registration.class);
-//                context.startActivity(intent);
-//            }
-//        };
         txtview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         ss.setSpan(fs,22,35,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//        ss.setSpan(cs,22,35, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         txtview.setText(ss);
         txtview.setMovementMethod(LinkMovementMethod.getInstance());
@@ -99,7 +90,6 @@ public class LoginActivity extends AppCompatActivity {
         ContentValues cv = new ContentValues();
         cv.put("email",email);
         cv.put("password",password);
-        //https://lamp.ms.wits.ac.za/home/s2172765/market_place_login.php
 
         new ServerCommunicator("https://lamp.ms.wits.ac.za/home/s2172765/market_place_app_login.php", cv) {
             @Override
@@ -108,9 +98,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(String output) {
                 try {
-
-
-                    //Toast.makeText(context,output,Toast.LENGTH_LONG).show();
                     JSONArray users = new JSONArray(output);
                     JSONObject object_one = users.getJSONObject(0);
 
@@ -122,7 +109,6 @@ public class LoginActivity extends AppCompatActivity {
                     int statusNum = Integer.parseInt(mstatus);
 
                     if (statusNum == 1){
-                        //Toast.makeText(context,"Welcome", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(context, LandingPage.class);
                         context.startActivity(intent);
                     }

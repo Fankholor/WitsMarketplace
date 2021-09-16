@@ -2,13 +2,18 @@ package com.example.witsmarketplace.LandingPage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.ScrollView;
 
 import com.example.witsmarketplace.MainActivity;
 import com.example.witsmarketplace.R;
@@ -25,6 +30,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -34,6 +41,8 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
     String webURL = "https://lamp.ms.wits.ac.za/home/s2172765/product.php?ID="; // 1 = computer/electronics >>> 3 = books >>> 6 = clothing >>> 8 = health/hygiene >>> 10 = sports
     private RecyclerView recyclerView;
     private RequestQueue requestQueue;
+    private BottomSheetDialog bottomSheetDialog;
+    private static Context mContext;
 
     ArrayList<ItemBox> books_list = new ArrayList<ItemBox>();
     ArrayList<ItemBox> computers_list = new ArrayList<ItemBox>();
@@ -45,13 +54,25 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
+        mContext = this;
 
         requestQueue = Volley.newRequestQueue(this);
         renderCategories();    //render all categories with their items
 
         EditText searchTxt = (EditText) findViewById(R.id.txt_search);
-        //Categories draw-bar button
-        ImageButton cat =(ImageButton)findViewById(R.id.btn_categories);
+        ImageButton searchBtn = (ImageButton) findViewById(R.id.btn_search);
+        ImageButton cat =(ImageButton)findViewById(R.id.btn_categories);//Categories draw-bar button
+
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomSheetDialog = new BottomSheetDialog(mContext);
+                View view = LayoutInflater.from(mContext).inflate(R.layout.modal_bottom_sheet, (ScrollView)findViewById(R.id.bottom_sheet));
+                bottomSheetDialog.setContentView(view);
+                bottomSheetDialog.show();
+            }
+        });
+
         cat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -22,6 +22,6 @@
         <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
     </style>
     <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@drawable/bottom_sheet_background</item>
+        <item name="android:background">@color/transparent</item>
     </style>
 </resources>

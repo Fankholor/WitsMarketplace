@@ -65,8 +65,8 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                bottomSheetDialog = new BottomSheetDialog(mContext, R.style.BottomSheetStyle);
+            public void onClick(View v) { //, R.style.BottomSheetStyle
+                bottomSheetDialog = new BottomSheetDialog(mContext);
                 View view = LayoutInflater.from(mContext).inflate(R.layout.modal_bottom_sheet, (ScrollView)findViewById(R.id.bottom_sheet));
                 bottomSheetDialog.setContentView(view);
                 bottomSheetDialog.show();

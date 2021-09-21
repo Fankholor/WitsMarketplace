@@ -17,11 +17,4 @@
     <style name="popupMenu" parent="Widget.AppCompat.PopupMenu">
         <item name="popupMenuBackground">@color/black</item>
     </style>
-
-    <style name="BottomSheetDialogTheme" parent="Theme.Design.Light">
-        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
-    </style>
-    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@color/transparent</item>
-    </style>
 </resources>

@@ -3,19 +3,14 @@ package com.example.witsmarketplace.LandingPage;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.PopupMenu;
-import android.widget.ScrollView;
 
-import com.example.witsmarketplace.MainActivity;
 import com.example.witsmarketplace.R;
 
 import org.json.JSONArray;
@@ -30,7 +25,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
@@ -65,14 +59,11 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { //, R.style.BottomSheetStyle
-                bottomSheetDialog = new BottomSheetDialog(mContext);
-                View view = LayoutInflater.from(mContext).inflate(R.layout.modal_bottom_sheet, (ScrollView)findViewById(R.id.bottom_sheet));
-                bottomSheetDialog.setContentView(view);
-                bottomSheetDialog.show();
+            public void onClick(View view) {
+                searchTxt.clearFocus();
+                hideKeyboard(view);
             }
         });
-
         cat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,9 +72,9 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
         });
     }
 
-    public void openMain() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+    public void hideKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
     }
 
 //  Pop up menu for the categories draw-bar

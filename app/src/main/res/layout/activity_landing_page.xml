@@ -38,7 +38,8 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
-                app:srcCompat="@drawable/wits" />
+                app:srcCompat="@drawable/wits"
+                android:contentDescription="@string/logo" />
 
             <ImageView
                 android:id="@+id/imageView4"
@@ -52,35 +53,36 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginEnd="10dp">
+                android:layout_marginEnd="10dp"
+                android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/txt_search"
-                    android:layout_width="0dp"
-                    android:layout_weight=".85"
+                    android:layout_width="wrap_content"
                     android:layout_height="44dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="15dp"
+                    android:layout_weight=".85"
                     android:background="@drawable/rectangle4"
                     android:ems="10"
                     android:hint="@string/search_for_products_brands"
                     android:importantForAutofill="no"
                     android:inputType="textPersonName"
                     android:padding="10dp"
-                    android:windowSoftInputMode="adjustResize" />
+                    android:windowSoftInputMode="adjustResize"
+                    />
 
-                <ImageButton
-                    android:id="@+id/btn_search"
-                    android:layout_width="0dp"
-                    android:layout_weight=".15"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_gravity="center_vertical"
-                    android:background="@drawable/round_search"
-                    android:contentDescription="@string/search_button"
-                    app:srcCompat="@drawable/search"
-                    tools:ignore="TouchTargetSizeCheck" />
+<!--                <ImageButton-->
+<!--                    android:id="@+id/btn_search"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="45dp"-->
+<!--                    android:layout_gravity="center_vertical"-->
+<!--                    android:layout_marginStart="5dp"-->
+<!--                    android:layout_weight=".15"-->
+<!--                    android:background="@drawable/round_search"-->
+<!--                    android:contentDescription="@string/search_button"-->
+<!--                    app:srcCompat="@drawable/search"-->
+<!--                    tools:ignore="TouchTargetSizeCheck" />-->
 
             </LinearLayout>
         </LinearLayout>
@@ -129,7 +131,8 @@
                     android:text="@string/view_more"
                     android:textAllCaps="false"
                     android:textColor="@color/blue"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    tools:ignore="RelativeOverlap" />
 
                 <HorizontalScrollView
                     android:id="@+id/horizontalScrollView"
@@ -202,7 +205,8 @@
                     android:text="@string/view_more"
                     android:textAllCaps="false"
                     android:textColor="@color/blue"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    tools:ignore="RelativeOverlap" />
 
                 <HorizontalScrollView
                     android:id="@+id/horizontalScrollView2"
@@ -265,7 +269,8 @@
                     android:text="@string/view_more"
                     android:textAllCaps="false"
                     android:textColor="@color/blue"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    tools:ignore="RelativeOverlap" />
 
                 <HorizontalScrollView
                     android:id="@+id/horizontalScrollView3"
@@ -351,7 +356,8 @@
                     android:text="@string/view_more"
                     android:textAllCaps="false"
                     android:textColor="@color/blue"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    tools:ignore="RelativeOverlap" />
 
                 <HorizontalScrollView
                     android:id="@+id/horizontalScrollView4"
@@ -430,7 +436,8 @@
                     android:text="@string/view_more"
                     android:textAllCaps="false"
                     android:textColor="@color/blue"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    tools:ignore="RelativeOverlap" />
 
                 <HorizontalScrollView
                     android:id="@+id/horizontalScrollView5"

@@ -4,13 +4,10 @@ import android.graphics.drawable.Drawable;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ItemBox {
+public class ItemBox implements java.io.Serializable{
     private final String name, price, image, description;
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
 
-//  constructor fetching all data required on an itemBox
+    //  constructor fetching all data required on an itemBox
     public ItemBox(String name, String price, String image, String description) {
         this.name = name;
         this.price = price;
@@ -18,7 +15,7 @@ public class ItemBox {
         this.description = description;
     }
 
-//  getters for all required data
+    //  getters for all required data
     public String getName(){
         return name;
     }

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,6 +37,7 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
         public ImageView itemImage;
         public TextView itemName;
         public TextView itemPrice;
+        public Button CartButton;
 
 //      view holder for directly setting the items' details to be displayed
         public Itembox_ViewHolder(@NonNull View itemView) {
@@ -43,6 +45,7 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
             itemImage = itemView.findViewById(R.id.img_item);
             itemName = itemView.findViewById(R.id.txt_itemname);
             itemPrice = itemView.findViewById(R.id.txt_price);
+            CartButton = itemView.findViewById(R.id.AddToCart);
         }
     }
 

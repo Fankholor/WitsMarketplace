@@ -69,5 +69,36 @@
             android:text="here is the description f the product...I've tested underlined on android 2.3 and it works. underline does not work for 2.3. The docs say Sometimes you may want to create a styled text resource that is also used as a format string. Normally, this won't work because the String.format(String, Object...) method will strip all the style information from the string. The work-around to this is to write the HTML tags with escaped entities, which are then recovered with fromHtml(String), after the formatting takes place. So I guess you would use the escaping if"
             android:textColor="@android:color/darker_gray"
             android:textSize="16dp"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/addCartBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/blue"
+            android:textColor="@color/white"
+            android:text="Add to Cart"
+            android:textAllCaps="false"
+            app:icon="@drawable/ic_baseline_add_shopping_cart_24"
+            app:iconTint="@color/white"
+            app:iconSize="25dp"
+            />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/addFaveBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/yellow"
+            android:text="Add to Favorites"
+            android:textAllCaps="false"
+            android:scrollHorizontally="false"
+            app:icon="@drawable/ic_baseline_favorite_border_24"
+            app:iconTint="@color/red"
+            app:iconSize="25dp"
+            android:layout_gravity="right"/>
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

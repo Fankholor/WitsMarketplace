@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WitsMarketplace">
         <activity
-            android:name=".modal"
+            android:name=".LandingPage.modal"
             android:exported="true" />
         <activity
             android:name=".Login.LoginActivity"

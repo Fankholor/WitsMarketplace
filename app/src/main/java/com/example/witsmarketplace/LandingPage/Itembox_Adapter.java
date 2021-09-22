@@ -1,6 +1,7 @@
 package com.example.witsmarketplace.LandingPage;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -10,12 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.witsmarketplace.Login.RegistrationActivity;
 import com.example.witsmarketplace.R;
 import com.squareup.picasso.Picasso;
 
@@ -36,6 +39,7 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
         public ImageView itemImage;
         public TextView itemName;
         public TextView itemPrice;
+        public RelativeLayout relativeLayout;
 
 //      view holder for directly setting the items' details to be displayed
         public Itembox_ViewHolder(@NonNull View itemView) {
@@ -43,6 +47,7 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
             itemImage = itemView.findViewById(R.id.img_item);
             itemName = itemView.findViewById(R.id.txt_itemname);
             itemPrice = itemView.findViewById(R.id.txt_price);
+            relativeLayout = itemView.findViewById(R.id.item_box);
         }
     }
 
@@ -61,17 +66,22 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
 
     @Override
     public void onBindViewHolder(@NonNull Itembox_ViewHolder holder, int position) {
-//      Set the view holders with details from the items list
         ItemBox currentItem = itemsList.get(position);
 
-        System.out.println(currentItem.getImage());
-        System.out.println("Outside");
-
         Glide.with(mContext).load(currentItem.getImage()).into(holder.itemImage);
-
-//        holder.itemImage.setImageDrawable(drawable);
         holder.itemName.setText(currentItem.getName());
         holder.itemPrice.setText(currentItem.getPrice());
+
+        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, modal.class);
+                intent.putExtra("name",currentItem.getName());
+                intent.putExtra("price",currentItem.getPrice());
+                intent.putExtra("description",currentItem.getDescription());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -60,7 +60,7 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                searchTxt.clearFocus();
+//                searchTxt.clearFocus();
                 hideKeyboard(view);
             }
         });

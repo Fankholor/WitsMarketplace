@@ -3,7 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/1445435/Documents/WitsMarketplace2/app/src/main/res/layout/activity_landing_page.xml" value="0.19882246376811594" />
+        <entry key="..\:/Users/1445435/Documents/WitsMarketplace2/app/src/main/res/layout/activity_search.xml" value="0.19882246376811594" />
+        <entry key="..\:/Users/1445435/Documents/WitsMarketplace2/app/src/main/res/layout/activity_view_more.xml" value="0.19882246376811594" />
+        <entry key="app/src/main/res/drawable/search_mobile.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_landing_page.xml" value="0.26197916666666665" />
+        <entry key="app/src/main/res/layout/activity_registration.xml" value="0.13125" />
+        <entry key="app/src/main/res/layout/activity_view_more.xml" value="0.13489583333333333" />
+        <entry key="app/src/main/res/layout/itembox.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/itembox_added.xml" value="0.13125" />
       </map>
     </option>
   </component>

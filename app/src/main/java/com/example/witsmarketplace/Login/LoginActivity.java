@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.witsmarketplace.LandingPage.LandingPage;
 import com.example.witsmarketplace.R;
+import com.example.witsmarketplace.SharedPreference;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginBtn;
     private static Context context;
     private static String status,statusMsg;
+    public static SharedPreference sharedPreference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         context = this;
+        sharedPreference = new SharedPreference(this);
 
         TextView txtview= findViewById(R.id.signupbtn);
         String text = "Don't have an account? Sign Up here";
@@ -109,6 +113,10 @@ public class LoginActivity extends AppCompatActivity {
                     int statusNum = Integer.parseInt(mstatus);
 
                     if (statusNum == 1){
+                        // store email in shared preference everytime after logging in
+                        sharedPreference.setSH("email", email);
+//                        System.out.println(sharedPreference.getSH("email"));
+
                         Intent intent = new Intent(context, LandingPage.class);
                         context.startActivity(intent);
                     }

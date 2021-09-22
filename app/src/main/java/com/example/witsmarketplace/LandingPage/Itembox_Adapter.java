@@ -1,6 +1,10 @@
 package com.example.witsmarketplace.LandingPage;
 
 import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -10,15 +14,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.witsmarketplace.Login.ServerCommunicator;
 import com.example.witsmarketplace.R;
+import com.example.witsmarketplace.SharedPreference;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,12 +44,14 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
     private ArrayList<ItemBox> itemsList;
 
     private Activity mContext;
+    public static SharedPreference sharedPreference;
+
     public static class Itembox_ViewHolder extends RecyclerView.ViewHolder{
 
         public ImageView itemImage;
         public TextView itemName;
         public TextView itemPrice;
-        public Button CartButton;
+        public ImageButton CartButton;
 
 //      view holder for directly setting the items' details to be displayed
         public Itembox_ViewHolder(@NonNull View itemView) {
@@ -53,8 +67,49 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
     public Itembox_Adapter(ArrayList<ItemBox> itemsList, Activity mContext){
         this.mContext = mContext;
         this.itemsList = itemsList;
+        sharedPreference = new SharedPreference(mContext);
     }
 
+    // add to cart button implementation
+    public void AddToCart(String email, String name, String description, String picture, String price){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("EMAIL", email);
+        contentValues.put("NAME", name);
+        contentValues.put("PICTURE", picture);
+        contentValues.put("DESCRIPTION", description);
+        contentValues.put("PRICE", price);
+        Toast.makeText(mContext, "Clicked", Toast.LENGTH_SHORT).show();
+        new ServerCommunicator("https://lamp.ms.wits.ac.za/home/s2172765/app_add_cart.php", contentValues) {
+            @Override
+            protected void onPreExecute() {}
+
+            @Override
+
+            protected void onPostExecute(String output) {
+                try {
+                    JSONArray users = new JSONArray(output);
+                    JSONObject object = users.getJSONObject(0);
+
+                    String status = object.getString("add_status");
+                    String message = object.getString("status_message");
+
+                    if(status.equals("1")){
+                        Intent intent = new Intent(mContext, LandingPage.class);
+                        mContext.startActivity(intent);
+
+                        Toast.makeText(mContext ,"You have Successfully added to cart",Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        Toast.makeText(mContext, message , Toast.LENGTH_LONG).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.execute();
+
+        }
     @NonNull
     @Override
     public Itembox_ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -67,14 +122,22 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
 //      Set the view holders with details from the items list
         ItemBox currentItem = itemsList.get(position);
 
-        System.out.println(currentItem.getImage());
-        System.out.println("Outside");
-
         Glide.with(mContext).load(currentItem.getImage()).into(holder.itemImage);
 
 //        holder.itemImage.setImageDrawable(drawable);
         holder.itemName.setText(currentItem.getName());
         holder.itemPrice.setText(currentItem.getPrice());
+
+        //SharedPreferences sharedPreferences = mContext.getSharedPreferences("application", Context.MODE_PRIVATE);
+
+        holder.CartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String email = sharedPreference.getSH("email");
+                AddToCart(email, currentItem.getName(), currentItem.getDescription(), currentItem.getImage(), currentItem.getPrice());
+            }
+        });
     }
 
     @Override

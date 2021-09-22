@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.witsmarketplace.LandingPage.LandingPage;
 import com.example.witsmarketplace.R;
+import com.example.witsmarketplace.SharedPreference;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,11 +32,13 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private static Context context;
     DatePickerDialog datePickerDialog ;
+    public static SharedPreference sharedPreference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = this;
+        sharedPreference = new SharedPreference(this);
 
         setContentView(R.layout.activity_registration);
         final EditText InputFirstname = findViewById(R.id.Firstname);
@@ -133,6 +136,8 @@ public class RegistrationActivity extends AppCompatActivity {
                     String message = object.getString("status_message");
 
                     if(status.equals("1")){
+                        sharedPreference.setSH("email", email);
+
                         Intent intent = new Intent(context, LandingPage.class);
                         context.startActivity(intent);
                         Toast.makeText(context ,"You have Succesfully registered",Toast.LENGTH_LONG).show();

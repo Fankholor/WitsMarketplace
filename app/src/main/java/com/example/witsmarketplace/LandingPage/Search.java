@@ -29,12 +29,13 @@ import java.util.ArrayList;
 
 public class Search extends AppCompatActivity {
 
-    private RequestQueue requestQueue;
-    RecyclerView recyclerView;
-    Itembox_Adapter adapter;
-    ArrayList<ItemBox> search_results = new ArrayList<ItemBox>();
-    String searchURL = "https://lamp.ms.wits.ac.za/home/s2172765/Search.php?ID=";
-    Activity context = this;
+//    private RequestQueue requestQueue;
+//    RecyclerView recyclerView;
+//    Itembox_Adapter adapter;
+//    ArrayList<ItemBox> search_results = new ArrayList<ItemBox>();
+//    String searchURL = "https://lamp.ms.wits.ac.za/home/s2172765/Search.php?ID=";
+//    Activity context = this;
+//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

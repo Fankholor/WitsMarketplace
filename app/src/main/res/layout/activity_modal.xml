@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LandingPage.modal"
+    android:orientation="vertical"
     android:fillViewport="true">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <com.denzcoskun.imageslider.ImageSlider
@@ -69,38 +74,51 @@
             android:text="here is the description f the product...I've tested underlined on android 2.3 and it works. underline does not work for 2.3. The docs say Sometimes you may want to create a styled text resource that is also used as a format string. Normally, this won't work because the String.format(String, Object...) method will strip all the style information from the string. The work-around to this is to write the HTML tags with escaped entities, which are then recovered with fromHtml(String), after the formatting takes place. So I guess you would use the escaping if"
             android:textColor="@android:color/darker_gray"
             android:textSize="16dp"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+
+
+
+    </LinearLayout>
+
+    </ScrollView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom">
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/addCartBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="left|bottom"
             android:backgroundTint="@color/blue"
-            android:textColor="@color/white"
             android:text="Add to Cart"
             android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="15dp"
             app:icon="@drawable/ic_baseline_add_shopping_cart_24"
-            app:iconTint="@color/white"
             app:iconSize="25dp"
-            android:layout_gravity="bottom"
+            app:iconTint="@color/white"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="5dp"
             />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/addFaveBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
             android:backgroundTint="@color/yellow"
-            android:text="Add to Favorites"
-            android:textAllCaps="false"
-            android:scrollHorizontally="false"
             app:icon="@drawable/ic_baseline_favorite_border_24"
+            app:iconSize="20dp"
             app:iconTint="@color/red"
-            app:iconSize="25dp"
-            android:layout_gravity="bottom"
-            />
-        </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"/>
+
+    </FrameLayout>
+
+
+
+</LinearLayout>
+

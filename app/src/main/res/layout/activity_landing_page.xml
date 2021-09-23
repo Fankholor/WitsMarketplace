@@ -54,6 +54,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:layout_marginEnd="10dp">
 
                 <EditText

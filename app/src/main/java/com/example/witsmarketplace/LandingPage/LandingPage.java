@@ -1,10 +1,12 @@
 package com.example.witsmarketplace.LandingPage;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +28,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.witsmarketplace.ViewMore.ViewMore;
+import com.example.witsmarketplace.fave_cart.cart;
+import com.example.witsmarketplace.fave_cart.favorite;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -115,8 +120,28 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
             }
         });
 
-        System.out.println(books_list);
+//        Bottom Navigation
+        BottomNavigationView bnv = findViewById(R.id.bottom_navigation);
+        bnv.setOnNavigationItemSelectedListener(navListener);
     }
+
+//    Bottom Navigation
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+        new BottomNavigationView.OnNavigationItemSelectedListener() {
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Intent intent = null;
+        if (item.getItemId() == R.id.nav_cart){
+            intent = new Intent(getApplicationContext(), cart.class);
+            startActivity(intent);
+        }
+        else if (item.getItemId() == R.id.nav_favorite) {
+            intent = new Intent(getApplicationContext(), favorite.class);
+            startActivity(intent);
+        }
+            return true;
+    }
+};
 
     //  Pop up menu for the categories draw-bar
     public void showPopup(View view){

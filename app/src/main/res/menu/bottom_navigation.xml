@@ -7,9 +7,9 @@
         android:title="Home"/>
 
     <item
-        android:id="@+id/nav_catagorie"
+        android:id="@+id/nav_cart"
         android:icon="@drawable/ic_baseline_list_24"
-        android:title="Catagories"/>
+        android:title="Cart"/>
 
     <item
         android:id="@+id/nav_favorite"

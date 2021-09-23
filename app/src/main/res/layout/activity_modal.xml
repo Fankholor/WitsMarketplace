@@ -70,8 +70,8 @@
             android:textColor="@android:color/darker_gray"
             android:textSize="16dp"/>
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -85,6 +85,7 @@
             app:icon="@drawable/ic_baseline_add_shopping_cart_24"
             app:iconTint="@color/white"
             app:iconSize="25dp"
+            android:layout_gravity="bottom"
             />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -98,7 +99,8 @@
             app:icon="@drawable/ic_baseline_favorite_border_24"
             app:iconTint="@color/red"
             app:iconSize="25dp"
-            android:layout_gravity="right"/>
+            android:layout_gravity="bottom"
+            />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

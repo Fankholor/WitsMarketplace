@@ -12,7 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WitsMarketplace">
-
+        <activity
+            android:name=".LandingPage.SearchResults"
+            android:exported="true" />
+        <activity
+            android:name=".LandingPage.Search"
+            android:exported="true" />
+        <activity
+            android:name=".ViewMore.ViewMore"
+            android:exported="true" />
         <activity
             android:name=".Login.LoginActivity"
             android:exported="true">
@@ -22,23 +30,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Login.RegistrationActivity"
-            android:exported="true" >
-
-        </activity>
-
+            android:exported="true" />
         <activity
             android:name=".LandingPage.LandingPage"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
     </application>
 
 </manifest>

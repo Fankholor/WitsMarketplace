@@ -28,6 +28,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class LandingPage extends AppCompatActivity implements RecyclerView.OnScrollChangeListener{
@@ -107,13 +108,16 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
             }
             //Adding the request object to the list
             String[] imageURLs = image.split(",");
+            ArrayList<String> images = new ArrayList<>();
+            images.addAll(Arrays.asList(imageURLs));
+
             String image_url = imageURLs[0];
 
-            if (count == 1) computers_list.add(new ItemBox(name, "R " + price, image_url, description));
-            else if (count == 3) books_list.add(new ItemBox(name, "R " + price, image_url, description));
-            else if (count == 6) clothes_list.add(new ItemBox(name, "R " + price, image_url, description));
-            else if (count == 8) health_list.add(new ItemBox(name, "R " + price, image_url, description));
-            else if (count == 10) sports_list.add(new ItemBox(name, "R " + price, image_url, description));
+            if (count == 1) computers_list.add(new ItemBox(name, "R " + price, image_url, description, images));
+            else if (count == 3) books_list.add(new ItemBox(name, "R " + price, image_url, description, images));
+            else if (count == 6) clothes_list.add(new ItemBox(name, "R " + price, image_url, description, images));
+            else if (count == 8) health_list.add(new ItemBox(name, "R " + price, image_url, description, images));
+            else if (count == 10) sports_list.add(new ItemBox(name, "R " + price, image_url, description, images));
         }
         //Notifying the adapter that data has been added or changed
 //        adapter.notifyDataSetChanged();

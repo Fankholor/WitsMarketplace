@@ -79,6 +79,7 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
                 intent.putExtra("name",currentItem.getName());
                 intent.putExtra("price",currentItem.getPrice());
                 intent.putExtra("description",currentItem.getDescription());
+                intent.putStringArrayListExtra("images_array", currentItem.getImageUrls());
                 mContext.startActivity(intent);
             }
         });

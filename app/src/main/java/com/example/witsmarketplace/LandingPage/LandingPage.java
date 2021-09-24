@@ -171,11 +171,6 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
 
     void openSearch(){
         Intent intent = new Intent(this, Search.class);
-//        intent.putExtra("search", search);
-
-//        Bundle bundle = new Bundle();
-//        bundle.putSerializable("search_results", search_results);
-//        intent.putExtra("search_bundle", bundle);
         startActivity(intent);
     }
 
@@ -267,6 +262,7 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
         RecyclerView.Adapter adapter = new Itembox_Adapter(list, this, 1);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
     }
 
     private boolean isLastItemDisplaying(RecyclerView recyclerView) {

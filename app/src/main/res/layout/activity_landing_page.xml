@@ -69,9 +69,7 @@
                     android:ems="10"
                     android:hint="@string/search_for_products_brands"
                     android:importantForAutofill="no"
-                    android:inputType="textPersonName"
-                    android:padding="10dp"
-                    android:windowSoftInputMode="adjustResize" />
+                    android:padding="10dp"/>
             </LinearLayout>
         </LinearLayout>
 

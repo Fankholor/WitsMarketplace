@@ -17,11 +17,11 @@
             android:id="@+id/modal_image_slider"
             android:layout_width="match_parent"
             android:layout_height="240dp"
+            app:placeholder="@color/black"
             android:background="@color/black"
             app:error_image="@drawable/error_img"
-            app:placeholder="@drawable/error_img"
             app:auto_cycle="true"
-            app:period="4000"
+            app:period="3000"
             app:delay="0" />
 
         <TextView

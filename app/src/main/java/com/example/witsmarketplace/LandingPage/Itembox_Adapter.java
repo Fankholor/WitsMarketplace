@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.witsmarketplace.Login.RegistrationActivity;
+import com.example.witsmarketplace.Login.ServerCommunicator;
 import com.example.witsmarketplace.R;
 import com.example.witsmarketplace.SharedPreference;
 import com.squareup.picasso.Picasso;
@@ -106,7 +107,7 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
                 itemName = itemView.findViewById(R.id.vm_itemname);
                 itemPrice = itemView.findViewById(R.id.vm_price);
                 CartButton = itemView.findViewById(R.id.AddToCart);
-
+                relativeLayout = itemView.findViewById(R.id.item_box);
             }
 
         }

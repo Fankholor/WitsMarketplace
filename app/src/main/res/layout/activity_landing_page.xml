@@ -38,8 +38,8 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
-                app:srcCompat="@drawable/wits"
-                android:contentDescription="@string/logo" />
+                android:contentDescription="@string/logo"
+                app:srcCompat="@drawable/wits" />
 
             <ImageView
                 android:id="@+id/imageView4"
@@ -54,6 +54,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:orientation="horizontal">
 
                 <EditText
@@ -69,8 +71,7 @@
                     android:importantForAutofill="no"
                     android:inputType="textPersonName"
                     android:padding="10dp"
-                    android:windowSoftInputMode="adjustResize"
-                    />
+                    android:windowSoftInputMode="adjustResize" />
 
                 <!--                <ImageButton-->
                 <!--                    android:id="@+id/btn_search"-->

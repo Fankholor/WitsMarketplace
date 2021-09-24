@@ -6,12 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 
-import com.example.witsmarketplace.MainActivity;
 import com.example.witsmarketplace.R;
 
 import org.json.JSONArray;
@@ -29,6 +29,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.witsmarketplace.ViewMore.ViewMore;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 @SuppressWarnings("ALL")
@@ -153,12 +154,12 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
 
             String image_url = imageURLs[0];
 
-            if (count.equals("1")) computers_list.add(new ItemBox(name, "R " + price, image_url, description));
-            else if (count.equals("3")) books_list.add(new ItemBox(name, "R " + price, image_url, description));
-            else if (count.equals("6")) clothes_list.add(new ItemBox(name, "R " + price, image_url, description));
-            else if (count.equals("8")) health_list.add(new ItemBox(name, "R " + price, image_url, description));
-            else if (count.equals("10")) sports_list.add(new ItemBox(name, "R " + price, image_url, description));
-            else search_results.add(new ItemBox(name, "R " + price, image_url, description));
+            if (count.equals("1")) computers_list.add(new ItemBox(name, "R " + price, image_url, description,images));
+            else if (count.equals("3")) books_list.add(new ItemBox(name, "R " + price, image_url, description,images));
+            else if (count.equals("6")) clothes_list.add(new ItemBox(name, "R " + price, image_url, description,images));
+            else if (count.equals("8")) health_list.add(new ItemBox(name, "R " + price, image_url, description,images));
+            else if (count.equals("10")) sports_list.add(new ItemBox(name, "R " + price, image_url, description,images));
+            else search_results.add(new ItemBox(name, "R " + price, image_url, description,images));
 
         }
         //Notifying the adapter that data has been added or changed

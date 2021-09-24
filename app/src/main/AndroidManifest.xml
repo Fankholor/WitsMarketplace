@@ -29,6 +29,12 @@
             android:exported="true" />
         <activity
             android:name=".Login.LoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".LandingPage.modal"
+            android:exported="true" />
+        <activity
+            android:name=".SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,9 +47,6 @@
             android:exported="true" />
         <activity
             android:name=".LandingPage.LandingPage"
-            android:exported="true" />
-        <activity
-            android:name=".MainActivity"
             android:exported="true" />
     </application>
 

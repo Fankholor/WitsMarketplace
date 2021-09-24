@@ -18,6 +18,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.witsmarketplace.Login.RegistrationActivity;
 import com.example.witsmarketplace.Login.ServerCommunicator;
 import com.example.witsmarketplace.R;
 import com.example.witsmarketplace.SharedPreference;
@@ -90,6 +92,7 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
         public TextView itemDesc;
         public Button AddCart;
         public ImageButton CartButton;
+        public RelativeLayout relativeLayout;
 
 //      view holder for directly setting the items' details to be displayed
         public Itembox_ViewHolder(@NonNull View itemView) {
@@ -99,14 +102,14 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
                 itemName = itemView.findViewById(R.id.txt_itemname);
                 itemPrice = itemView.findViewById(R.id.txt_price);
                 CartButton = itemView.findViewById(R.id.AddToCart);
-
+                relativeLayout = itemView.findViewById(R.id.item_box);
             }
             else if (Itembox_Adapter.n == 2){
                 itemImage = itemView.findViewById(R.id.vm_img_item);
                 itemName = itemView.findViewById(R.id.vm_itemname);
                 itemPrice = itemView.findViewById(R.id.vm_price);
                 CartButton = itemView.findViewById(R.id.AddToCart);
-
+                relativeLayout = itemView.findViewById(R.id.item_box);
             }
             else if (Itembox_Adapter.n == 3){
                 itemImage = itemView.findViewById(R.id.img_item);
@@ -207,6 +210,18 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
         holder.itemPrice.setText(currentItem.getPrice());
 
         //SharedPreferences sharedPreferences = mContext.getSharedPreferences("application", Context.MODE_PRIVATE);
+
+        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, modal.class);
+                intent.putExtra("name",currentItem.getName());
+                intent.putExtra("price",currentItem.getPrice());
+                intent.putExtra("description",currentItem.getDescription());
+                intent.putStringArrayListExtra("images_array", currentItem.getImageUrls());
+                mContext.startActivity(intent);
+            }
+        });
 
         holder.CartButton.setOnClickListener(new View.OnClickListener() {
             @Override

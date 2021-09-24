@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/discard.xml" value="0.1756578947368421" />
+        <entry key="app/src/main/res/drawable/dropdown.xml" value="0.1739413680781759" />
         <entry key="app/src/main/res/drawable/proceed_btn.xml" value="0.1756578947368421" />
         <entry key="app/src/main/res/drawable/round_btn.xml" value="0.1756578947368421" />
         <entry key="app/src/main/res/drawable/round_btn_remove.xml" value="0.1756578947368421" />

@@ -103,11 +103,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Proceed To Checkout"
-                    android:background="#397C0C"
+                    android:background="@drawable/proceed_btn"
+
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:textSize="20sp"
                     android:padding="8dp"
+
                     android:layout_marginLeft="8dp"
                     android:textAllCaps="false"
                     />
@@ -116,7 +118,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Discard"
-                    android:background="#FF0000"
+                    android:background="@drawable/discard"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:textSize="20sp"

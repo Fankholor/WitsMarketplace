@@ -65,7 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:elevation="10dp"
-                    android:background="@color/white"
+                    android:background="@drawable/round_btn_remove"
                     android:text="1"
                     android:layout_marginLeft="25dp"
                     android:textStyle="bold"
@@ -73,10 +73,6 @@
                     android:drawableRight="@drawable/dropdown"/>
 
             </LinearLayout>
-
-
-
-
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -106,7 +102,7 @@
                 android:layout_width="120dp"
                 android:layout_height="40dp"
                 android:backgroundTint="@color/white"
-                android:background="@color/yellow"
+                android:background="@drawable/round_btn"
                 android:layout_marginLeft="70dp"
                 android:text="remove"
                 android:textStyle="bold"

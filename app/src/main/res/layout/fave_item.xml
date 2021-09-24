@@ -80,7 +80,7 @@
                     android:layout_width="90dp"
                     android:layout_height="40dp"
                     android:backgroundTint="@color/white"
-                    android:background="@color/yellow"
+                    android:background="@drawable/round_btn"
                     android:layout_marginLeft="40dp"
                     android:text="+ cart"
                     android:textStyle="bold"

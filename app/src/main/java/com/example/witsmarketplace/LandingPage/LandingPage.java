@@ -2,11 +2,12 @@ package com.example.witsmarketplace.LandingPage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
@@ -25,51 +26,71 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.example.witsmarketplace.ViewMore.ViewMore;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
-public class LandingPage extends AppCompatActivity implements RecyclerView.OnScrollChangeListener{
+@SuppressWarnings("ALL")
+public class LandingPage extends AppCompatActivity implements RecyclerView.OnScrollChangeListener {
 
     String webURL = "https://lamp.ms.wits.ac.za/home/s2172765/product.php?ID="; // 1 = computer/electronics >>> 3 = books >>> 6 = clothing >>> 8 = health/hygiene >>> 10 = sports
+    String searchURL = "https://lamp.ms.wits.ac.za/home/s2172765/Search.php?ID=";
     private RecyclerView recyclerView;
     private RequestQueue requestQueue;
-    private BottomSheetDialog bottomSheetDialog;
-    private static Context mContext;
 
     ArrayList<ItemBox> books_list = new ArrayList<ItemBox>();
     ArrayList<ItemBox> computers_list = new ArrayList<ItemBox>();
     ArrayList<ItemBox> clothes_list = new ArrayList<ItemBox>();
     ArrayList<ItemBox> sports_list = new ArrayList<ItemBox>();
     ArrayList<ItemBox> health_list = new ArrayList<ItemBox>();
+    ArrayList<ItemBox> search_results = new ArrayList<ItemBox>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
-        mContext = this;
 
         requestQueue = Volley.newRequestQueue(this);
-        renderCategories();    //render all categories with their items
 
-        EditText searchTxt = (EditText) findViewById(R.id.txt_search);
-        ImageButton searchBtn = (ImageButton) findViewById(R.id.btn_search);
-        ImageButton cat =(ImageButton)findViewById(R.id.btn_categories);//Categories draw-bar button
+        renderCategories();         //render all categories with their items
 
-        searchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                searchTxt.clearFocus();
-                hideKeyboard(view);
-            }
-        });
+//      Categories draw-bar button
+        ImageButton cat = (ImageButton) findViewById(R.id.btn_categories);
         cat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showPopup(view);
             }
         });
+
+        Button health_vm = (Button) findViewById(R.id.vm_health);
+        health_vm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openViewMore(8, health_list);
+            }
+        });
+
+        Button sports_vm = (Button) findViewById(R.id.vm_sports);
+        sports_vm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openViewMore(10, sports_list);
+            }
+        });
+
+//      Search Button
+        EditText search_text = findViewById(R.id.txt_search);
+        search_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openSearch();
+            }
+        });
+
+        System.out.println(books_list);
     }
 
     public void hideKeyboard(View view) {
@@ -77,7 +98,7 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
         imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
     }
 
-//  Pop up menu for the categories draw-bar
+    //  Pop up menu for the categories draw-bar
     public void showPopup(View view){
         PopupMenu popupMenu = new PopupMenu(this, view);
         MenuInflater inflater = popupMenu.getMenuInflater();
@@ -85,8 +106,29 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
         popupMenu.show();
     }
 
-//  Parsing data from database and adding it to an arraylist (for easy access)
-    private void parseData(JSONArray array, int count) {
+    //  Open View More page
+    void openViewMore(int code, ArrayList<ItemBox> list){
+        Intent intent = new Intent(this, ViewMore.class);
+        intent.putExtra("depart_code", code);
+
+        Bundle b = new Bundle();
+        b.putSerializable("list", list);
+        intent.putExtra("bundle", b);
+        startActivity(intent);
+    }
+
+    void openSearch(){
+        Intent intent = new Intent(this, Search.class);
+//        intent.putExtra("search", search);
+
+//        Bundle bundle = new Bundle();
+//        bundle.putSerializable("search_results", search_results);
+//        intent.putExtra("search_bundle", bundle);
+        startActivity(intent);
+    }
+
+    //  Parsing data from database and adding it to an arraylist (for easy access)
+    private void parseData(JSONArray array, String count) {
         String name="", price="", image="", description="";
         for (int i = 0; i < array.length(); i++) {
 
@@ -107,23 +149,28 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
             }
             //Adding the request object to the list
             String[] imageURLs = image.split(",");
+            ArrayList<String> images = new ArrayList<>();
+            images.addAll(Arrays.asList(imageURLs));
+
             String image_url = imageURLs[0];
 
-            if (count == 1) computers_list.add(new ItemBox(name, "R " + price, image_url, description));
-            else if (count == 3) books_list.add(new ItemBox(name, "R " + price, image_url, description));
-            else if (count == 6) clothes_list.add(new ItemBox(name, "R " + price, image_url, description));
-            else if (count == 8) health_list.add(new ItemBox(name, "R " + price, image_url, description));
-            else if (count == 10) sports_list.add(new ItemBox(name, "R " + price, image_url, description));
+            if (count.equals("1")) computers_list.add(new ItemBox(name, "R " + price, image_url, description,images));
+            else if (count.equals("3")) books_list.add(new ItemBox(name, "R " + price, image_url, description,images));
+            else if (count.equals("6")) clothes_list.add(new ItemBox(name, "R " + price, image_url, description,images));
+            else if (count.equals("8")) health_list.add(new ItemBox(name, "R " + price, image_url, description,images));
+            else if (count.equals("10")) sports_list.add(new ItemBox(name, "R " + price, image_url, description,images));
+            else search_results.add(new ItemBox(name, "R " + price, image_url, description,images));
+
         }
         //Notifying the adapter that data has been added or changed
-//        adapter.notifyDataSetChanged();
+        //adapter.notifyDataSetChanged();
     }
 
-//  Fetching the data from the database as a JSON array
-    private JsonArrayRequest getDataFromServer(int requestCount) {
+    //  Fetching the data from the database as a JSON array
+    private JsonArrayRequest getDataFromServer(String url, String requestCount) {
 
         //JsonArrayRequest of volley
-        return new JsonArrayRequest(webURL + String.valueOf(requestCount),
+        return new JsonArrayRequest(url + String.valueOf(requestCount),
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -140,8 +187,7 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
     }
 
     private void getData(int count){
-
-        requestQueue.add(getDataFromServer(count));
+        requestQueue.add(getDataFromServer(webURL, String.valueOf(count)));
     }
 
     private void renderCategories(){
@@ -157,7 +203,7 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
             else if (i == 3) renderer(R.id.rv_books, books_list);
             else if (i == 6) renderer(R.id.rv_clothes, clothes_list);
             else if (i == 8) renderer(R.id.rv_health, health_list);
-            else if (i == 10) renderer(R.id.rv_sports, sports_list);
+            else renderer(R.id.rv_sports, sports_list);
         }
     }
 
@@ -166,7 +212,7 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
         recyclerView = findViewById(rv);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        RecyclerView.Adapter adapter = new Itembox_Adapter(list, this);
+        RecyclerView.Adapter adapter = new Itembox_Adapter(list, this, 1);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
     }

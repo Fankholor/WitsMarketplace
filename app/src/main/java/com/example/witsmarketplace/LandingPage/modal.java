@@ -22,15 +22,16 @@ public class modal extends AppCompatActivity
     private static String name;
     private static String price;
     private static String description;
+    private static ArrayList<String> images = new ArrayList<>();
     private static ExtendedFloatingActionButton cartBtn;
     private static ExtendedFloatingActionButton faveBtn;
-    private static Context context;
+    private static Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modal);
-        context = this;
+        mContext = this;
 
         TextView name_text = findViewById(R.id.name);
         TextView price_text = findViewById(R.id.price);
@@ -40,6 +41,7 @@ public class modal extends AppCompatActivity
         name = intent.getStringExtra("name");
         price = intent.getStringExtra("price");
         description = intent.getStringExtra("description");
+        images = intent.getStringArrayListExtra("images_array");
 
         name_text.setText(name);
         price_text.setText(price);
@@ -51,22 +53,22 @@ public class modal extends AppCompatActivity
         cartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context,"Added to Cart",Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext,"Added to Cart",Toast.LENGTH_SHORT).show();
             }
         });
 
         faveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context,"Added to Favorites",Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext,"Added to Favorites",Toast.LENGTH_SHORT).show();
             }
         });
 
         ImageSlider imageSlider = findViewById(R.id.modal_image_slider);
         List<SlideModel> slideModels = new ArrayList<>();
-        slideModels.add(new SlideModel("https://lamp.ms.wits.ac.za/home/s1671848/uploads/1624189162-IMG_20210620_133631202.jpg"));
-        slideModels.add(new SlideModel("https://lamp.ms.wits.ac.za/home/s1671848/uploads/1624189776-IMG_20210620_134645615.jpg"));
-        slideModels.add(new SlideModel("https://lamp.ms.wits.ac.za/home/s1671848/uploads/1624282297-IMG_20210621_152856992.jpg"));
+        for(String image:images){
+            slideModels.add(new SlideModel(image));
+        }
         imageSlider.setImageList(slideModels, true);
     }
 }

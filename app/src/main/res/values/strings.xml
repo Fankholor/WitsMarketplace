@@ -21,22 +21,8 @@
     <string name="password">Password</string>
     <string name="don_t_have_an_account_sign_up_here">Don\'t have an account? Sign Up here</string>
     <string name="enter_marketplace">Enter MarketPlace</string>
+    <string name="view_more_search_bar">view more search bar</string>
+    <string name="view_more_cart">view more cart</string>
     <string name="addFave">Add to \nFavorites</string>
 
-    <!--    <string-array name="departments">-->
-    <!--        <menu>-->
-    <!--        <item>Books-->
-    <!--            <menu>-->
-    <!--                <item>Fiction</item>-->
-    <!--                <item>Non-Fiction</item>-->
-    <!--            </menu>-->
-
-    <!--        </item>-->
-    <!--        <item>Computer &amp; Electronics</item>-->
-    <!--        <item>Gaming</item>-->
-    <!--        <item>Clothing</item>-->
-    <!--        <item>Health &amp; Hygiene</item>-->
-    <!--        <item>Sports &amp; Training</item>-->
-    <!--        </menu>-->
-    <!--    </string-array>-->
 </resources>

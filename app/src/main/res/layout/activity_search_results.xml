@@ -57,8 +57,8 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="18dp"
             android:layout_marginBottom="0dp"
-            app:srcCompat="@drawable/cart_mobile"
-            android:contentDescription="@string/view_more_cart" />
+            android:contentDescription="@string/view_more_cart"
+            app:srcCompat="@drawable/cart_mobile" />
 
     </RelativeLayout>
 

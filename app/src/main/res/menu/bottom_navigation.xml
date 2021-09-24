@@ -5,11 +5,11 @@
         android:id="@+id/nav_home"
         android:icon="@drawable/ic_baseline_home_24"
         android:title="Home"/>
-
+<!--    "@drawable/ic_baseline_add_shopping_cart_24"-->
     <item
         android:id="@+id/nav_catagorie"
-        android:icon="@drawable/ic_baseline_list_24"
-        android:title="Catagories"/>
+        android:icon="@drawable/cart_mobile"
+        android:title="Cart"/>
 
     <item
         android:id="@+id/nav_favorite"

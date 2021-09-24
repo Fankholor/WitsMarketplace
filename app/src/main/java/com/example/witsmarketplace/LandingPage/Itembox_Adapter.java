@@ -115,15 +115,15 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
                 itemImage = itemView.findViewById(R.id.img_item);
                 itemName = itemView.findViewById(R.id.item_name);
                 itemPrice = itemView.findViewById(R.id.item_price);
-                itemDesc = itemView.findViewById(R.id.item_desc);
-                AddCart = itemView.findViewById(R.id.btn_cart);
+//                itemDesc = itemView.findViewById(R.id.item_desc);
+//                AddCart = itemView.findViewById(R.id.btn_cart);
             }
 
             else if (Itembox_Adapter.n == 4){
                 itemImage = itemView.findViewById(R.id.img_item);
                 itemName = itemView.findViewById(R.id.item_name);
                 itemPrice = itemView.findViewById(R.id.item_price);
-                itemDesc = itemView.findViewById(R.id.item_desc);
+//                itemDesc = itemView.findViewById(R.id.item_desc);
                 AddCart = itemView.findViewById(R.id.incre_decr_btn);
             }
 

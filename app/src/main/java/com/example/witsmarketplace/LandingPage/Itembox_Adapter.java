@@ -89,6 +89,8 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
         public ImageView itemImage;
         public TextView itemName;
         public TextView itemPrice;
+        public TextView itemDesc;
+        public Button AddCart;
         public ImageButton CartButton;
         public RelativeLayout relativeLayout;
 
@@ -108,6 +110,21 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
                 itemPrice = itemView.findViewById(R.id.vm_price);
                 CartButton = itemView.findViewById(R.id.AddToCart);
                 relativeLayout = itemView.findViewById(R.id.item_box);
+            }
+            else if (Itembox_Adapter.n == 3){
+                itemImage = itemView.findViewById(R.id.img_item);
+                itemName = itemView.findViewById(R.id.item_name);
+                itemPrice = itemView.findViewById(R.id.item_price);
+                itemDesc = itemView.findViewById(R.id.item_desc);
+                AddCart = itemView.findViewById(R.id.btn_cart);
+            }
+
+            else if (Itembox_Adapter.n == 4){
+                itemImage = itemView.findViewById(R.id.img_item);
+                itemName = itemView.findViewById(R.id.item_name);
+                itemPrice = itemView.findViewById(R.id.item_price);
+                itemDesc = itemView.findViewById(R.id.item_desc);
+                AddCart = itemView.findViewById(R.id.incre_decr_btn);
             }
 
         }
@@ -165,12 +182,18 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
     @NonNull
     @Override
     public Itembox_ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view;
+        View view = null;
         if (Itembox_Adapter.n == 1) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itembox, parent, false);
         }
-        else {
+        else if (Itembox_Adapter.n == 2) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_more, parent, false);
+        }
+        else if (Itembox_Adapter.n == 3) {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fave_item, parent, false);
+        }
+        else if (Itembox_Adapter.n == 4) {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_item, parent, false);
         }
         return new Itembox_ViewHolder(view);
     }

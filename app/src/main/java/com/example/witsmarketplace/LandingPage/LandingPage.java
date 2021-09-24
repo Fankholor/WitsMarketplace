@@ -1,10 +1,12 @@
 package com.example.witsmarketplace.LandingPage;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -27,6 +29,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.witsmarketplace.ViewMore.ViewMore;
+import com.example.witsmarketplace.fave_cart.cart;
+import com.example.witsmarketplace.fave_cart.favorite;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,6 +70,33 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
             }
         });
 
+        // 1 = computer/electronics >>> 3 = books >>> 6 = clothing >>> 8 = health/hygiene >>> 10 = sports
+
+//********************************************************* Click Listeners for ViewMore ********************************************************//
+        Button books_vm = (Button) findViewById(R.id.vm_books);
+        books_vm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openViewMore(3, books_list);
+            }
+        });
+//
+        Button computer_vm = (Button) findViewById(R.id.vm_computers);
+        computer_vm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openViewMore(1, computers_list);
+            }
+        });
+
+        Button clothes_vm = (Button) findViewById(R.id.vm_clothes);
+        clothes_vm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openViewMore(6, clothes_list);
+            }
+        });
+
         Button health_vm = (Button) findViewById(R.id.vm_health);
         health_vm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,8 +122,28 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
             }
         });
 
-        System.out.println(books_list);
+//        Bottom Navigation
+        BottomNavigationView bnv = findViewById(R.id.bottom_navigation);
+        bnv.setOnNavigationItemSelectedListener(navListener);
     }
+
+//    Bottom Navigation
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+        new BottomNavigationView.OnNavigationItemSelectedListener() {
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Intent intent = null;
+        if (item.getItemId() == R.id.nav_cart){
+            intent = new Intent(getApplicationContext(), cart.class);
+            startActivity(intent);
+        }
+        else if (item.getItemId() == R.id.nav_favorite) {
+            intent = new Intent(getApplicationContext(), favorite.class);
+            startActivity(intent);
+        }
+            return true;
+    }
+};
 
     public void hideKeyboard(View view) {
         InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);

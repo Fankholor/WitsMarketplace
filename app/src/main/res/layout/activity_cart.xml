@@ -42,7 +42,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <ListView
@@ -50,17 +50,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-
-
             </ListView>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="0dp"
-            android:orientation="vertical"
-            android:layout_alignParentBottom="true"
-            android:layout_weight="1">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -82,7 +73,7 @@
                     android:id="@+id/cart_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="(9 items)"
+                    android:text="7 items"
                     android:textSize="18dp"
                     android:layout_marginTop="10dp"/>
 
@@ -123,14 +114,15 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Discard"
-                    android:background="#FF0000"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:padding="8dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginLeft="30dp"
-                    android:textAllCaps="false"/>
+                    android:background="#FF0000"
+                    android:padding="8dp"
+                    android:text="Discard"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 

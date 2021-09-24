@@ -3,8 +3,11 @@ package com.example.witsmarketplace.LandingPage;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,7 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
+import com.example.witsmarketplace.Login.LoginActivity;
 import com.example.witsmarketplace.R;
 
 import org.json.JSONArray;
@@ -28,6 +33,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.witsmarketplace.SharedPreference;
 import com.example.witsmarketplace.ViewMore.ViewMore;
 import com.example.witsmarketplace.fave_cart.cart;
 import com.example.witsmarketplace.fave_cart.favorite;
@@ -44,6 +50,8 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
     String searchURL = "https://lamp.ms.wits.ac.za/home/s2172765/Search.php?ID=";
     private RecyclerView recyclerView;
     private RequestQueue requestQueue;
+    public static SharedPreference sharedPreference;
+
 
     ArrayList<ItemBox> books_list = new ArrayList<ItemBox>();
     ArrayList<ItemBox> computers_list = new ArrayList<ItemBox>();
@@ -56,11 +64,26 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
-
         requestQueue = Volley.newRequestQueue(this);
 
         renderCategories();         //render all categories with their items
 
+
+        // logout button
+        ImageButton logout = (ImageButton) findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences mySPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor editor = mySPrefs.edit();
+                editor.remove("email");
+                editor.apply();
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
 //      Categories draw-bar button
         ImageButton cat = (ImageButton) findViewById(R.id.btn_categories);
         cat.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +141,7 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
         search_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 openSearch();
             }
         });

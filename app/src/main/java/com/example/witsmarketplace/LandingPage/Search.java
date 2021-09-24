@@ -1,5 +1,6 @@
 package com.example.witsmarketplace.LandingPage;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -20,6 +21,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.witsmarketplace.R;
+import com.example.witsmarketplace.fave_cart.cart;
+import com.example.witsmarketplace.fave_cart.favorite;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,7 +58,33 @@ public class Search extends AppCompatActivity {
                 openSearchResults(key);
             }
         });
+
+        //        Bottom Navigation
+        BottomNavigationView bnv = findViewById(R.id.bottom_navigation);
+        bnv.setOnNavigationItemSelectedListener(navListener);
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    Intent intent = null;
+                    if (item.getItemId() == R.id.nav_home){
+                        intent = new Intent(getApplicationContext(), LandingPage.class);
+                        startActivity(intent);
+                    }
+                    else if (item.getItemId() == R.id.nav_favorite) {
+                        intent = new Intent(getApplicationContext(), favorite.class);
+                        startActivity(intent);
+                    }
+                    else if(item.getItemId() == R.id.nav_cart){
+                        intent = new Intent(getApplicationContext(), cart.class);
+                        startActivity(intent);
+                    }
+
+                    return true;
+                }
+            };
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {

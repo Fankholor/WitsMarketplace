@@ -22,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 @SuppressWarnings("ALL")
 public class SearchResults extends AppCompatActivity {
@@ -91,9 +92,11 @@ public class SearchResults extends AppCompatActivity {
             }
             //Adding the request object to the list
             String[] imageURLs = image.split(",");
+            ArrayList<String> images = new ArrayList<>();
+            images.addAll(Arrays.asList(imageURLs));
             String image_url = imageURLs[0];
 
-            search_results.add(new ItemBox(name, "R " + price, image_url, description));
+            search_results.add(new ItemBox(name, "R " + price, image_url, description,images));
         }
         //Notifying the adapter that data has been added or changed
         //adapter.notifyDataSetChanged();

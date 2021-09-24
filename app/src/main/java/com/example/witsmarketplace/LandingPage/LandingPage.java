@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -28,10 +29,11 @@ import com.android.volley.toolbox.Volley;
 import com.example.witsmarketplace.ViewMore.ViewMore;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 @SuppressWarnings("ALL")
-public class LandingPage extends AppCompatActivity implements RecyclerView.OnScrollChangeListener{
+public class LandingPage extends AppCompatActivity implements RecyclerView.OnScrollChangeListener {
 
     String webURL = "https://lamp.ms.wits.ac.za/home/s2172765/product.php?ID="; // 1 = computer/electronics >>> 3 = books >>> 6 = clothing >>> 8 = health/hygiene >>> 10 = sports
     String searchURL = "https://lamp.ms.wits.ac.za/home/s2172765/Search.php?ID=";
@@ -55,38 +57,11 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
         renderCategories();         //render all categories with their items
 
 //      Categories draw-bar button
-        ImageButton cat =(ImageButton)findViewById(R.id.btn_categories);
+        ImageButton cat = (ImageButton) findViewById(R.id.btn_categories);
         cat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showPopup(view);
-            }
-        });
-
-        // 1 = computer/electronics >>> 3 = books >>> 6 = clothing >>> 8 = health/hygiene >>> 10 = sports
-
-//********************************************************* Click Listeners for ViewMore ********************************************************//
-        Button books_vm = (Button) findViewById(R.id.vm_books);
-        books_vm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openViewMore(3, books_list);
-            }
-        });
-//
-        Button computer_vm = (Button) findViewById(R.id.vm_computers);
-        computer_vm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openViewMore(1, computers_list);
-            }
-        });
-
-        Button clothes_vm = (Button) findViewById(R.id.vm_clothes);
-        clothes_vm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openViewMore(6, clothes_list);
             }
         });
 
@@ -116,6 +91,11 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
         });
 
         System.out.println(books_list);
+    }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
     }
 
     //  Pop up menu for the categories draw-bar
@@ -169,14 +149,17 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
             }
             //Adding the request object to the list
             String[] imageURLs = image.split(",");
+            ArrayList<String> images = new ArrayList<>();
+            images.addAll(Arrays.asList(imageURLs));
+
             String image_url = imageURLs[0];
 
-            if (count.equals("1")) computers_list.add(new ItemBox(name, "R " + price, image_url, description));
-            else if (count.equals("3")) books_list.add(new ItemBox(name, "R " + price, image_url, description));
-            else if (count.equals("6")) clothes_list.add(new ItemBox(name, "R " + price, image_url, description));
-            else if (count.equals("8")) health_list.add(new ItemBox(name, "R " + price, image_url, description));
-            else if (count.equals("10")) sports_list.add(new ItemBox(name, "R " + price, image_url, description));
-            else search_results.add(new ItemBox(name, "R " + price, image_url, description));
+            if (count.equals("1")) computers_list.add(new ItemBox(name, "R " + price, image_url, description,images));
+            else if (count.equals("3")) books_list.add(new ItemBox(name, "R " + price, image_url, description,images));
+            else if (count.equals("6")) clothes_list.add(new ItemBox(name, "R " + price, image_url, description,images));
+            else if (count.equals("8")) health_list.add(new ItemBox(name, "R " + price, image_url, description,images));
+            else if (count.equals("10")) sports_list.add(new ItemBox(name, "R " + price, image_url, description,images));
+            else search_results.add(new ItemBox(name, "R " + price, image_url, description,images));
 
         }
         //Notifying the adapter that data has been added or changed

@@ -13,9 +13,10 @@
         <entry key="app/src/main/res/layout/activity_favorite.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_landing_page.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_main2.xml" value="0.26197916666666665" />
+        <entry key="app/src/main/res/layout/activity_modal.xml" value="0.16546052631578947" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.15625" />
-        <entry key="app/src/main/res/layout/activity_search_results.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/activity_view_more.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_search_results.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/activity_view_more.xml" value="0.18" />
         <entry key="app/src/main/res/layout/cart_item.xml" value="0.15625" />
         <entry key="app/src/main/res/layout/fave_item.xml" value="0.26197916666666665" />
         <entry key="app/src/main/res/layout/itembox.xml" value="0.26197916666666665" />

@@ -72,7 +72,6 @@
                     android:inputType="textPersonName"
                     android:padding="10dp"
                     android:windowSoftInputMode="adjustResize" />
-
             </LinearLayout>
         </LinearLayout>
 

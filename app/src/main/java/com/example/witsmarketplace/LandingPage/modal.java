@@ -1,5 +1,6 @@
 package com.example.witsmarketplace.LandingPage;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,8 +12,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.example.witsmarketplace.Login.ServerCommunicator;
 import com.example.witsmarketplace.R;
+import com.example.witsmarketplace.SharedPreference;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +32,7 @@ public class modal extends AppCompatActivity
     private static ArrayList<String> images = new ArrayList<>();
     private static ExtendedFloatingActionButton cartBtn;
     private static ExtendedFloatingActionButton faveBtn;
+    public static SharedPreference sharedPreference;
     private static Context mContext;
 
     @Override
@@ -49,18 +57,22 @@ public class modal extends AppCompatActivity
 
         cartBtn = (ExtendedFloatingActionButton) findViewById(R.id.addCartBtn);
         faveBtn = (ExtendedFloatingActionButton) findViewById(R.id.addFaveBtn);
+        sharedPreference = new SharedPreference(this);
+        String email = sharedPreference.getSH("email");
 
         cartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext,"Added to Cart",Toast.LENGTH_SHORT).show();
+
+                AddToCart(email,name,description,images.get(0),price);
+//                Toast.makeText(mContext,"Added to Cart",Toast.LENGTH_SHORT).show();
             }
         });
-
         faveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext,"Added to Favorites",Toast.LENGTH_SHORT).show();
+                AddToFav(email,name,description,images.get(0),price);
+//                Toast.makeText(mContext,"Added to Favorites",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -71,4 +83,88 @@ public class modal extends AppCompatActivity
         }
         imageSlider.setImageList(slideModels, true);
     }
+
+    // add to cart button implementation
+    public void AddToCart(String email, String name, String description, String picture, String price){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("EMAIL", email);
+        contentValues.put("NAME", name);
+        contentValues.put("PICTURE", picture);
+        contentValues.put("DESCRIPTION", description);
+        contentValues.put("PRICE", price);
+        Toast.makeText(mContext, "Clicked", Toast.LENGTH_SHORT).show();
+        new ServerCommunicator("https://lamp.ms.wits.ac.za/home/s2172765/app_add_cart.php", contentValues) {
+            @Override
+            protected void onPreExecute() {}
+
+            @Override
+
+            protected void onPostExecute(String output) {
+                try {
+                    JSONArray users = new JSONArray(output);
+                    JSONObject object = users.getJSONObject(0);
+
+                    String status = object.getString("add_status");
+                    String message = object.getString("status_message");
+
+                    if(status.equals("1")){
+                        Intent intent = new Intent(mContext, LandingPage.class);
+                        mContext.startActivity(intent);
+
+                        Toast.makeText(mContext ,"You have Successfully added to cart",Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        Toast.makeText(mContext, message , Toast.LENGTH_LONG).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.execute();
+
+    }
+
+    // add to favorite button implementation
+    public void AddToFav(String email, String name, String description, String picture, String price){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("EMAIL", email);
+        contentValues.put("NAME", name);
+        contentValues.put("PICTURE", picture);
+        contentValues.put("DESCRIPTION", description);
+        contentValues.put("PRICE", price);
+
+        Toast.makeText(mContext, "Clicked", Toast.LENGTH_SHORT).show();
+        new ServerCommunicator("https://lamp.ms.wits.ac.za/home/s2172765/app_add_fav.php", contentValues) {
+            @Override
+            protected void onPreExecute() {}
+
+            @Override
+
+            protected void onPostExecute(String output) {
+                try {
+                    JSONArray users = new JSONArray(output);
+                    JSONObject object = users.getJSONObject(0);
+
+                    String status = object.getString("add_status");
+                    String message = object.getString("status_message");
+
+                    if(status.equals("1")){
+                        Intent intent = new Intent(mContext, LandingPage.class);
+                        mContext.startActivity(intent);
+
+                        Toast.makeText(mContext ,"You have Successfully added to favorite",Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        Toast.makeText(mContext, message , Toast.LENGTH_LONG).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.execute();
+
+    }
+
 }

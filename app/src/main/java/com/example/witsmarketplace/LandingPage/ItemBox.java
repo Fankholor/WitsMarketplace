@@ -1,10 +1,9 @@
 package com.example.witsmarketplace.LandingPage;
 
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 
-public class ItemBox {
+public class ItemBox implements java.io.Serializable{
     private final String name , price, image, description;
     private final ArrayList<String> imageUrls;
     private RecyclerView recyclerView;

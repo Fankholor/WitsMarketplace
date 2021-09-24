@@ -6,12 +6,21 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/logo"
-        android:label="Wits MarketPlace"
+        android:icon="@mipmap/ic_launcher"
+        android:label=""
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WitsMarketplace">
+        <activity
+            android:name=".LandingPage.SearchResults"
+            android:exported="true" />
+        <activity
+            android:name=".LandingPage.Search"
+            android:exported="true" />
+        <activity
+            android:name=".ViewMore.ViewMore"
+            android:exported="true" />
         <activity
             android:name=".Login.LoginActivity"
             android:exported="true" />

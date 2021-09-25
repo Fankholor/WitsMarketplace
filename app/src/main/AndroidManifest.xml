@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WitsMarketplace">
         <activity
+            android:name=".fave_cart.cart"
+            android:exported="true" />
+        <activity
+            android:name=".fave_cart.favorite"
+            android:exported="true" />
+        <activity
             android:name=".LandingPage.SearchResults"
             android:exported="true" />
         <activity

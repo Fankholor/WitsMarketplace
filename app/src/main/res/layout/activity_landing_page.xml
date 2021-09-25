@@ -54,7 +54,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
-                android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:orientation="horizontal">
 
@@ -65,26 +64,12 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="15dp"
                     android:layout_weight=".85"
+                    android:focusable="true"
                     android:background="@drawable/rectangle4"
                     android:ems="10"
                     android:hint="@string/search_for_products_brands"
                     android:importantForAutofill="no"
-                    android:inputType="textPersonName"
-                    android:padding="10dp"
-                    android:windowSoftInputMode="adjustResize" />
-
-                <!--                <ImageButton-->
-                <!--                    android:id="@+id/btn_search"-->
-                <!--                    android:layout_width="0dp"-->
-                <!--                    android:layout_height="45dp"-->
-                <!--                    android:layout_gravity="center_vertical"-->
-                <!--                    android:layout_marginStart="5dp"-->
-                <!--                    android:layout_weight=".15"-->
-                <!--                    android:background="@drawable/round_search"-->
-                <!--                    android:contentDescription="@string/search_button"-->
-                <!--                    app:srcCompat="@drawable/search"-->
-                <!--                    tools:ignore="TouchTargetSizeCheck" />-->
-
+                    android:padding="10dp"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -448,7 +433,7 @@
                     android:layout_alignParentTop="false"
                     android:layout_alignParentEnd="false"
                     android:layout_alignParentBottom="false"
-                    android:layout_marginStart="0dp"
+                    android:layout_marginStart="-7dp"
                     android:layout_marginTop="50dp"
                     android:layout_marginEnd="0dp"
                     android:layout_marginBottom="0dp"
@@ -496,17 +481,5 @@
         android:layout_alignParentBottom="true"
 
         app:menu="@menu/bottom_navigation" />
-
-    <!--    <Spinner-->
-    <!--        android:id="@+id/categories"-->
-    <!--        android:layout_width="37dp"-->
-    <!--        android:layout_height="36dp"-->
-    <!--        android:background="@drawable/yellow_categories"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.949"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:layout_constraintVertical_bias="0.023" />-->
 
 </RelativeLayout>

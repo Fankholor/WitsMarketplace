@@ -18,7 +18,7 @@ import android.widget.TextView;
 import androidx.test.espresso.Espresso;
 import androidx.test.rule.ActivityTestRule;
 
-import com.example.witsmarketplace.Login.LandingPageActivity;
+//import com.example.witsmarketplace.Login.LandingPageActivity;
 import com.example.witsmarketplace.Login.LoginActivity;
 
 import org.junit.After;
@@ -33,7 +33,7 @@ public class LoginActivityTest {
     private LoginActivity mActivity = null;
     public String wrongDetails = "Incorrect email, make sure you have registered before you can login.";
     public String correctDetails = "Login successful. Thank you for shopping with us!";
-    Instrumentation.ActivityMonitor monitor = getInstrumentation().addMonitor(LandingPageActivity.class.getName(),null,false);
+//    Instrumentation.ActivityMonitor monitor = getInstrumentation().addMonitor(LandingPageActivity.class.getName(),null,false);
 
     @Before
     public void setUp() throws Exception {

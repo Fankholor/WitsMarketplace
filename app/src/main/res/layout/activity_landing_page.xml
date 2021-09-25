@@ -28,6 +28,16 @@
             app:srcCompat="@drawable/yellow_categories"
             tools:ignore="SpeakableTextPresentCheck" />
 
+        <ImageButton
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/blue"
+            android:src="@drawable/ic_baseline_login_24"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="25dp"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,12 +74,12 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="15dp"
                     android:layout_weight=".85"
-                    android:focusable="true"
                     android:background="@drawable/rectangle4"
                     android:ems="10"
+                    android:focusable="true"
                     android:hint="@string/search_for_products_brands"
                     android:importantForAutofill="no"
-                    android:padding="10dp"/>
+                    android:padding="10dp" />
             </LinearLayout>
         </LinearLayout>
 

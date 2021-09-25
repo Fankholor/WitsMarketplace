@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WitsMarketplace">
         <activity
+            android:name=".fave_cart.cart"
+            android:exported="true" />
+        <activity
+            android:name=".fave_cart.favorite"
+            android:exported="true" />
+        <activity
             android:name=".LandingPage.SearchResults"
             android:exported="true" />
         <activity
@@ -23,6 +29,12 @@
             android:exported="true" />
         <activity
             android:name=".Login.LoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".LandingPage.modal"
+            android:exported="true" />
+        <activity
+            android:name=".SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,9 +47,6 @@
             android:exported="true" />
         <activity
             android:name=".LandingPage.LandingPage"
-            android:exported="true" />
-        <activity
-            android:name=".MainActivity"
             android:exported="true" />
     </application>
 

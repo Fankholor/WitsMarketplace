@@ -8,6 +8,7 @@
     android:clickable="true"
     android:focusable="true"
     android:layout_margin="3dp"
+    android:id="@+id/item_box"
     android:background="@color/cardview_light_background">
 
     <TextView

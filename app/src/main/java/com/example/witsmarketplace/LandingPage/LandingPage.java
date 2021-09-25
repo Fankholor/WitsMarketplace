@@ -1,16 +1,24 @@
 package com.example.witsmarketplace.LandingPage;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
+import com.example.witsmarketplace.Login.LoginActivity;
 import com.example.witsmarketplace.R;
 
 import org.json.JSONArray;
@@ -25,18 +33,25 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.witsmarketplace.SharedPreference;
 import com.example.witsmarketplace.ViewMore.ViewMore;
+import com.example.witsmarketplace.fave_cart.cart;
+import com.example.witsmarketplace.fave_cart.favorite;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 @SuppressWarnings("ALL")
-public class LandingPage extends AppCompatActivity implements RecyclerView.OnScrollChangeListener{
+public class LandingPage extends AppCompatActivity implements RecyclerView.OnScrollChangeListener {
 
     String webURL = "https://lamp.ms.wits.ac.za/home/s2172765/product.php?ID="; // 1 = computer/electronics >>> 3 = books >>> 6 = clothing >>> 8 = health/hygiene >>> 10 = sports
     String searchURL = "https://lamp.ms.wits.ac.za/home/s2172765/Search.php?ID=";
     private RecyclerView recyclerView;
     private RequestQueue requestQueue;
+    public static SharedPreference sharedPreference;
+
 
     ArrayList<ItemBox> books_list = new ArrayList<ItemBox>();
     ArrayList<ItemBox> computers_list = new ArrayList<ItemBox>();
@@ -49,13 +64,28 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
-
         requestQueue = Volley.newRequestQueue(this);
 
         renderCategories();         //render all categories with their items
 
+
+        // logout button
+        ImageButton logout = (ImageButton) findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences mySPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor editor = mySPrefs.edit();
+                editor.remove("email");
+                editor.apply();
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
 //      Categories draw-bar button
-        ImageButton cat =(ImageButton)findViewById(R.id.btn_categories);
+        ImageButton cat = (ImageButton) findViewById(R.id.btn_categories);
         cat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,11 +141,37 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
         search_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 openSearch();
             }
         });
 
-        System.out.println(books_list);
+//        Bottom Navigation
+        BottomNavigationView bnv = findViewById(R.id.bottom_navigation);
+        bnv.setOnNavigationItemSelectedListener(navListener);
+    }
+
+//    Bottom Navigation
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+        new BottomNavigationView.OnNavigationItemSelectedListener() {
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Intent intent = null;
+        if (item.getItemId() == R.id.nav_cart){
+            intent = new Intent(getApplicationContext(), cart.class);
+            startActivity(intent);
+        }
+        else if (item.getItemId() == R.id.nav_favorite) {
+            intent = new Intent(getApplicationContext(), favorite.class);
+            startActivity(intent);
+        }
+            return true;
+    }
+};
+
+    public void hideKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
     }
 
     //  Pop up menu for the categories draw-bar
@@ -139,11 +195,6 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
 
     void openSearch(){
         Intent intent = new Intent(this, Search.class);
-//        intent.putExtra("search", search);
-
-//        Bundle bundle = new Bundle();
-//        bundle.putSerializable("search_results", search_results);
-//        intent.putExtra("search_bundle", bundle);
         startActivity(intent);
     }
 
@@ -169,14 +220,17 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
             }
             //Adding the request object to the list
             String[] imageURLs = image.split(",");
+            ArrayList<String> images = new ArrayList<>();
+            images.addAll(Arrays.asList(imageURLs));
+
             String image_url = imageURLs[0];
 
-            if (count.equals("1")) computers_list.add(new ItemBox(name, "R " + price, image_url, description));
-            else if (count.equals("3")) books_list.add(new ItemBox(name, "R " + price, image_url, description));
-            else if (count.equals("6")) clothes_list.add(new ItemBox(name, "R " + price, image_url, description));
-            else if (count.equals("8")) health_list.add(new ItemBox(name, "R " + price, image_url, description));
-            else if (count.equals("10")) sports_list.add(new ItemBox(name, "R " + price, image_url, description));
-            else search_results.add(new ItemBox(name, "R " + price, image_url, description));
+            if (count.equals("1")) computers_list.add(new ItemBox(name, "R " + price, image_url, description,images));
+            else if (count.equals("3")) books_list.add(new ItemBox(name, "R " + price, image_url, description,images));
+            else if (count.equals("6")) clothes_list.add(new ItemBox(name, "R " + price, image_url, description,images));
+            else if (count.equals("8")) health_list.add(new ItemBox(name, "R " + price, image_url, description,images));
+            else if (count.equals("10")) sports_list.add(new ItemBox(name, "R " + price, image_url, description,images));
+            else search_results.add(new ItemBox(name, "R " + price, image_url, description,images));
 
         }
         //Notifying the adapter that data has been added or changed
@@ -232,6 +286,7 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
         RecyclerView.Adapter adapter = new Itembox_Adapter(list, this, 1);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
     }
 
     private boolean isLastItemDisplaying(RecyclerView recyclerView) {

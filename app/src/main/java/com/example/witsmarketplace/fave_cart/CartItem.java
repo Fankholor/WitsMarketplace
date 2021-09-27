@@ -1,16 +1,15 @@
 package com.example.witsmarketplace.fave_cart;
 
 public class CartItem {
-    private final String name, price, image, count, desc,quantity;
+    private final String name, price, image;
 
     //  constructor fetching all data required on an itemBox
-    public CartItem(String name, String price, String image, String count,String desc,String quantity) {
+    public CartItem(String name, String price, String image) {
         this.name = name;
         this.price = price;
         this.image = image;
-        this.count = count;
-        this.desc  = desc;
-        this.quantity = quantity;
+//        this.count = count;
+//        this.quantity = quantity;
     }
 
     //  getters for all required data
@@ -23,9 +22,6 @@ public class CartItem {
     public String getImage(){
         return image;
     }
-    public String getCount(){
-        return count;
-    }
-    public String getDesc() {return desc;}
-    public  String getQuantity(){return quantity;}
+//    public String getCount(){ return count; }
+//    public  String getQuantity(){return quantity;}
 }

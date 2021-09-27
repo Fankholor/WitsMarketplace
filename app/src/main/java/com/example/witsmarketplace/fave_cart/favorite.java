@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -45,6 +46,9 @@ public class favorite extends AppCompatActivity {
 
         sharedPreference = new SharedPreference(this);
         String userEmail = sharedPreference.getSH("email");
+        System.out.println(userEmail + "--------------------------" + "+++++++++++++++++++++");
+        Toast.makeText(this, userEmail, Toast.LENGTH_SHORT).show();
+
         requestQueue = Volley.newRequestQueue(this);
         renderItems(userEmail);
 

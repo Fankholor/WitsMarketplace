@@ -160,4 +160,19 @@ public class cart extends AppCompatActivity {
 
     }
 
+    new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Intent intent = null;
+            if (item.getItemId() == R.id.nav_home){
+                intent = new Intent(getApplicationContext(), LandingPage.class);
+                startActivity(intent);
+            }
+            else if (item.getItemId() == R.id.nav_favorite) {
+                intent = new Intent(getApplicationContext(), favorite.class);
+                startActivity(intent);
+            }
+            return true;
+        }
+    };
 }

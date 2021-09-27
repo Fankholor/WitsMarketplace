@@ -19,6 +19,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.witsmarketplace.LandingPage.LandingPage;
 import com.example.witsmarketplace.R;
+import com.example.witsmarketplace.SharedPreference;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
@@ -43,12 +44,13 @@ public class cart extends AppCompatActivity {
         setContentView(R.layout.activity_cart);
 
         requestQueue = Volley.newRequestQueue(this);
-        renderItems("vince@gmail.com");
+        SharedPreference sharedPreference = new SharedPreference(this);
+        renderItems(sharedPreference.getSH("email"));
         //        Bottom Navigation
         BottomNavigationView bnv = findViewById(R.id.bottom_navigation);
         bnv.setOnNavigationItemSelectedListener(navListener);
 
-        backbtn = findViewById(R.id.backbtnn);
+        backbtn = findViewById(R.id.backbtn);
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -50,6 +50,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
+
+
             </ListView>
 
 
@@ -102,11 +104,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Proceed To Checkout"
-                    android:background="#397C0C"
+                    android:background="@drawable/proceed_btn"
+
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:textSize="20sp"
                     android:padding="8dp"
+
                     android:layout_marginLeft="8dp"
                     android:textAllCaps="false"
                     />

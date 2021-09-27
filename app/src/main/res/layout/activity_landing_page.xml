@@ -28,6 +28,16 @@
             app:srcCompat="@drawable/yellow_categories"
             tools:ignore="SpeakableTextPresentCheck" />
 
+        <ImageButton
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/blue"
+            android:src="@drawable/ic_baseline_login_24"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="25dp"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,6 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
+                android:focusableInTouchMode="true"
                 android:orientation="horizontal">
 
                 <EditText
@@ -65,24 +76,10 @@
                     android:layout_weight=".85"
                     android:background="@drawable/rectangle4"
                     android:ems="10"
+                    android:focusable="true"
                     android:hint="@string/search_for_products_brands"
                     android:importantForAutofill="no"
-                    android:inputType="textPersonName"
-                    android:padding="10dp"
-                    android:windowSoftInputMode="adjustResize" />
-
-                <!--                <ImageButton-->
-                <!--                    android:id="@+id/btn_search"-->
-                <!--                    android:layout_width="0dp"-->
-                <!--                    android:layout_height="45dp"-->
-                <!--                    android:layout_gravity="center_vertical"-->
-                <!--                    android:layout_marginStart="5dp"-->
-                <!--                    android:layout_weight=".15"-->
-                <!--                    android:background="@drawable/round_search"-->
-                <!--                    android:contentDescription="@string/search_button"-->
-                <!--                    app:srcCompat="@drawable/search"-->
-                <!--                    tools:ignore="TouchTargetSizeCheck" />-->
-
+                    android:padding="10dp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -494,17 +491,5 @@
         android:layout_alignParentBottom="true"
 
         app:menu="@menu/bottom_navigation" />
-
-    <!--    <Spinner-->
-    <!--        android:id="@+id/categories"-->
-    <!--        android:layout_width="37dp"-->
-    <!--        android:layout_height="36dp"-->
-    <!--        android:background="@drawable/yellow_categories"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.949"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:layout_constraintVertical_bias="0.023" />-->
 
 </RelativeLayout>

@@ -1,6 +1,5 @@
 plugins {
     id 'com.android.application'
-    id 'jacoco'
 }
 
 android {
@@ -31,7 +30,7 @@ android {
 
         def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
         def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
-        def mainSrc = "${project.projectDir}/src/main/java"
+        def mainSrc = "${project.projectDir}/src/androidTest"
 
         sourceDirectories.setFrom(files([mainSrc]))
         classDirectories.setFrom(files([debugTree]))
@@ -40,17 +39,6 @@ android {
                 "outputs/code-coverage/connected/*coverage.ec"
         ]))
     }
-
-    testOptions {
-        unitTests.all {
-            jacoco {
-                includeNoLocationClasses = true
-                excludes = ['jdk.internal.*']
-            }
-        }
-        unitTests.returnDefaultValues = true
-    }
-
 
     buildTypes {
         debug {
@@ -107,4 +95,6 @@ dependencies {
 //    Glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+
+    implementation 'com.github.denzcoskun:ImageSlideshow:0.0.6'
 }

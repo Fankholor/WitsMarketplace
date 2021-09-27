@@ -26,14 +26,14 @@ public class SplashScreen extends AppCompatActivity
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {
-                if(!email.isEmpty()){
-                    Intent intent = new Intent(mContext, LandingPage.class);
-                    mContext.startActivity(intent);
+                Intent intent;
+                if(email != null){
+                    intent = new Intent(mContext, LandingPage.class);
                 }
                 else {
-                    Intent intent = new Intent(mContext, LoginActivity.class);
-                    mContext.startActivity(intent);
+                    intent = new Intent(mContext, LoginActivity.class);
                 }
+                mContext.startActivity(intent);
             }
         }, 4000);
     }

@@ -3,6 +3,7 @@ package com.example.witsmarketplace.fave_cart;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +34,7 @@ public class favorite extends AppCompatActivity {
 
     private RequestQueue requestQueue;
     ImageButton backbtn;
+    public static SharedPreference sharedPreference;
 
     ArrayList<FavItem> favItems = new ArrayList<FavItem>();
 
@@ -41,10 +43,10 @@ public class favorite extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wish_list);
 
-
+        sharedPreference = new SharedPreference(this);
+        String userEmail = sharedPreference.getSH("email");
         requestQueue = Volley.newRequestQueue(this);
-        SharedPreference sharedPreference = new SharedPreference(this);
-        renderItems(sharedPreference.getSH("email"));
+        renderItems(userEmail);
 
         //        Bottom Navigation
         BottomNavigationView bnv = findViewById(R.id.bottom_navigation);

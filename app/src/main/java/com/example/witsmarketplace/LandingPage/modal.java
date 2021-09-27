@@ -63,16 +63,13 @@ public class modal extends AppCompatActivity
         cartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 AddToCart(email,name,description,images.get(0),price);
-//                Toast.makeText(mContext,"Added to Cart",Toast.LENGTH_SHORT).show();
             }
         });
         faveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AddToFav(email,name,description,images.get(0),price);
-//                Toast.makeText(mContext,"Added to Favorites",Toast.LENGTH_SHORT).show();
             }
         });
 

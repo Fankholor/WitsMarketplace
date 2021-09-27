@@ -23,4 +23,11 @@ public class SharedPreference {
         SharedPreferences s = activity.getSharedPreferences("application", Context.MODE_PRIVATE);
         return s.getString(key, null);
     }
+
+    public void RemoveKey(String key){
+        SharedPreferences s = activity.getSharedPreferences("application", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = s.edit();
+        editor.remove(key);
+        editor.apply();
+    }
 }

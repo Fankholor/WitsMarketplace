@@ -63,16 +63,13 @@ public class modal extends AppCompatActivity
         cartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 AddToCart(email,name,description,images.get(0),price);
-//                Toast.makeText(mContext,"Added to Cart",Toast.LENGTH_SHORT).show();
             }
         });
         faveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AddToFav(email,name,description,images.get(0),price);
-//                Toast.makeText(mContext,"Added to Favorites",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -92,7 +89,6 @@ public class modal extends AppCompatActivity
         contentValues.put("PICTURE", picture);
         contentValues.put("DESCRIPTION", description);
         contentValues.put("PRICE", price);
-        Toast.makeText(mContext, "Clicked", Toast.LENGTH_SHORT).show();
         new ServerCommunicator("https://lamp.ms.wits.ac.za/home/s2172765/app_add_cart.php", contentValues) {
             @Override
             protected void onPreExecute() {}
@@ -108,10 +104,7 @@ public class modal extends AppCompatActivity
                     String message = object.getString("status_message");
 
                     if(status.equals("1")){
-                        Intent intent = new Intent(mContext, LandingPage.class);
-                        mContext.startActivity(intent);
-
-                        Toast.makeText(mContext ,"You have Successfully added to cart",Toast.LENGTH_LONG).show();
+                        Toast.makeText(mContext ,"Added to cart",Toast.LENGTH_LONG).show();
                     }
                     else{
                         Toast.makeText(mContext, message , Toast.LENGTH_LONG).show();
@@ -134,7 +127,6 @@ public class modal extends AppCompatActivity
         contentValues.put("DESCRIPTION", description);
         contentValues.put("PRICE", price);
 
-        Toast.makeText(mContext, "Clicked", Toast.LENGTH_SHORT).show();
         new ServerCommunicator("https://lamp.ms.wits.ac.za/home/s2172765/app_add_fav.php", contentValues) {
             @Override
             protected void onPreExecute() {}
@@ -150,10 +142,7 @@ public class modal extends AppCompatActivity
                     String message = object.getString("status_message");
 
                     if(status.equals("1")){
-                        Intent intent = new Intent(mContext, LandingPage.class);
-                        mContext.startActivity(intent);
-
-                        Toast.makeText(mContext ,"You have Successfully added to favorite",Toast.LENGTH_LONG).show();
+                        Toast.makeText(mContext ,"Added to favorite",Toast.LENGTH_LONG).show();
                     }
                     else{
                         Toast.makeText(mContext, message , Toast.LENGTH_LONG).show();

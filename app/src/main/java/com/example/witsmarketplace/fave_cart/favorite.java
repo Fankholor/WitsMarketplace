@@ -18,6 +18,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.witsmarketplace.LandingPage.LandingPage;
 import com.example.witsmarketplace.R;
+import com.example.witsmarketplace.SharedPreference;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
@@ -42,7 +43,8 @@ public class favorite extends AppCompatActivity {
 
 
         requestQueue = Volley.newRequestQueue(this);
-        renderItems("vince@gmail.com");
+        SharedPreference sharedPreference = new SharedPreference(this);
+        renderItems(sharedPreference.getSH("email"));
 
         //        Bottom Navigation
         BottomNavigationView bnv = findViewById(R.id.bottom_navigation);

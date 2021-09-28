@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import com.example.witsmarketplace.Login.LoginActivity;
 import com.example.witsmarketplace.R;
@@ -148,11 +149,13 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
 //        Bottom Navigation
         BottomNavigationView bnv = findViewById(R.id.bottom_navigation);
         bnv.setOnNavigationItemSelectedListener(navListener);
+        bnv.getMenu().getItem(0).setChecked(true);
     }
 
 //    Bottom Navigation
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
         new BottomNavigationView.OnNavigationItemSelectedListener() {
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Intent intent = null;
@@ -164,7 +167,11 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
             intent = new Intent(getApplicationContext(), favorite.class);
             startActivity(intent);
         }
-            return true;
+        else if(item.getItemId() == R.id.nav_home){
+            intent = new Intent(getApplicationContext(),LandingPage.class);
+            startActivity(intent);
+        }
+        return true;
     }
 };
 
@@ -241,19 +248,19 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
 
         //JsonArrayRequest of volley
         return new JsonArrayRequest(url + String.valueOf(requestCount),
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        //Calling method to parse the json response
-                        parseData(response, requestCount);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //If an error occurs that means end of the list has reached
-                    }
-                });
+        new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                //Calling method to parse the json response
+                parseData(response, requestCount);
+            }
+        },
+        new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //If an error occurs that means end of the list has reached
+            }
+        });
     }
 
     private void getData(int count){

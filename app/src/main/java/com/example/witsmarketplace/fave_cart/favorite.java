@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -45,12 +46,14 @@ public class favorite extends AppCompatActivity {
 
         sharedPreference = new SharedPreference(this);
         String userEmail = sharedPreference.getSH("email");
+
         requestQueue = Volley.newRequestQueue(this);
         renderItems(userEmail);
 
         //        Bottom Navigation
         BottomNavigationView bnv = findViewById(R.id.bottom_navigation);
         bnv.setOnNavigationItemSelectedListener(navListener);
+        bnv.getMenu().getItem(2).setChecked(true);
 
         backbtn = findViewById(R.id.backbtn);
         backbtn.setOnClickListener(new View.OnClickListener() {

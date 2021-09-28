@@ -25,7 +25,8 @@ android:
     - 'google-gdk-license-.+'
 
 branches:
-  only: main
+  only: 
+    - main
   
 env:
   global:

@@ -31,9 +31,6 @@
             android:name=".ViewMore.ViewMore"
             android:exported="true" />
         <activity
-            android:name=".Login.LoginActivity"
-            android:exported="true" />
-        <activity
             android:name=".LandingPage.modal"
             android:exported="true" />
         <activity

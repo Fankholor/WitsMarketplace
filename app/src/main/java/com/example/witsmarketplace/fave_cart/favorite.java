@@ -51,6 +51,7 @@ public class favorite extends AppCompatActivity {
         //        Bottom Navigation
         BottomNavigationView bnv = findViewById(R.id.bottom_navigation);
         bnv.setOnNavigationItemSelectedListener(navListener);
+        bnv.getMenu().getItem(2).setChecked(true);
 
         backbtn = findViewById(R.id.backbtn);
         backbtn.setOnClickListener(new View.OnClickListener() {

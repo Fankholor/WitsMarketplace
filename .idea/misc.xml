@@ -11,6 +11,7 @@
         <entry key="app/src/main/res/drawable/round_btn.xml" value="0.1756578947368421" />
         <entry key="app/src/main/res/drawable/round_btn_remove.xml" value="0.1756578947368421" />
         <entry key="app/src/main/res/drawable/round_search.xml" value="0.1756578947368421" />
+        <entry key="app/src/main/res/drawable/selector.xml" value="0.15104166666666666" />
         <entry key="app/src/main/res/layout/activity_cart.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_favorite.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_landing_page.xml" value="0.25" />

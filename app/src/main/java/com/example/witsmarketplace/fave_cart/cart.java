@@ -63,21 +63,21 @@ public class cart extends AppCompatActivity {
 
     //    Bottom Navigation
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    Intent intent = null;
-                    if (item.getItemId() == R.id.nav_home){
-                        intent = new Intent(getApplicationContext(), LandingPage.class);
-                        startActivity(intent);
-                    }
-                    else if (item.getItemId() == R.id.nav_favorite) {
-                        intent = new Intent(getApplicationContext(), favorite.class);
-                        startActivity(intent);
-                    }
-                    return true;
+        new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent = null;
+                if (item.getItemId() == R.id.nav_home){
+                    intent = new Intent(getApplicationContext(), LandingPage.class);
+                    startActivity(intent);
                 }
-            };
+                else if (item.getItemId() == R.id.nav_favorite) {
+                    intent = new Intent(getApplicationContext(), favorite.class);
+                    startActivity(intent);
+                }
+                return true;
+            }
+        };
 
     //  Parsing data from database and adding it to an arraylist (for easy access)
     private void parseData(JSONArray array) throws JSONException {

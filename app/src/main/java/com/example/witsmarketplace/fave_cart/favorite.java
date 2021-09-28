@@ -46,8 +46,6 @@ public class favorite extends AppCompatActivity {
 
         sharedPreference = new SharedPreference(this);
         String userEmail = sharedPreference.getSH("email");
-        System.out.println(userEmail + "--------------------------" + "+++++++++++++++++++++");
-        Toast.makeText(this, userEmail, Toast.LENGTH_SHORT).show();
 
         requestQueue = Volley.newRequestQueue(this);
         renderItems(userEmail);

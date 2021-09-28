@@ -160,24 +160,18 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Intent intent = null;
         if (item.getItemId() == R.id.nav_cart){
-
             intent = new Intent(getApplicationContext(), cart.class);
             startActivity(intent);
-
-
         }
         else if (item.getItemId() == R.id.nav_favorite) {
             intent = new Intent(getApplicationContext(), favorite.class);
             startActivity(intent);
-
-
         }
         else if(item.getItemId() == R.id.nav_home){
             intent = new Intent(getApplicationContext(),LandingPage.class);
             startActivity(intent);
-
         }
-            return true;
+        return true;
     }
 };
 
@@ -254,19 +248,19 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
 
         //JsonArrayRequest of volley
         return new JsonArrayRequest(url + String.valueOf(requestCount),
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        //Calling method to parse the json response
-                        parseData(response, requestCount);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //If an error occurs that means end of the list has reached
-                    }
-                });
+        new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                //Calling method to parse the json response
+                parseData(response, requestCount);
+            }
+        },
+        new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //If an error occurs that means end of the list has reached
+            }
+        });
     }
 
     private void getData(int count){

@@ -72,6 +72,7 @@ public class RegistrationActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(context, LoginActivity.class);
                 context.startActivity(intent);
+                finish();
             }
         });
 
@@ -121,8 +122,6 @@ public class RegistrationActivity extends AppCompatActivity {
         contentValues.put("dateOfBirth", date);
         contentValues.put("password", Password);
 
-
-
         new ServerCommunicator("https://lamp.ms.wits.ac.za/home/s2172765/market_place_app_register.php", contentValues) {
             @Override
             protected void onPreExecute() {}
@@ -140,6 +139,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                         Intent intent = new Intent(context, LandingPage.class);
                         context.startActivity(intent);
+                        ((RegistrationActivity)context).finish();
                         Toast.makeText(context ,"You have Succesfully registered",Toast.LENGTH_LONG).show();
                     }
                     else{

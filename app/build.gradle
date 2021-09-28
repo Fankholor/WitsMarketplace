@@ -29,6 +29,11 @@ android {
      
         }
 
+        project.gradle.taskGraph.whenReady {
+            connectedDebugAndroidTest {
+                ignoreFailures = true
+            }
+        }
         def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
         def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
         def mainSrc = "${project.projectDir}/src/main/java"

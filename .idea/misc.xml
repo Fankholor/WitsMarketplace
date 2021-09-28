@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.18697916666666667" />
+        <entry key="..\:/Users/nihal/StudioProjects/WitsMarketplace/app/src/main/res/layout/activity_landing_page.xml" value="0.33" />
+        <entry key="..\:/Users/nihal/StudioProjects/WitsMarketplace/app/src/main/res/menu/bottom_navigation.xml" value="0.18697916666666667" />
         <entry key="app/src/main/res/drawable/boarders.xml" value="0.278125" />
         <entry key="app/src/main/res/drawable/discard.xml" value="0.1756578947368421" />
         <entry key="app/src/main/res/drawable/dropdown.xml" value="0.1739413680781759" />
@@ -11,6 +13,7 @@
         <entry key="app/src/main/res/drawable/round_btn.xml" value="0.1756578947368421" />
         <entry key="app/src/main/res/drawable/round_btn_remove.xml" value="0.1756578947368421" />
         <entry key="app/src/main/res/drawable/round_search.xml" value="0.1756578947368421" />
+        <entry key="app/src/main/res/drawable/selector.xml" value="0.15104166666666666" />
         <entry key="app/src/main/res/layout/activity_cart.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_favorite.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_landing_page.xml" value="0.25" />

@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WitsMarketplace">
         <activity
-            android:name=".OrderHistory.OrderHistory"
+            android:name=".SplashScreen"
             android:exported="true" />
         <activity
             android:name=".Login.LoginActivity"
@@ -37,7 +37,7 @@
             android:name=".LandingPage.modal"
             android:exported="true" />
         <activity
-            android:name=".SplashScreen"
+            android:name=".OrderHistory.OrderHistory"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

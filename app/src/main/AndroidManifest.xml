@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WitsMarketplace">
         <activity
+            android:name=".fave_cart.Address"
+            android:exported="true" />
+        <activity
             android:name=".OrderHistory.OrderHistory"
             android:exported="true" />
         <activity

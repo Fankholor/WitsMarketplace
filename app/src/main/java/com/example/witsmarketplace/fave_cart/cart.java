@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -33,6 +34,7 @@ public class cart extends AppCompatActivity {
 
     private RequestQueue requestQueue;
     ImageButton backbtn;
+    Button proceed;
     TextView cart_count;
 
     ArrayList<CartItem> cartItems = new ArrayList<CartItem>();
@@ -59,7 +61,17 @@ public class cart extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        proceed = findViewById(R.id.proceed);
+        proceed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(cart.this, Summery.class);
+                startActivity(intent);
+            }
+        });
     }
+
+
 
     //    Bottom Navigation
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =

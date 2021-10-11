@@ -8,11 +8,10 @@ public class CartItem {
         this.name = name;
         this.price = price;
         this.image = image;
-//        this.count = count;
-//        this.quantity = quantity;
+
     }
 
-    //  getters for all required data
+
     public String getName(){
         return name;
     }
@@ -22,6 +21,5 @@ public class CartItem {
     public String getImage(){
         return image;
     }
-//    public String getCount(){ return count; }
-//    public  String getQuantity(){return quantity;}
+
 }

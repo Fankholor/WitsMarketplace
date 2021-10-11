@@ -4,14 +4,17 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/dotted.xml" value="0.15104166666666666" />
+        <entry key="app/src/main/res/layout/activity_cart.xml" value="0.26197916666666665" />
         <entry key="app/src/main/res/layout/activity_landing_page.xml" value="0.24048913043478262" />
         <entry key="app/src/main/res/layout/activity_order_history.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_orders.xml" value="0.33" />
         <entry key="app/src/main/res/layout/cart_item.xml" value="0.1956521739130435" />
         <entry key="app/src/main/res/layout/fave_item.xml" value="0.1956521739130435" />
         <entry key="app/src/main/res/layout/itembox.xml" value="0.26197916666666665" />
+        <entry key="app/src/main/res/layout/itembox_added.xml" value="0.26197916666666665" />
         <entry key="app/src/main/res/layout/order_history_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/orders_item.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/sum_item.xml" value="0.26197916666666665" />
         <entry key="app/src/main/res/layout/summery.xml" value="0.19947916666666668" />
       </map>
     </option>

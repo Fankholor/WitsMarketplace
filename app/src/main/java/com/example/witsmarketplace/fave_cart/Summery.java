@@ -7,12 +7,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.witsmarketplace.LandingPage.LandingPage;
 import com.example.witsmarketplace.R;
 import com.example.witsmarketplace.SharedPreference;
@@ -21,7 +24,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Summery extends AppCompatActivity {
@@ -32,6 +34,7 @@ public class Summery extends AppCompatActivity {
     TextView itemNum;
     TextView Delivery;
     TextView price;
+    private RequestQueue requestQueue;
     TextView price2;
     String email;
     String webURL = "https://lamp.ms.wits.ac.za/home/s2172765/cart_items.php?ID=";
@@ -41,7 +44,9 @@ public class Summery extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.summery);
 
+        requestQueue = Volley.newRequestQueue(this);
         SharedPreference sharedPreference = new SharedPreference(this);
+        renderItems(sharedPreference.getSH("email"));
         email = sharedPreference.getSH("email");
 
         backbut = findViewById(R.id.sumback);
@@ -52,8 +57,6 @@ public class Summery extends AppCompatActivity {
         price = findViewById(R.id.textView4);
         price2 = findViewById(R.id.textView6);
         getDataFromServer(email);
-
-        itemNum.setText(String.valueOf(cartItems.size()));
 
         backbut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,14 +82,20 @@ public class Summery extends AppCompatActivity {
 
     }
 
+    private void AsignValues(){
+
+        itemNum.setText(String.valueOf(cartItems.size()) + "  Items");
+
+    }
+
     private void parseData(JSONArray array) throws JSONException {
 
         Log.d("Cart Items",String.valueOf(array.getJSONObject(0)));
 
-        String name="", price="", image="", iCount="", desc="";
+        String name="", price="", image="";
+        Log.d("Size",String.valueOf(array.length()));
         for (int i = 0; i < array.length(); i++) {
 
-            //Creating the Request object
             JSONObject json = null;
 
             try {
@@ -96,8 +105,6 @@ public class Summery extends AppCompatActivity {
                 name = json.getString("NAME");
                 price = json.getString("PRICE");
                 image = json.getString("PICTURE");
-                desc = json.getString("DESCRIPTION");
-                //iCount = json.getString("COUNT");
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -108,21 +115,17 @@ public class Summery extends AppCompatActivity {
 
             cartItems.add(new CartItem(name, price, image_url));
         }
-        //Notifying the adapter that data has been added or changed
-//        adapter.notifyDataSetChanged();
-
-//        renderer();
-//        cart_count = findViewById(R.id.cart_count);
-//        cart_count.setText(cartItems.size()+" items");
+        AsignValues();
+        renderer();
     }
 
     private JsonArrayRequest getDataFromServer(String email) {
-        //JsonArrayRequest of volley
+
         return new JsonArrayRequest(webURL + String.valueOf(email),
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        //Calling method to parse the json response
+
                         try {
                             parseData(response);
                         } catch (JSONException e) {
@@ -136,5 +139,22 @@ public class Summery extends AppCompatActivity {
                         //If an error occurs that means end of the list has reached
                     }
                 });
+    }
+
+    private void getData(String email){
+
+        requestQueue.add(getDataFromServer(email));
+    }
+
+    private void renderItems(String email){
+
+        getData(email);
+    }
+
+    private void renderer(){
+        //ListView adapter for the wishlist items
+        ListView cartList  = findViewById(R.id.SumList);
+        SummeryItemAdapter IT = new SummeryItemAdapter(Summery.this, R.layout.sum_item, cartItems);
+        cartList.setAdapter(IT);
     }
 }

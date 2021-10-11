@@ -184,11 +184,13 @@
         android:orientation="vertical">
 
         <ListView
-            android:id="@+id/cartList"
+            android:id="@+id/SumList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
+
         </ListView>
+
     </LinearLayout>
 
 </LinearLayout>

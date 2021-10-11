@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WitsMarketplace">
         <activity
+            android:name=".OrderHistory.Orders"
+            android:exported="true" />
+        <activity
             android:name=".SplashScreen"
             android:exported="true" />
         <activity
@@ -37,7 +40,7 @@
             android:name=".LandingPage.modal"
             android:exported="true" />
         <activity
-            android:name=".OrderHistory.OrderHistory"
+            android:name=".LandingPage.LandingPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,7 +52,7 @@
             android:name=".Login.RegistrationActivity"
             android:exported="true" />
         <activity
-            android:name=".LandingPage.LandingPage"
+            android:name=".OrderHistory.OrderHistory"
             android:exported="true" />
     </application>
 

@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.example.witsmarketplace.Account;
 import com.example.witsmarketplace.Login.LoginActivity;
 import com.example.witsmarketplace.R;
 
@@ -169,6 +170,10 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
         }
         else if(item.getItemId() == R.id.nav_home){
             intent = new Intent(getApplicationContext(),LandingPage.class);
+            startActivity(intent);
+        }
+        else if(item.getItemId() == R.id.nav_account){
+            intent = new Intent(getApplicationContext(), Account.class);
             startActivity(intent);
         }
         return true;

@@ -89,7 +89,7 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
         public ImageView itemImage;
         public TextView itemName;
         public TextView itemPrice;
-        public TextView itemDesc;
+        public TextView itemDesc, date, address;
         public Button AddCart;
         public ImageButton CartButton;
         public RelativeLayout relativeLayout;

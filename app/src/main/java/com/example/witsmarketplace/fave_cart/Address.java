@@ -2,6 +2,7 @@ package com.example.witsmarketplace.fave_cart;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,21 +29,20 @@ public class Address extends AppCompatActivity {
 
         sharedPreference = new SharedPreference(this);
 
-        Save.setOnClickListener(new View.OnClickListener() {
+        Continue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                sharedPreference.setSH("Street", Street_Name.getText().toString().trim());
-                sharedPreference.setSH("City", City_Name.getText().toString().trim());
-                sharedPreference.setSH("Suburb", Suburb_Name.getText().toString().trim());
-                sharedPreference.setSH("Country", Country_Name.getText().toString().trim());
+                String Street = Street_Name.getText().toString().trim();
+                String City = City_Name.getText().toString().trim();
+                String Suburb = Suburb_Name.getText().toString().trim();
+                String Country = Country_Name.getText().toString().trim();
 
+                String address = Street + "," + City + "," + Suburb +"," + Country;
+                sharedPreference.setSH("Address", address);
 
-                System.out.println(sharedPreference.getSH("Street"));
-                System.out.println(sharedPreference.getSH("City"));
-                System.out.println(sharedPreference.getSH("Suburb"));
-                System.out.println(sharedPreference.getSH("Country"));
-
+                Intent intent = new Intent(Address.this, Summery.class);
+                startActivity(intent);
             }
         });
 

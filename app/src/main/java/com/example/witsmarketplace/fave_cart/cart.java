@@ -33,7 +33,6 @@ public class cart extends AppCompatActivity {
     String webURL = "https://lamp.ms.wits.ac.za/home/s2172765/cart_items.php?ID="; // id == email
 
     private RequestQueue requestQueue;
-    ImageButton Checkoutbtn ;
     ImageButton backbtn;
     Button proceed;
     TextView cart_count;
@@ -54,16 +53,6 @@ public class cart extends AppCompatActivity {
         bnv.setOnNavigationItemSelectedListener(navListener);
         bnv.getMenu().getItem(1).setChecked(true);
 
-         Checkoutbtn = findViewById(R.id.CheckOut);
-         Checkoutbtn.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View view) {
-                        Intent intent = new Intent(cart.this,Address.class);
-                        startActivity(intent);
-             }
-          });
-
-
          backbtn = findViewById(R.id.backbtn);
          backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +65,7 @@ public class cart extends AppCompatActivity {
         proceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(cart.this, Summery.class);
+                Intent intent = new Intent(cart.this, Address.class);
                 startActivity(intent);
             }
         });

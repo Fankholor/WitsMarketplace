@@ -54,8 +54,7 @@ public class Summery extends AppCompatActivity {
         changeAdd = findViewById(R.id.textView11);
         itemNum = findViewById(R.id.textView3);
         Delivery = findViewById(R.id.textView8);
-        price = findViewById(R.id.textView4);
-        price2 = findViewById(R.id.textView6);
+        price = findViewById(R.id.textView6);
         getDataFromServer(email);
 
         backbut.setOnClickListener(new View.OnClickListener() {

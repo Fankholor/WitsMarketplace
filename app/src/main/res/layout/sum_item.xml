@@ -26,40 +26,29 @@
             android:src="@drawable/laptop3" />
 
         <TextView
-            android:id="@+id/fv_itemname"
+            android:id="@+id/sum_itemname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_toRightOf="@+id/fav_itemImg"
             android:text="Product Name"
             android:textColor="@color/blue"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/fv_price"
+            android:id="@+id/sum_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
+            android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/fav_itemImg"
-            android:layout_below = "@+id/fv_itemname"
+            android:layout_below = "@+id/sum_itemname"
             android:text="R 100"
             android:textColor="@color/blue"
             android:textSize="18sp"
             android:textStyle="bold"/>
 
-
-        <TextView
-            android:id="@+id/fav_itemDesc"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_below="@+id/fv_price"
-            android:layout_marginLeft="8dp"
-            android:layout_toRightOf="@+id/fav_itemImg"
-            android:text="The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "
-            android:textColor="@color/lightGrey"
-            android:textSize="10sp"
-            android:textStyle="bold" />
 
     </RelativeLayout>
 

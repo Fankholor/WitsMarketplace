@@ -33,14 +33,12 @@ public class SummeryItemAdapter extends ArrayAdapter<CartItem> {
         String price = getItem(position).getPrice();
         String image = getItem(position).getImage();
 
-        CartItem cartItem = new CartItem(name,price,image);
-
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(resource,parent,false);
 
-        ImageView itemImage = (ImageView) convertView.findViewById(R.id.cart_image);
-        TextView itemName =  (TextView) convertView.findViewById(R.id.cart_name);
-        TextView itemPrice = (TextView) convertView.findViewById(R.id.cart_item_price);
+        ImageView itemImage = (ImageView) convertView.findViewById(R.id.fav_itemImg);
+        TextView itemName =  (TextView) convertView.findViewById(R.id.sum_itemname);
+        TextView itemPrice = (TextView) convertView.findViewById(R.id.sum_price);
 
         itemName.setText(name);
         itemPrice.setText(price);

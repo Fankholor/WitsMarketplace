@@ -86,11 +86,6 @@ public class OrderHistory extends AppCompatActivity {
                     products = products.substring(1, products.length()-1);
                     System.out.println("we are in");
                 }
-//                System.out.println(j.length());
-//                for (int k = 0; k < j.length(); k++){
-//
-//                }
-//                String str = "[{\"PICTURE\":\"https://lamp.ms.wits.ac.za/home/s2172765/Books/book3.jpeg\",\"NAME\":\"Rich Dad Poor Dad\",\"PRICE\":159,\"ORIGINAL_PRICE\":159,\"DESCRIPTION\":\"Rich Dad Poor Dad is Roberts story of growing up with two dads his real father and the father of his best friend, his rich dad and the ways in which both men shaped his thoughts about money and investing. The book explodes the myth that you need to earn a\",\"COUNT\":1},{\"PICTURE\":\"https://lamp.ms.wits.ac.za/home/s2172765/Books/book1.jpeg\",\"NAME\":\"Hartedief\",\"PRICE\":205,\"ORIGINAL_PRICE\":205,\"DESCRIPTION\":\"n Reeksmoordenaar jag by stormweer, en Rooi en Kassie moet hom vastrek. Die Hartedief kom met moord weg, en dan is Kassie se volle aandag ook nie eintlik by die saak nie, want hy is smoorverlief op n aanvallige mede-seelversamelaar. Vlerksleep is nie vir\",\"COUNT\":1},{\"PICTURE\":\"https://lamp.ms.wits.ac.za/home/s2172765/Books/book3.jpeg\",\"NAME\":\"Rich Dad Poor Dad\",\"PRICE\":159,\"ORIGINAL_PRICE\":159,\"DESCRIPTION\":\"Rich Dad Poor Dad is Roberts story of growing up with two dads his real father and the father of his best friend, his rich dad and the ways in which both men shaped his thoughts about money and investing. The book explodes the myth that you need to earn a\",\"COUNT\":1}]";
                 System.out.println(products);
 
                 JSONArray arr = new JSONArray(products);

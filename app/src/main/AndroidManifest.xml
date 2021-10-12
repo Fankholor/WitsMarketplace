@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WitsMarketplace">
         <activity
+            android:name=".Account"
+            android:exported="true" />
+        <activity
             android:name=".OrderHistory.Orders"
             android:exported="true" />
         <activity

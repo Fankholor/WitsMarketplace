@@ -104,7 +104,7 @@ public class SearchResults extends AppCompatActivity {
     }
 
     private void parseData(JSONArray array, String count) {
-        String name="", price="", image="", description="";
+        String productID="",name="", price="", image="", description="";
         for (int i = 0; i < array.length(); i++) {
 
             //Creating the Request object
@@ -118,6 +118,7 @@ public class SearchResults extends AppCompatActivity {
                 price = json.getString("PRICE");
                 image = json.getString("PICTURE");
                 description = json.getString("DESCRIPTION");
+                productID = json.getString("PRODUCT_ID");
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -128,7 +129,7 @@ public class SearchResults extends AppCompatActivity {
             images.addAll(Arrays.asList(imageURLs));
             String image_url = imageURLs[0];
 
-            search_results.add(new ItemBox(name, "R " + price, image_url, description,images));
+            search_results.add(new ItemBox(productID,name, "R " + price, image_url, description,images));
         }
         //Notifying the adapter that data has been added or changed
         //adapter.notifyDataSetChanged();

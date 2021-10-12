@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fave_cart.favorite"
+    tools:context=".fave_cart.cart"
     android:orientation="vertical">
 
     <LinearLayout
@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_weight=".1"
-                    android:text="(9 items)"
+                    android:text="(0 items)"
                     android:textSize="16dp" />
 
                 <TextView
@@ -95,7 +95,7 @@
                     android:layout_weight=".1"
                     android:gravity="end"
                     android:paddingRight="15dp"
-                    android:text="R 2000"
+                    android:text="R 0"
                     android:textColor="@color/black"
                     android:textSize="16dp"
                     android:textStyle="bold" />
@@ -112,6 +112,7 @@
                 android:paddingRight="15dp">
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/pcheckout"
                     android:layout_width="wrap_content"
                     android:layout_height="26dp"
                     android:layout_marginLeft="8dp"
@@ -127,6 +128,7 @@
                     android:textStyle="bold" />
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/discard"
                     android:layout_width="wrap_content"
                     android:layout_height="26dp"
                     android:layout_marginLeft="30dp"

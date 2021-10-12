@@ -152,16 +152,17 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
             @Override
             protected void onPreExecute() {}
 
-            @Override
 
+            @Override
             protected void onPostExecute(String output) {
                 try {
+                    System.out.println(output);
                     JSONArray users = new JSONArray(output);
                     JSONObject object = users.getJSONObject(0);
 
                     String status = object.getString("add_status");
                     String message = object.getString("status_message");
-
+                    System.out.println(price);
                     if(status.equals("1")){
 
                         Toast.makeText(mContext ,"Added to cart",Toast.LENGTH_LONG).show();

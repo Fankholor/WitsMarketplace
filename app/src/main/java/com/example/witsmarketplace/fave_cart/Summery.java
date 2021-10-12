@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.example.witsmarketplace.LandingPage.LandingPage;
 import com.example.witsmarketplace.R;
 import com.example.witsmarketplace.SharedPreference;
@@ -35,10 +39,10 @@ public class Summery extends AppCompatActivity {
     TextView Delivery;
     TextView price;
     private RequestQueue requestQueue;
-    TextView price2;
     String email;
     String webURL = "https://lamp.ms.wits.ac.za/home/s2172765/cart_items.php?ID=";
     ArrayList<CartItem> cartItems = new ArrayList<CartItem>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,18 +85,24 @@ public class Summery extends AppCompatActivity {
 
     }
 
-    private void AsignValues(){
+    private void AsignValues() {
 
         itemNum.setText(String.valueOf(cartItems.size()) + "  Items");
-
+        String pricestr;
+        int Price = 0;
+        for(int i = 0; i< cartItems.size();i++){
+            pricestr = cartItems.get(i).getPrice().replace("R","").replace(" ","");
+            Price += Integer.parseInt(pricestr);
+        }
+        price.setText("R "+String.valueOf(Price));
     }
 
     private void parseData(JSONArray array) throws JSONException {
 
-        Log.d("Cart Items",String.valueOf(array.getJSONObject(0)));
+        Log.d("Cart Items", String.valueOf(array.getJSONObject(0)));
 
-        String name="", price="", image="";
-        Log.d("Size",String.valueOf(array.length()));
+        String name = "", price = "", image = "";
+        Log.d("Size", String.valueOf(array.length()));
         for (int i = 0; i < array.length(); i++) {
 
             JSONObject json = null;
@@ -115,7 +125,6 @@ public class Summery extends AppCompatActivity {
             cartItems.add(new CartItem(name, price, image_url));
         }
         AsignValues();
-        renderer();
     }
 
     private JsonArrayRequest getDataFromServer(String email) {
@@ -140,20 +149,14 @@ public class Summery extends AppCompatActivity {
                 });
     }
 
-    private void getData(String email){
+    private void getData(String email) {
 
         requestQueue.add(getDataFromServer(email));
     }
 
-    private void renderItems(String email){
+    private void renderItems(String email) {
 
         getData(email);
     }
 
-    private void renderer(){
-        //ListView adapter for the wishlist items
-        ListView cartList  = findViewById(R.id.SumList);
-        SummeryItemAdapter IT = new SummeryItemAdapter(Summery.this, R.layout.sum_item, cartItems);
-        cartList.setAdapter(IT);
-    }
 }

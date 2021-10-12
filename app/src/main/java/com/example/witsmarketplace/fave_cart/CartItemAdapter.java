@@ -34,8 +34,6 @@ public class CartItemAdapter extends ArrayAdapter<CartItem> {
         String price = getItem(position).getPrice();
         String image = getItem(position).getImage();
 
-
-
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(resource,parent,false);
 

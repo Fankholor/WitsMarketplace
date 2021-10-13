@@ -115,10 +115,10 @@ public class OrderHistory extends AppCompatActivity implements RecyclerView.OnSc
                 city = address_obj.getString("City");
                 country = address_obj.getString("Country");
 
-                address = "Street: " + street + " "+
-                        "Surburb: " + surburb + " "+
-                        "City: " + city + " "+
-                        "Country: " + country + " ";
+                address = street + ", "+
+                        surburb + ", "+
+                        city + ", "+
+                        country;
 
                 date = json.getString("DATE");
 

@@ -27,6 +27,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.Objects;
 import java.util.zip.Inflater;
 
@@ -44,8 +46,6 @@ public class OrderHistory extends AppCompatActivity implements RecyclerView.OnSc
 
         requestQueue = Volley.newRequestQueue(this);
         getData();
-
-
     }
 
     private void parseData2(JSONArray array) {
@@ -68,13 +68,6 @@ public class OrderHistory extends AppCompatActivity implements RecyclerView.OnSc
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            //Adding the request object to the list
-//            String[] imageURLs = image.split(",");
-//            ArrayList<String> images = new ArrayList<>();
-//            images.addAll(Arrays.asList(imageURLs));
-//            String image_url = imageURLs[0];
-
-//            order_history_items.add(new OrderHistory_Item("R " + total, date, address, items));
         }
         //Notifying the adapter that data has been added or changed
         //adapter.notifyDataSetChanged();
@@ -82,7 +75,7 @@ public class OrderHistory extends AppCompatActivity implements RecyclerView.OnSc
     }
 
     private void parseData(JSONArray array) {
-        String products="", address="", date="", total="", items="", street="", city="", surburb="", country="";
+        String products="", name="", order_no="", address="", date="", total="", items="", street="", city="", surburb="", country="";
         for (int i = 0; i < array.length(); i++) {
 
             //Creating the Request object
@@ -98,48 +91,30 @@ public class OrderHistory extends AppCompatActivity implements RecyclerView.OnSc
                     products = products.substring(1, products.length()-1);
                 }
 
-//                System.out.println(products);
-
                 address = json.getString("ADDRESS");
-//                address = address.substring(1, address.length());
+                order_no = json.getString("ORDER_NO");
 
-//                JSONObject address_obj = json.getJSONObject("ADDRESS");
-//                street = address_obj.getString("Street");
-//                surburb = address_obj.getString("Surburb");
-//                city = address_obj.getString("City");
-//                country = address_obj.getString("Country");
-//                System.out.println(address);
                 JSONObject address_obj = new JSONObject(address);
                 street = address_obj.getString("Street");
                 surburb = address_obj.getString("Surburb");
                 city = address_obj.getString("City");
                 country = address_obj.getString("Country");
 
-                address = "Street: " + street + " "+
-                        "Surburb: " + surburb + " "+
-                        "City: " + city + " "+
-                        "Country: " + country + " ";
+//                address = street + ", "+
+//                        surburb + ", "+
+//                        city + ", "+
+//                        country;
 
                 date = json.getString("DATE");
 
                 JSONArray arr = new JSONArray(products);
 
-                items = String.valueOf(arr.length());
                 for (int j = 0; j < arr.length();j++){
                     JSONObject obj = arr.getJSONObject(j);
 
-                    //Adding data to the request object
-//                    address = obj.getString("NAME");
-//                    date = obj.getString("DATE");
                     total = obj.getString("PRICE");
-//                    image = obj.getString("PICTURE");
-//                    description = obj.getString("DESCRIPTION");
-
-//                    System.out.println(address + " " + date + " " + total + " " + items);
+                    name = obj.getString("NAME");
                 }
-
-
-
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -149,9 +124,9 @@ public class OrderHistory extends AppCompatActivity implements RecyclerView.OnSc
 //            ArrayList<String> images = new ArrayList<>();
 //            images.addAll(Arrays.asList(imageURLs));
 //            String image_url = imageURLs[0];
-            System.out.println(address);
+
+//          split prices
             total = total.substring(1, total.length());
-            System.out.println(total);
 
             String[] total_str = total.split(",");
             int[] total_int = new int[total_str.length];
@@ -160,17 +135,15 @@ public class OrderHistory extends AppCompatActivity implements RecyclerView.OnSc
             items = String.valueOf(total_str.length);
             for(int k = 0; k < total_str.length; k++) {
                 total_int[k] = Integer.parseInt(total_str[k]);
-                System.out.println(total_int[k]);
                 total_pmt += total_int[k];
             }
 
+//          split product names
+            name = name.substring(1, name.length());
+            String[] name_str = name.split(",");
 
-            OrderHistory_Item v = new OrderHistory_Item("R " + total_pmt, date, address, items);
+            OrderHistory_Item v = new OrderHistory_Item("R " + total_pmt, date, street, surburb, city, country, items, name_str, total_int, order_no);
             order_history_items.add(v);
-
-//            System.out.println(order_history_items.size());
-//            System.out.println("R " + total + date + address + items);
-//            order_history.add(new ItemBox(name, "R " + price, image_url, description,images));
         }
         //Notifying the adapter that data has been added or changed
         //adapter.notifyDataSetChanged();

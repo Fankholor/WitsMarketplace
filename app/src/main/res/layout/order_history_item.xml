@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/orderTab"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:elevation="5dp"
@@ -19,8 +20,6 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:id="@+id/orderTab"
-            android:clickable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="2dp"
@@ -129,7 +128,7 @@
                     android:layout_weight=".2"
                     android:gravity="end"
                     android:text="123 ABC, Johannesburg 2001"
-                    android:textSize="10sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
         </LinearLayout>

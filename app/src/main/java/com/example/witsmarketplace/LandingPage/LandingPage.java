@@ -223,7 +223,6 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
 
                 //Adding data to the request object
                 productID = json.getInt("PRODUCT_ID");
-                Log.d("PRODUCT_ID","PRODUCT_ID ==   "+productID);
                 name = json.getString("NAME");
                 price = json.getString("PRICE");
                 image = json.getString("PICTURE");

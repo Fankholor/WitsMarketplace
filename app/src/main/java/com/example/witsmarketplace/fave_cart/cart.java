@@ -150,8 +150,6 @@ public class cart extends AppCompatActivity {
             cartItems.add(new CartItem(email,name, price, image_url,productID));
             tprice += Integer.parseInt(price);
         }
-        //Notifying the adapter that data has been added or changed
-//        adapter.notifyDataSetChanged();
 
         renderer();
         cart_count = findViewById(R.id.cart_count);

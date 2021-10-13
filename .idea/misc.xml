@@ -5,6 +5,8 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_account.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_address.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_cart.xml" value="0.17844202898550723" />
         <entry key="app/src/main/res/layout/activity_landing_page.xml" value="0.22010869565217392" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.26197916666666665" />
         <entry key="app/src/main/res/layout/activity_modal.xml" value="0.26197916666666665" />

@@ -47,7 +47,7 @@ import java.util.Objects;
 @SuppressWarnings("ALL")
 public class LandingPage extends AppCompatActivity implements RecyclerView.OnScrollChangeListener {
 
-    String webURL = "https://lamp.ms.wits.ac.za/home/s2172765/product.php?ID="; // 1 = computer/electronics >>> 3 = books >>> 6 = clothing >>> 8 = health/hygiene >>> 10 = sports
+    String webURL = "https://lamp.ms.wits.ac.za/home/s2172765/product.php?ID=";
     String searchURL = "https://lamp.ms.wits.ac.za/home/s2172765/Search.php?ID=";
     private RecyclerView recyclerView;
     private RequestQueue requestQueue;
@@ -95,7 +95,6 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
             }
         });
 
-        // 1 = computer/electronics >>> 3 = books >>> 6 = clothing >>> 8 = health/hygiene >>> 10 = sports
 
 //********************************************************* Click Listeners for ViewMore ********************************************************//
         Button books_vm = (Button) findViewById(R.id.vm_books);
@@ -212,7 +211,8 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
 
     //  Parsing data from database and adding it to an arraylist (for easy access)
     private void parseData(JSONArray array, String count) {
-        String productID = "",name="", price="", image="", description="";
+        int productID = 0;
+        String name="", price="", image="", description="";
         for (int i = 0; i < array.length(); i++) {
 
             //Creating the Request object
@@ -222,8 +222,7 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
                 json = array.getJSONObject(i);
 
                 //Adding data to the request object
-                productID = json.getString("PRODUCT_ID");
-                Log.d("PRODUCT_ID","PRODUCT_ID ==   "+productID);
+                productID = json.getInt("PRODUCT_ID");
                 name = json.getString("NAME");
                 price = json.getString("PRICE");
                 image = json.getString("PICTURE");
@@ -247,8 +246,7 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
             else search_results.add(new ItemBox(productID,name, price, image_url, description,images));
 
         }
-        //Notifying the adapter that data has been added or changed
-        //adapter.notifyDataSetChanged();
+
     }
 
     //  Fetching the data from the database as a JSON array

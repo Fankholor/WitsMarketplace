@@ -10,8 +10,7 @@ public class CartItem {
         this.price = price;
         this.image = image;
         this.productID = productID;
-//        this.count = count;
-//        this.quantity = quantity;
+
     }
 
     //  getters for all required data
@@ -27,6 +26,5 @@ public class CartItem {
         return image;
     }
     public String getProductID(){return productID;}
-//    public String getCount(){ return count; }
-//    public  String getQuantity(){return quantity;}
+
 }

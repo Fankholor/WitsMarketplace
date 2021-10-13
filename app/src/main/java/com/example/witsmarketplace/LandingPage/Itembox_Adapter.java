@@ -141,7 +141,8 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
     }
 
     // add to cart button implementation
-    public void AddToCart(String email, String name, String description, String picture, String price,String productID){
+    public void AddToCart(String email, String name, String description, String picture, String price,int productID){
+        Log.d("Int id for ths 1 is : ", String.valueOf(productID));
         ContentValues contentValues = new ContentValues();
         contentValues.put("EMAIL", email);
         contentValues.put("NAME", name);
@@ -158,13 +159,12 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
             @Override
             protected void onPostExecute(String output) {
                 try {
-                    System.out.println(output);
+
                     JSONArray users = new JSONArray(output);
                     JSONObject object = users.getJSONObject(0);
 
                     String status = object.getString("add_status");
                     String message = object.getString("status_message");
-                    System.out.println(price);
                     if(status.equals("1")){
 
                         Toast.makeText(mContext ,"Added to cart",Toast.LENGTH_LONG).show();
@@ -206,11 +206,9 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
 
         Glide.with(mContext).load(currentItem.getImage()).into(holder.itemImage);
 
-//        holder.itemImage.setImageDrawable(drawable);
         holder.itemName.setText(currentItem.getName());
         holder.itemPrice.setText("R  "+currentItem.getPrice());
 
-        //SharedPreferences sharedPreferences = mContext.getSharedPreferences("application", Context.MODE_PRIVATE);
 
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -231,7 +229,6 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
 
                 String email = sharedPreference.getSH("email");
                 AddToCart(email, currentItem.getName(), currentItem.getDescription(), currentItem.getImage(), currentItem.getPrice(), currentItem.getProductID());
-                Log.d("ADD TO CART","PRODUCT ADDED TO CART HAS ID ==    "+currentItem.getProductID());
             }
         });
     }

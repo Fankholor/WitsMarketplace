@@ -31,6 +31,9 @@
             android:name=".fave_cart.Summery"
             android:exported="true" />
         <activity
+            android:name=".fave_cart.Address"
+            android:exported="true" />
+        <activity
             android:name=".LandingPage.SearchResults"
             android:exported="true" />
         <activity

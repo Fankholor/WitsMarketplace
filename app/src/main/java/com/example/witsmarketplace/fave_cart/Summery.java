@@ -155,7 +155,7 @@ public class Summery extends AppCompatActivity {
 
         Log.d("Cart Items", String.valueOf(array.getJSONObject(0)));
 
-        String name = "", price = "", image = "";
+        String name = "", price = "", image = "", ID="";
         Log.d("Size", String.valueOf(array.length()));
         for (int i = 0; i < array.length(); i++) {
 
@@ -168,6 +168,7 @@ public class Summery extends AppCompatActivity {
                 name = json.getString("NAME");
                 price = json.getString("PRICE");
                 image = json.getString("PICTURE");
+                ID = json.getString("PRODUCT_ID ");
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -176,7 +177,7 @@ public class Summery extends AppCompatActivity {
             String[] imageURLs = image.split(",");
             String image_url = imageURLs[0];
 
-            cartItems.add(new CartItem(name, price, image_url));
+            cartItems.add(new CartItem(email,name, price, image_url,ID));
         }
         AsignValues();
     }

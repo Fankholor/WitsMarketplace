@@ -5,12 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
 import android.content.Intent;
-import android.location.Address;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
+
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -22,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+
 import com.example.witsmarketplace.LandingPage.LandingPage;
 import com.example.witsmarketplace.Login.ServerCommunicator;
 import com.example.witsmarketplace.R;
@@ -32,8 +33,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
+
 
 public class cart extends AppCompatActivity {
     String webURL = "https://lamp.ms.wits.ac.za/home/s2172765/cart_items.php?ID="; // id == email
@@ -56,10 +57,6 @@ public class cart extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
-
-//        requestQueue = Volley.newRequestQueue(this);
-//        SharedPreference sharedPreference = new SharedPreference(this);
-//        renderItems(sharedPreference.getSH("email")
 
         sharedPreference = new SharedPreference(this);
         String userEmail = sharedPreference.getSH("email");
@@ -89,8 +86,8 @@ public class cart extends AppCompatActivity {
         proceedToCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(cart.this, Address.class);
-//                startActivity(intent);
+                Intent intent = new Intent(cart.this, Address.class);
+                startActivity(intent);
             }
         });
 

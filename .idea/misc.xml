@@ -5,6 +5,8 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_account.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_address.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_cart.xml" value="0.17844202898550723" />
         <entry key="app/src/main/res/layout/activity_landing_page.xml" value="0.22010869565217392" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.26197916666666665" />
         <entry key="app/src/main/res/layout/activity_modal.xml" value="0.26197916666666665" />
@@ -12,20 +14,6 @@
         <entry key="app/src/main/res/layout/activity_orders.xml" value="0.26197916666666665" />
         <entry key="app/src/main/res/layout/order_history_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/orders_item.xml" value="0.26197916666666665" />
-        <entry key="app/src/main/res/layout/activity_cart.xml" value="0.20244565217391305" />
-        <entry key="app/src/main/res/layout/activity_landing_page.xml" value="0.24048913043478262" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.240625" />
-        <entry key="app/src/main/res/layout/activity_modal.xml" value="0.19270833333333334" />
-        <entry key="app/src/main/res/layout/activity_order_history.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_orders.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.240625" />
-        <entry key="app/src/main/res/layout/cart_item.xml" value="0.1956521739130435" />
-        <entry key="app/src/main/res/layout/fave_item.xml" value="0.1956521739130435" />
-        <entry key="app/src/main/res/layout/itembox.xml" value="0.19270833333333334" />
-        <entry key="app/src/main/res/layout/order_history_item.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/orders_item.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/sum_item.xml" value="0.240625" />
-        <entry key="app/src/main/res/layout/summery.xml" value="0.240625" />
       </map>
     </option>
   </component>

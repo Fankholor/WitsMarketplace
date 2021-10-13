@@ -19,6 +19,8 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/orderTab"
+            android:clickable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="2dp"
@@ -27,7 +29,8 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -35,7 +38,7 @@
                     android:text="Date: "
                     android:textColor="@color/blue"
                     android:textSize="16sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/oh_date"
@@ -45,7 +48,7 @@
                     android:text="Fri, 01 Oct 2021"
                     android:textColor="@color/blue"
                     android:textSize="16sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
@@ -54,7 +57,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".2"
                     android:text="Total: "
                     android:textColor="@color/blue"
                     android:textSize="14sp"
@@ -65,15 +67,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight=".2"
-                    android:text="R 2000000"
+                    android:text="R 20000000000"
                     android:textColor="@color/blue"
                     android:textSize="14sp"
                     android:textStyle="bold"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="200dp">
+                    android:layout_height="match_parent">
 
                     <TextView
                         android:id="@+id/NoItems_id"

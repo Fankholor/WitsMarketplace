@@ -3,15 +3,19 @@ package com.example.witsmarketplace.fave_cart;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.location.Address;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -19,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.witsmarketplace.LandingPage.LandingPage;
+import com.example.witsmarketplace.Login.ServerCommunicator;
 import com.example.witsmarketplace.R;
 import com.example.witsmarketplace.SharedPreference;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -27,51 +32,75 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class cart extends AppCompatActivity {
     String webURL = "https://lamp.ms.wits.ac.za/home/s2172765/cart_items.php?ID="; // id == email
+    String discardUrl = "https://lamp.ms.wits.ac.za/home/s2172765/discard_cart.php?ID="; // discard cart items
+
 
     private RequestQueue requestQueue;
     ImageButton backbtn;
-    Button proceed;
     TextView cart_count;
+    TextView totalPrice;
+
+    ListView cartList;
 
     ArrayList<CartItem> cartItems = new ArrayList<CartItem>();
+    SharedPreference sharedPreference;
 
+    Button proceedToCheckout, discard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
+//        requestQueue = Volley.newRequestQueue(this);
+//        SharedPreference sharedPreference = new SharedPreference(this);
+//        renderItems(sharedPreference.getSH("email")
+
+        sharedPreference = new SharedPreference(this);
+        String userEmail = sharedPreference.getSH("email");
+
         requestQueue = Volley.newRequestQueue(this);
-        SharedPreference sharedPreference = new SharedPreference(this);
-        renderItems(sharedPreference.getSH("email"));
+        renderItems(userEmail);
+
         //        Bottom Navigation
         BottomNavigationView bnv = findViewById(R.id.bottom_navigation);
         bnv.setOnNavigationItemSelectedListener(navListener);
         bnv.getMenu().getItem(1).setChecked(true);
 
-         backbtn = findViewById(R.id.backbtn);
-         backbtn.setOnClickListener(new View.OnClickListener() {
+        backbtn = findViewById(R.id.backbtn);
+        backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(cart.this,LandingPage.class);
                 startActivity(intent);
             }
         });
-        proceed = findViewById(R.id.proceed);
-        proceed.setOnClickListener(new View.OnClickListener() {
+
+        cartList  = findViewById(R.id.cartList);
+
+        proceedToCheckout =  findViewById(R.id.pcheckout);
+        discard = findViewById(R.id.discard);
+
+        proceedToCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(cart.this, Address.class);
-                startActivity(intent);
+//                Intent intent = new Intent(cart.this, Address.class);
+//                startActivity(intent);
+            }
+        });
+
+        discard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                discardCart(userEmail);
             }
         });
     }
-
-
 
     //    Bottom Navigation
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -96,7 +125,8 @@ public class cart extends AppCompatActivity {
 
         Log.d("Cart Items",String.valueOf(array.getJSONObject(0)));
 
-        String name="", price="", image="", iCount="", desc="";
+        int tprice =0;
+        String email="",name="", price="", image="", productID="";
         for (int i = 0; i < array.length(); i++) {
 
             //Creating the Request object
@@ -106,10 +136,11 @@ public class cart extends AppCompatActivity {
                 json = array.getJSONObject(i);
 
                 //Adding data to the request object
+                email = json.getString("EMAIL");
                 name = json.getString("NAME");
                 price = json.getString("PRICE");
                 image = json.getString("PICTURE");
-                desc = json.getString("DESCRIPTION");
+                productID = json.getString("PRODUCT_ID");
                 //iCount = json.getString("COUNT");
 
             } catch (JSONException e) {
@@ -119,7 +150,8 @@ public class cart extends AppCompatActivity {
             String[] imageURLs = image.split(",");
             String image_url = imageURLs[0];
 
-            cartItems.add(new CartItem(name, price, image_url));
+            cartItems.add(new CartItem(email,name, price, image_url,productID));
+            tprice += Integer.parseInt(price);
         }
         //Notifying the adapter that data has been added or changed
 //        adapter.notifyDataSetChanged();
@@ -127,6 +159,9 @@ public class cart extends AppCompatActivity {
         renderer();
         cart_count = findViewById(R.id.cart_count);
         cart_count.setText(cartItems.size()+" items");
+
+        totalPrice = findViewById(R.id.cart_total);
+        totalPrice.setText("R  "+tprice);
     }
 
     //  Fetching the data from the database as a JSON array
@@ -170,4 +205,30 @@ public class cart extends AppCompatActivity {
         cartList.setAdapter(ad);
 
     }
+
+    public void discardCart(String email){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("ID", email);
+
+        new ServerCommunicator(discardUrl, contentValues) {
+            @Override
+            protected void onPreExecute() {}
+
+            @Override
+
+            protected void onPostExecute(String output) {
+                if(output.equals("1")){
+
+                    Toast.makeText(cart.this ,"Cart Discarded",Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(cart.this, LandingPage.class));
+                }
+                else{
+                    Toast.makeText(cart.this, output , Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }.execute();
+
+    }
+
 }

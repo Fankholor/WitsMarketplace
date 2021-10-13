@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.example.witsmarketplace.Account;
 import com.example.witsmarketplace.Login.LoginActivity;
 import com.example.witsmarketplace.R;
 
@@ -171,6 +173,10 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
             intent = new Intent(getApplicationContext(),LandingPage.class);
             startActivity(intent);
         }
+        else if(item.getItemId() == R.id.nav_account){
+            intent = new Intent(getApplicationContext(), Account.class);
+            startActivity(intent);
+        }
         return true;
     }
 };
@@ -206,7 +212,7 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
 
     //  Parsing data from database and adding it to an arraylist (for easy access)
     private void parseData(JSONArray array, String count) {
-        String name="", price="", image="", description="";
+        String productID = "",name="", price="", image="", description="";
         for (int i = 0; i < array.length(); i++) {
 
             //Creating the Request object
@@ -216,6 +222,8 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
                 json = array.getJSONObject(i);
 
                 //Adding data to the request object
+                productID = json.getString("PRODUCT_ID");
+                Log.d("PRODUCT_ID","PRODUCT_ID ==   "+productID);
                 name = json.getString("NAME");
                 price = json.getString("PRICE");
                 image = json.getString("PICTURE");
@@ -231,12 +239,12 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
 
             String image_url = imageURLs[0];
 
-            if (count.equals("1")) computers_list.add(new ItemBox(name, "R " + price, image_url, description,images));
-            else if (count.equals("3")) books_list.add(new ItemBox(name, "R " + price, image_url, description,images));
-            else if (count.equals("6")) clothes_list.add(new ItemBox(name, "R " + price, image_url, description,images));
-            else if (count.equals("8")) health_list.add(new ItemBox(name, "R " + price, image_url, description,images));
-            else if (count.equals("10")) sports_list.add(new ItemBox(name, "R " + price, image_url, description,images));
-            else search_results.add(new ItemBox(name, "R " + price, image_url, description,images));
+            if (count.equals("1")) computers_list.add(new ItemBox(productID,name,  price, image_url, description,images));
+            else if (count.equals("3")) books_list.add(new ItemBox(productID,name, price, image_url, description,images));
+            else if (count.equals("6")) clothes_list.add(new ItemBox(productID,name, price, image_url, description,images));
+            else if (count.equals("8")) health_list.add(new ItemBox(productID,name,  price, image_url, description,images));
+            else if (count.equals("10")) sports_list.add(new ItemBox(productID,name,  price, image_url, description,images));
+            else search_results.add(new ItemBox(productID,name, price, image_url, description,images));
 
         }
         //Notifying the adapter that data has been added or changed

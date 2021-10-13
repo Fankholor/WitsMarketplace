@@ -89,10 +89,11 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
         public ImageView itemImage;
         public TextView itemName;
         public TextView itemPrice;
-        public TextView itemDesc;
+        public TextView itemDesc, date, address;
         public Button AddCart;
         public ImageButton CartButton;
         public RelativeLayout relativeLayout;
+
 
 //      view holder for directly setting the items' details to be displayed
         public Itembox_ViewHolder(@NonNull View itemView) {
@@ -140,13 +141,14 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
     }
 
     // add to cart button implementation
-    public void AddToCart(String email, String name, String description, String picture, String price){
+    public void AddToCart(String email, String name, String description, String picture, String price,String productID){
         ContentValues contentValues = new ContentValues();
         contentValues.put("EMAIL", email);
         contentValues.put("NAME", name);
         contentValues.put("PICTURE", picture);
         contentValues.put("DESCRIPTION", description);
         contentValues.put("PRICE", price);
+        contentValues.put("PRODUCT_ID",productID);
 
         new ServerCommunicator("https://lamp.ms.wits.ac.za/home/s2172765/app_add_cart.php", contentValues) {
             @Override
@@ -206,7 +208,7 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
 
 //        holder.itemImage.setImageDrawable(drawable);
         holder.itemName.setText(currentItem.getName());
-        holder.itemPrice.setText(currentItem.getPrice());
+        holder.itemPrice.setText("R  "+currentItem.getPrice());
 
         //SharedPreferences sharedPreferences = mContext.getSharedPreferences("application", Context.MODE_PRIVATE);
 
@@ -217,6 +219,7 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
                 intent.putExtra("name",currentItem.getName());
                 intent.putExtra("price",currentItem.getPrice());
                 intent.putExtra("description",currentItem.getDescription());
+                intent.putExtra("productID",currentItem.getProductID());
                 intent.putStringArrayListExtra("images_array", currentItem.getImageUrls());
                 mContext.startActivity(intent);
             }
@@ -227,7 +230,8 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
             public void onClick(View view) {
 
                 String email = sharedPreference.getSH("email");
-                AddToCart(email, currentItem.getName(), currentItem.getDescription(), currentItem.getImage(), currentItem.getPrice());
+                AddToCart(email, currentItem.getName(), currentItem.getDescription(), currentItem.getImage(), currentItem.getPrice(), currentItem.getProductID());
+                Log.d("ADD TO CART","PRODUCT ADDED TO CART HAS ID ==    "+currentItem.getProductID());
             }
         });
     }

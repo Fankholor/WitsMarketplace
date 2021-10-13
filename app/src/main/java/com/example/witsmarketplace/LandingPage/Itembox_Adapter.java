@@ -163,7 +163,7 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
 
                     String status = object.getString("add_status");
                     String message = object.getString("status_message");
-
+                    Toast.makeText(mContext ,"outside",Toast.LENGTH_LONG).show();
                     if(status.equals("1")){
 
                         Toast.makeText(mContext ,"Added to cart",Toast.LENGTH_LONG).show();

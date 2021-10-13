@@ -94,7 +94,7 @@
                 android:textStyle="bold"
                 android:layout_gravity="end"
                 android:textSize="11sp"
-                android:text="makgakgacharles@gmail.com"
+                android:text="charles@gmail.com"
                 android:gravity="end"/>
 
         </LinearLayout>

@@ -3,6 +3,7 @@ package com.example.witsmarketplace.OrderHistory;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ import java.util.ArrayList;
 public class OrderItem_Adapter extends RecyclerView.Adapter<OrderItem_Adapter.OrderItem_ViewHolder>  {
     private Context mContext;
     private  int resource;
+    private Activity context;
     private ArrayList<OrderHistory_Item> itemsList = new ArrayList<OrderHistory_Item>();
 
 
@@ -39,6 +41,7 @@ public class OrderItem_Adapter extends RecyclerView.Adapter<OrderItem_Adapter.Or
         public TextView itemsAddress;
         public TextView itemsTotal;
         public TextView NoItems;
+        public LinearLayout order_item;
 
         //      view holder for directly setting the items' details to be displayed
 
@@ -48,12 +51,14 @@ public class OrderItem_Adapter extends RecyclerView.Adapter<OrderItem_Adapter.Or
             itemsAddress = itemView.findViewById(R.id.address_id);
             itemsTotal = itemView.findViewById(R.id.total_id);
             NoItems = itemView.findViewById(R.id.NoItems_id);
+            order_item = itemView.findViewById(R.id.orderTab);
         }
     }
 
     public OrderItem_Adapter(ArrayList<OrderHistory_Item> itemsList, Activity mContext, int n){
         this.mContext = mContext;
         this.itemsList = itemsList;
+        this.context = mContext;
 //        Itembox_Adapter.n = n;
     }
 
@@ -76,8 +81,34 @@ public class OrderItem_Adapter extends RecyclerView.Adapter<OrderItem_Adapter.Or
 //        holder.itemImage.setImageDrawable(drawable);
         holder.itemsDate.setText(currentItem.getDate());
         holder.itemsTotal.setText(currentItem.getTotal());
-        holder.itemsAddress.setText(currentItem.getAddress());
+
+        holder.itemsAddress.setText(currentItem.getStreet() + ", "
+                                    + currentItem.getSurburb()+ ", "
+                                    + currentItem.getCity()+ ", "
+                                    + currentItem.getCountry());
+
         holder.NoItems.setText(currentItem.getItems());
+
+        holder.order_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreference sharedPreference = new SharedPreference(context);
+                String Email = sharedPreference.getSH("email");
+
+                Intent intent = new Intent(mContext, Orders.class);
+                intent.putExtra("date", currentItem.getDate());
+                intent.putExtra("street", currentItem.getStreet());
+                intent.putExtra("surburb", currentItem.getSurburb());
+                intent.putExtra("city", currentItem.getCity());
+                intent.putExtra("country", currentItem.getCountry());
+                intent.putExtra("names", currentItem.getName());
+                intent.putExtra("prices", currentItem.getPrice());
+                intent.putExtra("order_no", currentItem.getOrder_no());
+                intent.putExtra("total", currentItem.getTotal());
+                intent.putExtra("user", Email);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override

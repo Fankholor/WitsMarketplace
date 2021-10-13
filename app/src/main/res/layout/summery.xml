@@ -186,7 +186,7 @@
             android:paddingTop="10dp"
             android:paddingRight="15dp">
 
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/complete"
                 android:layout_width="wrap_content"
                 android:layout_height="26dp"
@@ -202,7 +202,7 @@
                 android:textSize="13sp"
                 android:textStyle="bold" />
 
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="wrap_content"
                 android:layout_height="26dp"
                 android:layout_marginLeft="30dp"

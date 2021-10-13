@@ -88,23 +88,23 @@ public class Summery extends AppCompatActivity {
         complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String names = "";
-                String Price = "";
+                StringBuilder names = new StringBuilder();
+                StringBuilder Price = new StringBuilder();
                 String control;
-                String pictures = "";
+                StringBuilder pictures = new StringBuilder();
 
                 for(int i = 0; i< cartItems.size();i++){
                     control = cartItems.get(i).getPrice().replace("R","").replace(" ","");
-                    Price = Price + control + ",";
-                    names = names + cartItems.get(i).getName();
-                    pictures = pictures + cartItems.get(i).getImage();
+                    Price.append(control).append(",");
+                    names.append(cartItems.get(i).getName());
+                    pictures.append(cartItems.get(i).getImage());
                 }
 
                 JSONObject order = new JSONObject();
                 try {
-                    order.put("NAME", names);
-                    order.put("PICTURE", pictures);
-                    order.put("PRICE", Price);
+                    order.put("NAME", names.toString());
+                    order.put("PICTURE", pictures.toString());
+                    order.put("PRICE", Price.toString());
 
 
                 } catch (JSONException e) {
@@ -112,9 +112,9 @@ public class Summery extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 Gson gson = new Gson();
-                String string_order = "[" + gson.toJson(order) + "]";
-                Toast.makeText(Summery.this, string_order,Toast.LENGTH_LONG).show();
-                //SaveOrder(email, string_order, Address);
+                String string_order = gson.toJson(order);
+                //Toast.makeText(Summery.this, string_order,Toast.LENGTH_LONG).show();
+                SaveOrder(email, string_order, Address);
             }
         });
 
@@ -148,7 +148,7 @@ public class Summery extends AppCompatActivity {
         }
         Gson gson = new Gson();
         Address = gson.toJson(order);
-        Toast.makeText(Summery.this,Address,Toast.LENGTH_LONG).show();
+        //Toast.makeText(Summery.this,Address,Toast.LENGTH_LONG).show();
     }
 
     private void parseData(JSONArray array) throws JSONException {
@@ -227,7 +227,7 @@ public class Summery extends AppCompatActivity {
             @Override
             protected void onPostExecute(String output) {
                 try {
-                    System.out.println(output);
+                    Log.d("Output from database", output);
                     JSONArray users = new JSONArray(output);
                     JSONObject object = users.getJSONObject(0);
 

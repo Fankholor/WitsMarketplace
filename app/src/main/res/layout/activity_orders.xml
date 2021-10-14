@@ -175,6 +175,7 @@
         android:textStyle="italic"
         android:textSize="12sp"
         android:text="Wits marketPlace!"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        />
 
 </LinearLayout>

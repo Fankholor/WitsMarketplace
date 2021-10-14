@@ -136,6 +136,11 @@ public class Summery extends AppCompatActivity {
         String[] temp2 = temp.split(",");
         location.setText(temp);
 
+        LinearLayout layout = (LinearLayout)findViewById(R.id.dynaLay);
+        View child = getLayoutInflater().inflate(R.layout.sum_item, null);
+
+        layout.addView(child);
+
         JSONObject order = new JSONObject();
         try {
             order.put("Street", temp2[0]);
@@ -148,8 +153,6 @@ public class Summery extends AppCompatActivity {
             e.printStackTrace();
         }
         Address = order.toString();
-        System.out.println(Address);
-        //Toast.makeText(Summery.this,Address,Toast.LENGTH_LONG).show();
     }
 
     private void parseData(JSONArray array) throws JSONException {

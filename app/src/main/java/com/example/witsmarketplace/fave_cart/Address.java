@@ -38,11 +38,22 @@ public class Address extends AppCompatActivity {
                 String Suburb = Suburb_Name.getText().toString().trim();
                 String Country = Country_Name.getText().toString().trim();
 
-                String address = Street + "," + City + "," + Suburb +"," + Country;
-                sharedPreference.setSH("Address", address);
+                if(Street.isEmpty())
+                    Street_Name.setError("This Field Is Required");
+                else if(Suburb.isEmpty())
+                    Suburb_Name.setError("This Field Is Required");
+                if(City.isEmpty())
+                    City_Name.setError("This Field Is Required");
+                if(Country.isEmpty())
+                    Country_Name.setError("This Field Is Required");
+                else{
+                    String address = Street + "," + City + "," + Suburb +"," + Country;
+                    sharedPreference.setSH("Address", address);
 
-                Intent intent = new Intent(Address.this, Summery.class);
-                startActivity(intent);
+                    Intent intent = new Intent(Address.this, Summery.class);
+                    startActivity(intent);
+                }
+
             }
         });
 

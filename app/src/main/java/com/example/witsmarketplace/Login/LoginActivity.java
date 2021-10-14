@@ -76,7 +76,12 @@ public class LoginActivity extends AppCompatActivity {
                 String userNameinput = userName.getText().toString().trim();
                 String userPasswordInput = userPassword.getText().toString().trim();
 
-                if(userNameinput.isEmpty() || userPasswordInput.isEmpty()){
+                if(userNameinput.isEmpty()){
+                    userName.setError("Required");
+                    Toast.makeText(LoginActivity.this,"Incomplete fields",Toast.LENGTH_SHORT).show();
+                }
+                else if(userPasswordInput.isEmpty()){
+                    userPassword.setError("Required");
                     Toast.makeText(LoginActivity.this,"Incomplete fields",Toast.LENGTH_SHORT).show();
                 }
                 else{

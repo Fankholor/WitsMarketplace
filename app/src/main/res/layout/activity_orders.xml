@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".OrderHistory.Orders"
     android:padding="10dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/pdf">
 
     <ImageView
         android:id="@+id/downloadPDF"

@@ -65,7 +65,7 @@ public class CartItemAdapter extends ArrayAdapter<CartItem> {
         Button cartRemove = (Button) convertView.findViewById(R.id.btn_remove);
 
         itemName.setText(name);
-        itemPrice.setText(price);
+        itemPrice.setText("R "+ price);
         itemQuantity.setText("1");
         Glide.with(mContext).load(image).into(itemImage);
 

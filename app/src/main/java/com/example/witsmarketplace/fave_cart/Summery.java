@@ -251,6 +251,7 @@ public class Summery extends AppCompatActivity {
     }
 
     public void SaveOrder(String email, String name, String address){
+        Log.d("Here is what : ", email + " "+ name + " " + address);
         ContentValues contentValues = new ContentValues();
         contentValues.put("EMAIL", email);
         contentValues.put("ORDER_NAME", name);

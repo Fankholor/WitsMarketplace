@@ -84,8 +84,13 @@ public class cart extends AppCompatActivity {
         proceedToCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(cart.this, Address.class);
-                startActivity(intent);
+                if(!cartItems.isEmpty()){
+                    Intent intent = new Intent(cart.this, Address.class);
+                    startActivity(intent);
+                }
+                else {
+                    Toast.makeText(cart.this,"Nothing has been added to cart",Toast.LENGTH_LONG).show();
+                }
             }
         });
 

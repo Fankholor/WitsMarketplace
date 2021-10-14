@@ -69,6 +69,9 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersView
         int current_price = prices[position];
 //        Glide.with(mContext).load(currentItem.getImage()).into(holder.itemImage);
 
+        for (int s: prices){
+            System.out.println("ADAPTER PRICES" + s);
+        }
 //        holder.itemImage.setImageDrawable(drawable);
         holder.order_name.setText(current_name);
         holder.order_price.setText(String.valueOf(current_price));

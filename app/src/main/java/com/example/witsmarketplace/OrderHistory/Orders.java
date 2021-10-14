@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.witsmarketplace.R;
 
@@ -52,6 +55,14 @@ public class Orders extends AppCompatActivity {
         email.setText(email_str);
 
         renderer();
+
+        ImageView downloadPDF = findViewById(R.id.downloadPDF);
+        downloadPDF.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Invoice Downloaded", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void renderer(){
@@ -63,4 +74,5 @@ public class Orders extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
     }
+
 }

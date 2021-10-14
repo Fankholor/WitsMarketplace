@@ -142,7 +142,6 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
         search_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 openSearch();
             }
         });

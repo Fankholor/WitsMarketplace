@@ -62,14 +62,11 @@ public class CartItemAdapter extends ArrayAdapter<CartItem> {
         TextView itemName = (TextView) convertView.findViewById(R.id.cart_name);
         TextView itemPrice = (TextView) convertView.findViewById(R.id.cart_item_price);
         TextView itemQuantity = (TextView) convertView.findViewById(R.id.incre_decr_btn);
-        TextView instock = (TextView) convertView.findViewById(R.id.cart_instock);
         Button cartRemove = (Button) convertView.findViewById(R.id.btn_remove);
 
         itemName.setText(name);
-        itemPrice.setText(price);
+        itemPrice.setText("R "+ price);
         itemQuantity.setText("1");
-        //instock.setText(count);
-        //if(Integer.parseInt(count)>0)instock.setText("In stock: "+count);
         Glide.with(mContext).load(image).into(itemImage);
 
         cartRemove.setOnClickListener(new View.OnClickListener() {

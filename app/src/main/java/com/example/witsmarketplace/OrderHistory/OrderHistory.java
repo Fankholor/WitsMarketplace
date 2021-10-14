@@ -82,9 +82,7 @@ public class OrderHistory extends AppCompatActivity implements RecyclerView.OnSc
                 e.printStackTrace();
             }
         }
-        //Notifying the adapter that data has been added or changed
-        //adapter.notifyDataSetChanged();
-//        renderer(order_history);
+
     }
 
     private void parseData(JSONArray array) {

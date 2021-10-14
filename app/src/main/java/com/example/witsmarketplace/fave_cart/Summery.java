@@ -47,6 +47,7 @@ public class Summery extends AppCompatActivity {
     TextView price;
     private RequestQueue requestQueue;
     String email;
+    String discardUrl = "https://lamp.ms.wits.ac.za/home/s2172765/discard_cart.php?ID=";
     String webURL = "https://lamp.ms.wits.ac.za/home/s2172765/cart_items.php?ID=";
     ArrayList<CartItem> cartItems = new ArrayList<CartItem>();
     public static SharedPreference sharedPreference;
@@ -74,7 +75,7 @@ public class Summery extends AppCompatActivity {
         backbut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Summery.this, LandingPage.class);
+                Intent intent = new Intent(Summery.this, cart.class);
                 startActivity(intent);
             }
         });
@@ -116,6 +117,7 @@ public class Summery extends AppCompatActivity {
 
                 //Toast.makeText(Summery.this, string_order,Toast.LENGTH_LONG).show();
                 SaveOrder(email, string_order, Address);
+                discardCart(email);
             }
         });
 
@@ -126,20 +128,25 @@ public class Summery extends AppCompatActivity {
         itemNum.setText(String.valueOf(cartItems.size()) + "  Items");
         String pricestr;
         int Price = 0;
+        LinearLayout layout = (LinearLayout)findViewById(R.id.dynaLay);
         for(int i = 0; i< cartItems.size();i++){
+
+            View child = getLayoutInflater().inflate(R.layout.sum_item, null);
+            TextView itemName = (TextView) child.findViewById(R.id.sum_itemname);
+            TextView itemPrice = (TextView) child.findViewById(R.id.sum_price);
+            ImageView itemImage = (ImageView) child.findViewById(R.id.sum_itemImg);
             pricestr = cartItems.get(i).getPrice().replace("R","").replace(" ","");
             Price += Integer.parseInt(pricestr);
+            itemName.setText(cartItems.get(i).getName());
+            itemPrice.setText(pricestr);
+            layout.addView(child);
+            Glide.with(Summery.this).load(cartItems.get(i).getImage()).into(itemImage);
         }
         price.setText("R "+String.valueOf(Price));
 
         String temp = sharedPreference.getSH("Address");
         String[] temp2 = temp.split(",");
         location.setText(temp);
-
-        LinearLayout layout = (LinearLayout)findViewById(R.id.dynaLay);
-        View child = getLayoutInflater().inflate(R.layout.sum_item, null);
-
-        layout.addView(child);
 
         JSONObject order = new JSONObject();
         try {
@@ -186,6 +193,31 @@ public class Summery extends AppCompatActivity {
         AsignValues();
     }
 
+    public void discardCart(String email){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("ID", email);
+
+        new ServerCommunicator(discardUrl, contentValues) {
+            @Override
+            protected void onPreExecute() {}
+
+            @Override
+
+            protected void onPostExecute(String output) {
+                if(output.equals("1")){
+
+                    Toast.makeText(getApplicationContext() ,"Cart Discarded",Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(Summery.this, LandingPage.class));
+                }
+                else{
+                    Toast.makeText(Summery.this, output , Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }.execute();
+
+    }
+
     private JsonArrayRequest getDataFromServer(String email) {
 
         return new JsonArrayRequest(webURL + String.valueOf(email),
@@ -219,6 +251,7 @@ public class Summery extends AppCompatActivity {
     }
 
     public void SaveOrder(String email, String name, String address){
+        Log.d("Here is what : ", email + " "+ name + " " + address);
         ContentValues contentValues = new ContentValues();
         contentValues.put("EMAIL", email);
         contentValues.put("ORDER_NAME", name);

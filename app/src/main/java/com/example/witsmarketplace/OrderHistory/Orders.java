@@ -17,11 +17,13 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.witsmarketplace.Account;
 import com.example.witsmarketplace.R;
 
 import java.io.File;
@@ -49,6 +51,7 @@ public class Orders extends AppCompatActivity {
         TextView total = findViewById(R.id.totalPrice);
         TextView email = findViewById(R.id.email);
         LinearLayout pdf = findViewById(R.id.pdf);
+        ImageView downloadPDF = findViewById(R.id.downloadPDF);
 
         Intent intent = getIntent();
         street_name = intent.getStringExtra("street");
@@ -62,6 +65,9 @@ public class Orders extends AppCompatActivity {
         names = intent.getStringArrayExtra("names");
         prices = intent.getIntArrayExtra("prices");
 
+        for (int s: prices){
+            System.out.println("INTENT " + s);
+        }
         street.setText(street_name);
         surburb.setText(surburb_name);
         city.setText(city_name);
@@ -72,13 +78,13 @@ public class Orders extends AppCompatActivity {
         email.setText(email_str);
 
         renderer();
-
-        ImageView downloadPDF = findViewById(R.id.downloadPDF);
         downloadPDF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Toast.makeText(getApplicationContext(), "Invoice Downloaded", Toast.LENGTH_SHORT).show();
                 System.out.println("W: " + pdf.getWidth() + " H: " + pdf.getHeight());
+
                 int width = pdf.getWidth(), height = pdf.getHeight();
                 bitmap = loadBitmap(pdf, width, height);
                 createPDF();
@@ -125,6 +131,7 @@ public class Orders extends AppCompatActivity {
         filePath = new File(targetPdf);
         try {
             document.writeTo(new FileOutputStream(filePath));
+            Toast.makeText(this, "successfully pdf created", Toast.LENGTH_SHORT).show();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -133,7 +140,6 @@ public class Orders extends AppCompatActivity {
 
         // close the document
         document.close();
-        Toast.makeText(this, "successfully pdf created", Toast.LENGTH_SHORT).show();
 
         openPdf();
 

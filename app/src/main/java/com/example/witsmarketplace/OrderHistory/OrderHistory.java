@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -16,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.witsmarketplace.Account;
 import com.example.witsmarketplace.OrderHistory.OrderHistory_Item;
 import com.example.witsmarketplace.OrderHistory.OrderItem_Adapter;
 import com.example.witsmarketplace.R;
@@ -46,6 +49,16 @@ public class OrderHistory extends AppCompatActivity implements RecyclerView.OnSc
 
         requestQueue = Volley.newRequestQueue(this);
         getData();
+        ImageButton backButton = findViewById(R.id.backbtn);
+        // back button on order history
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Account.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void parseData2(JSONArray array) {
@@ -94,7 +107,6 @@ public class OrderHistory extends AppCompatActivity implements RecyclerView.OnSc
                 json = array.getJSONObject(i);
 
                 products = json.getString("PRODUCT_NAME");
-                System.out.println("+++++++++++++++++++++" + products);
 
                 if (products.charAt(0) == '"'){
                     products = products.substring(1, products.length()-1);
@@ -102,9 +114,6 @@ public class OrderHistory extends AppCompatActivity implements RecyclerView.OnSc
 
                 address = json.getString("ADDRESS");
                 order_no = json.getString("ORDER_NO");
-
-//                System.out.println("++++++++++++++++++++++" + address);
-//                System.out.println("++++++++++++++++++++++" + order_no);
 
                 JSONObject address_obj = new JSONObject(address);
                 street = address_obj.getString("Street");
@@ -120,15 +129,21 @@ public class OrderHistory extends AppCompatActivity implements RecyclerView.OnSc
                     name = arr.getString("NAME");
                     total = arr.getString("PRICE");
 
+                    System.out.println("PRICES ///////////////// " + total);
                     total_str = total.split(",");
                     total_int = new int[total_str.length];
                     total_pmt = 0;
+
+                    for (String d: total_str){
+                        System.out.println("FROM APP " + d);
+                    }
 
                     items = String.valueOf(total_str.length);
                     for(int k = 0; k < total_str.length-1; k++) {
                         total_int[k] = Integer.parseInt(total_str[k]);
                         total_pmt += total_int[k];
                     }
+
 
 //                  split product names
                     name = name.substring(0, name.length()-1);
@@ -149,8 +164,8 @@ public class OrderHistory extends AppCompatActivity implements RecyclerView.OnSc
                     total_int = new int[total_str.length];
                     total_pmt = 0;
 
-                    for (int d: total_int){
-                        System.out.println(total_int);
+                    for (String d: total_str){
+                        System.out.println(" FROM WEBSTITE "+ d);
                     }
 
                     items = String.valueOf(total_str.length);

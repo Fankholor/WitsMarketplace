@@ -168,10 +168,6 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
             intent = new Intent(getApplicationContext(), favorite.class);
             startActivity(intent);
         }
-        else if(item.getItemId() == R.id.nav_home){
-            intent = new Intent(getApplicationContext(),LandingPage.class);
-            startActivity(intent);
-        }
         else if(item.getItemId() == R.id.nav_account){
             intent = new Intent(getApplicationContext(), Account.class);
             startActivity(intent);

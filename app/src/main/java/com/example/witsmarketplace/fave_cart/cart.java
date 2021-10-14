@@ -23,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
+import com.example.witsmarketplace.Account;
 import com.example.witsmarketplace.LandingPage.LandingPage;
 import com.example.witsmarketplace.Login.ServerCommunicator;
 import com.example.witsmarketplace.R;
@@ -111,6 +112,10 @@ public class cart extends AppCompatActivity {
                     intent = new Intent(getApplicationContext(), favorite.class);
                     startActivity(intent);
                 }
+                else if(item.getItemId() == R.id.nav_account) {
+                    intent = new Intent(getApplicationContext(), Account.class);
+                    startActivity(intent);
+                }
                 return true;
             }
         };
@@ -144,10 +149,11 @@ public class cart extends AppCompatActivity {
             //Adding the request object to the list
             String[] imageURLs = image.split(",");
             String image_url = imageURLs[0];
-
+            price = "R " + price;
             System.out.println(price);
-            price = price.substring(2);///////////////added this
+
             cartItems.add(new CartItem(email,name, price, image_url,productID));
+            price = price.substring(2);///////////////added this
             tprice += Integer.parseInt(price);
         }
 

@@ -95,6 +95,11 @@ public class OrderItem_Adapter extends RecyclerView.Adapter<OrderItem_Adapter.Or
                 SharedPreference sharedPreference = new SharedPreference(context);
                 String Email = sharedPreference.getSH("email");
 
+                for (int d : currentItem.getPrice()){
+                    System.out.println("PUTEXTRA " + d);
+
+                }
+
                 Intent intent = new Intent(mContext, Orders.class);
                 intent.putExtra("date", currentItem.getDate());
                 intent.putExtra("street", currentItem.getStreet());

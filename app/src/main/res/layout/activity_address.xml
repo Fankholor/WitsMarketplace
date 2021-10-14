@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:fillViewport="true"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    android:gravity="center"
-    android:orientation="vertical"
-    tools:context=".fave_cart.Address"
+
     >
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:padding="10dp"
+              android:gravity="center"
+              android:orientation="vertical"
+              tools:context=".fave_cart.Address"
+              >
 
-
-
-    
-
-
-
-                                            >
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:id="@+id/textInputLayout"
@@ -113,13 +111,21 @@
             android:layout_marginTop="20dp"
             android:textStyle="bold"
             tools:ignore="MissingConstraints" />
-        <Button
-            android:id="@+id/Save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Save"
-            android:layout_marginTop="20dp"
-            android:textStyle="bold"
-            />
 
-</LinearLayout>
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:orientation="vertical"
+         >
+    <TextView
+        android:id="@+id/as_street"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Latest Address"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        />
+     </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

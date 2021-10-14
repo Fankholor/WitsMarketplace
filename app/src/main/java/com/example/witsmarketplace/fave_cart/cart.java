@@ -79,10 +79,8 @@ public class cart extends AppCompatActivity {
         });
 
         cartList  = findViewById(R.id.cartList);
-
         proceedToCheckout =  findViewById(R.id.pcheckout);
         discard = findViewById(R.id.discard);
-
         proceedToCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,7 +124,6 @@ public class cart extends AppCompatActivity {
         String email="",name="", price="", image="", productID="";
         for (int i = 0; i < array.length(); i++) {
 
-            //Creating the Request object
             JSONObject json = null;
 
             try {
@@ -214,7 +211,7 @@ public class cart extends AppCompatActivity {
             protected void onPostExecute(String output) {
                 if(output.equals("1")){
 
-                    Toast.makeText(cart.this ,"Cart Discarded",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext() ,"Cart Discarded",Toast.LENGTH_LONG).show();
                     startActivity(new Intent(cart.this, LandingPage.class));
                 }
                 else{

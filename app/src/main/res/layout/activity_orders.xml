@@ -6,8 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".OrderHistory.Orders"
     android:padding="10dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/pdf">
 
+    <ImageView
+        android:id="@+id/downloadPDF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/download"
+        android:layout_gravity="end"
+        android:layout_marginRight="11dp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -175,6 +183,7 @@
         android:textStyle="italic"
         android:textSize="12sp"
         android:text="Wits marketPlace!"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        />
 
 </LinearLayout>

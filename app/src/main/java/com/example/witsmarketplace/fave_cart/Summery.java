@@ -32,6 +32,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Summery extends AppCompatActivity {
@@ -46,6 +47,7 @@ public class Summery extends AppCompatActivity {
     TextView price;
     private RequestQueue requestQueue;
     String email;
+    String discardUrl = "https://lamp.ms.wits.ac.za/home/s2172765/discard_cart.php?ID=";
     String webURL = "https://lamp.ms.wits.ac.za/home/s2172765/cart_items.php?ID=";
     ArrayList<CartItem> cartItems = new ArrayList<CartItem>();
     public static SharedPreference sharedPreference;
@@ -73,7 +75,7 @@ public class Summery extends AppCompatActivity {
         backbut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Summery.this, LandingPage.class);
+                Intent intent = new Intent(Summery.this, cart.class);
                 startActivity(intent);
             }
         });
@@ -96,8 +98,8 @@ public class Summery extends AppCompatActivity {
                 for(int i = 0; i< cartItems.size();i++){
                     control = cartItems.get(i).getPrice().replace("R","").replace(" ","");
                     Price.append(control).append(",");
-                    names.append(cartItems.get(i).getName());
-                    pictures.append(cartItems.get(i).getImage());
+                    names.append(cartItems.get(i).getName()).append(",");
+                    pictures.append(cartItems.get(i).getImage()).append(",");
                 }
 
                 JSONObject order = new JSONObject();
@@ -111,10 +113,11 @@ public class Summery extends AppCompatActivity {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
-                Gson gson = new Gson();
-                String string_order = gson.toJson(order);
+                String string_order = order.toString();
+
                 //Toast.makeText(Summery.this, string_order,Toast.LENGTH_LONG).show();
                 SaveOrder(email, string_order, Address);
+                discardCart(email);
             }
         });
 
@@ -125,9 +128,19 @@ public class Summery extends AppCompatActivity {
         itemNum.setText(String.valueOf(cartItems.size()) + "  Items");
         String pricestr;
         int Price = 0;
+        LinearLayout layout = (LinearLayout)findViewById(R.id.dynaLay);
         for(int i = 0; i< cartItems.size();i++){
+
+            View child = getLayoutInflater().inflate(R.layout.sum_item, null);
+            TextView itemName = (TextView) child.findViewById(R.id.sum_itemname);
+            TextView itemPrice = (TextView) child.findViewById(R.id.sum_price);
+            ImageView itemImage = (ImageView) child.findViewById(R.id.sum_itemImg);
             pricestr = cartItems.get(i).getPrice().replace("R","").replace(" ","");
             Price += Integer.parseInt(pricestr);
+            itemName.setText(cartItems.get(i).getName());
+            itemPrice.setText(pricestr);
+            layout.addView(child);
+            Glide.with(Summery.this).load(cartItems.get(i).getImage()).into(itemImage);
         }
         price.setText("R "+String.valueOf(Price));
 
@@ -146,9 +159,7 @@ public class Summery extends AppCompatActivity {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        Gson gson = new Gson();
-        Address = gson.toJson(order);
-        //Toast.makeText(Summery.this,Address,Toast.LENGTH_LONG).show();
+        Address = order.toString();
     }
 
     private void parseData(JSONArray array) throws JSONException {
@@ -180,6 +191,31 @@ public class Summery extends AppCompatActivity {
             cartItems.add(new CartItem(email,name, price, image_url,ID));
         }
         AsignValues();
+    }
+
+    public void discardCart(String email){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("ID", email);
+
+        new ServerCommunicator(discardUrl, contentValues) {
+            @Override
+            protected void onPreExecute() {}
+
+            @Override
+
+            protected void onPostExecute(String output) {
+                if(output.equals("1")){
+
+                    Toast.makeText(getApplicationContext() ,"Cart Discarded",Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(Summery.this, LandingPage.class));
+                }
+                else{
+                    Toast.makeText(Summery.this, output , Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }.execute();
+
     }
 
     private JsonArrayRequest getDataFromServer(String email) {

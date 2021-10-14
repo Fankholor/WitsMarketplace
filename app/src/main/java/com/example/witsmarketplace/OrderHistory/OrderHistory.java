@@ -76,6 +76,14 @@ public class OrderHistory extends AppCompatActivity implements RecyclerView.OnSc
 
     private void parseData(JSONArray array) {
         String products="", name="", order_no="", address="", date="", total="", items="", street="", city="", surburb="", country="";
+
+        String[] total_str = new String[50];
+        int[] total_int = new int[total_str.length];
+        int total_pmt = 0;
+
+        String[] name_str = new String[50];
+        String str = "";
+
         for (int i = 0; i < array.length(); i++) {
 
             //Creating the Request object
@@ -86,6 +94,7 @@ public class OrderHistory extends AppCompatActivity implements RecyclerView.OnSc
                 json = array.getJSONObject(i);
 
                 products = json.getString("PRODUCT_NAME");
+                System.out.println("+++++++++++++++++++++" + products);
 
                 if (products.charAt(0) == '"'){
                     products = products.substring(1, products.length()-1);
@@ -94,53 +103,70 @@ public class OrderHistory extends AppCompatActivity implements RecyclerView.OnSc
                 address = json.getString("ADDRESS");
                 order_no = json.getString("ORDER_NO");
 
+//                System.out.println("++++++++++++++++++++++" + address);
+//                System.out.println("++++++++++++++++++++++" + order_no);
+
                 JSONObject address_obj = new JSONObject(address);
                 street = address_obj.getString("Street");
                 surburb = address_obj.getString("Surburb");
                 city = address_obj.getString("City");
                 country = address_obj.getString("Country");
 
-//                address = street + ", "+
-//                        surburb + ", "+
-//                        city + ", "+
-//                        country;
-
                 date = json.getString("DATE");
 
-                JSONArray arr = new JSONArray(products);
+//              FROM APP
+                if (products.charAt(0) == '{'){
+                    JSONObject arr = new JSONObject(products);
+                    name = arr.getString("NAME");
+                    total = arr.getString("PRICE");
 
-                for (int j = 0; j < arr.length();j++){
+                    total_str = total.split(",");
+                    total_int = new int[total_str.length];
+                    total_pmt = 0;
+
+                    items = String.valueOf(total_str.length);
+                    for(int k = 0; k < total_str.length-1; k++) {
+                        total_int[k] = Integer.parseInt(total_str[k]);
+                        total_pmt += total_int[k];
+                    }
+
+//                  split product names
+                    name = name.substring(0, name.length()-1);
+                    name_str = name.split(",");
+                }// FROM WEBSITE
+                else{
+                    JSONArray arr = new JSONArray(products);
+
+                    for (int j = 0; j < arr.length();j++){
                     JSONObject obj = arr.getJSONObject(j);
 
                     total = obj.getString("PRICE");
                     name = obj.getString("NAME");
+                    }
+
+                    total = total.substring(1);
+                    total_str = total.split(",");
+                    total_int = new int[total_str.length];
+                    total_pmt = 0;
+
+                    for (int d: total_int){
+                        System.out.println(total_int);
+                    }
+
+                    items = String.valueOf(total_str.length);
+                    for(int k = 0; k < total_str.length; k++) {
+                        total_int[k] = Integer.parseInt(total_str[k]);
+                        total_pmt += total_int[k];
+                    }
+
+//                  split product names
+                    name = name.substring(1);
+                    name_str = name.split(",");
                 }
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            //Adding the request object to the list
-//            String[] imageURLs = image.split(",");
-//            ArrayList<String> images = new ArrayList<>();
-//            images.addAll(Arrays.asList(imageURLs));
-//            String image_url = imageURLs[0];
-
-//          split prices
-            total = total.substring(1, total.length());
-
-            String[] total_str = total.split(",");
-            int[] total_int = new int[total_str.length];
-            int total_pmt = 0;
-
-            items = String.valueOf(total_str.length);
-            for(int k = 0; k < total_str.length; k++) {
-                total_int[k] = Integer.parseInt(total_str[k]);
-                total_pmt += total_int[k];
-            }
-
-//          split product names
-            name = name.substring(1, name.length());
-            String[] name_str = name.split(",");
 
             OrderHistory_Item v = new OrderHistory_Item("R " + total_pmt, date, street, surburb, city, country, items, name_str, total_int, order_no);
             order_history_items.add(v);

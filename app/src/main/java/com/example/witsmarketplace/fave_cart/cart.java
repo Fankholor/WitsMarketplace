@@ -124,7 +124,6 @@ public class cart extends AppCompatActivity {
         String email="",name="", price="", image="", productID="";
         for (int i = 0; i < array.length(); i++) {
 
-            //Creating the Request object
             JSONObject json = null;
 
             try {
@@ -145,8 +144,6 @@ public class cart extends AppCompatActivity {
             String[] imageURLs = image.split(",");
             String image_url = imageURLs[0];
 
-            System.out.println(price);
-            price = price.substring(2);///////////////added this
             cartItems.add(new CartItem(email,name, price, image_url,productID));
             tprice += Integer.parseInt(price);
         }
@@ -214,7 +211,7 @@ public class cart extends AppCompatActivity {
             protected void onPostExecute(String output) {
                 if(output.equals("1")){
 
-                    Toast.makeText(cart.this ,"Cart Discarded",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext() ,"Cart Discarded",Toast.LENGTH_LONG).show();
                     startActivity(new Intent(cart.this, LandingPage.class));
                 }
                 else{

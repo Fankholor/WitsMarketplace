@@ -32,6 +32,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Summery extends AppCompatActivity {
@@ -96,8 +97,8 @@ public class Summery extends AppCompatActivity {
                 for(int i = 0; i< cartItems.size();i++){
                     control = cartItems.get(i).getPrice().replace("R","").replace(" ","");
                     Price.append(control).append(",");
-                    names.append(cartItems.get(i).getName());
-                    pictures.append(cartItems.get(i).getImage());
+                    names.append(cartItems.get(i).getName()).append(",");
+                    pictures.append(cartItems.get(i).getImage()).append(",");
                 }
 
                 JSONObject order = new JSONObject();
@@ -111,8 +112,8 @@ public class Summery extends AppCompatActivity {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
-                Gson gson = new Gson();
-                String string_order = gson.toJson(order);
+                String string_order = order.toString();
+
                 //Toast.makeText(Summery.this, string_order,Toast.LENGTH_LONG).show();
                 SaveOrder(email, string_order, Address);
             }
@@ -146,8 +147,8 @@ public class Summery extends AppCompatActivity {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        Gson gson = new Gson();
-        Address = gson.toJson(order);
+        Address = order.toString();
+        System.out.println(Address);
         //Toast.makeText(Summery.this,Address,Toast.LENGTH_LONG).show();
     }
 

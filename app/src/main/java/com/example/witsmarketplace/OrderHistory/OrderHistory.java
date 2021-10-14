@@ -86,6 +86,7 @@ public class OrderHistory extends AppCompatActivity implements RecyclerView.OnSc
                 json = array.getJSONObject(i);
 
                 products = json.getString("PRODUCT_NAME");
+//                System.out.println("+++++++++++++++++++++" + products);
 
                 if (products.charAt(0) == '"'){
                     products = products.substring(1, products.length()-1);
@@ -94,27 +95,26 @@ public class OrderHistory extends AppCompatActivity implements RecyclerView.OnSc
                 address = json.getString("ADDRESS");
                 order_no = json.getString("ORDER_NO");
 
+//                System.out.println("++++++++++++++++++++++" + address);
+//                System.out.println("++++++++++++++++++++++" + order_no);
+
                 JSONObject address_obj = new JSONObject(address);
                 street = address_obj.getString("Street");
                 surburb = address_obj.getString("Surburb");
                 city = address_obj.getString("City");
                 country = address_obj.getString("Country");
 
-//                address = street + ", "+
-//                        surburb + ", "+
-//                        city + ", "+
-//                        country;
-
                 date = json.getString("DATE");
 
-                JSONArray arr = new JSONArray(products);
-
-                for (int j = 0; j < arr.length();j++){
-                    JSONObject obj = arr.getJSONObject(j);
-
-                    total = obj.getString("PRICE");
-                    name = obj.getString("NAME");
-                }
+                JSONObject arr = new JSONObject(products);
+                String srt = arr.getString("NAME");
+                System.out.println("//////////////////"+ srt);
+//                for (int j = 0; j < arr.length();j++){
+//                    JSONObject obj = arr.getJSONObject(j);
+//
+//                    total = obj.getString("PRICE");
+//                    name = obj.getString("NAME");
+//                }
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -126,14 +126,14 @@ public class OrderHistory extends AppCompatActivity implements RecyclerView.OnSc
 //            String image_url = imageURLs[0];
 
 //          split prices
-            total = total.substring(1, total.length());
+//            total = total.substring(1, total.length());
 
             String[] total_str = total.split(",");
             int[] total_int = new int[total_str.length];
             int total_pmt = 0;
 
             items = String.valueOf(total_str.length);
-            for(int k = 0; k < total_str.length; k++) {
+            for(int k = 0; k < total_str.length-1; k++) {
                 total_int[k] = Integer.parseInt(total_str[k]);
                 total_pmt += total_int[k];
             }

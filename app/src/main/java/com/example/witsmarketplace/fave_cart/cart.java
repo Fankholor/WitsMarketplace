@@ -79,10 +79,8 @@ public class cart extends AppCompatActivity {
         });
 
         cartList  = findViewById(R.id.cartList);
-
         proceedToCheckout =  findViewById(R.id.pcheckout);
         discard = findViewById(R.id.discard);
-
         proceedToCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -147,6 +145,8 @@ public class cart extends AppCompatActivity {
             String[] imageURLs = image.split(",");
             String image_url = imageURLs[0];
 
+            System.out.println(price);
+            price = price.substring(2);///////////////added this
             cartItems.add(new CartItem(email,name, price, image_url,productID));
             tprice += Integer.parseInt(price);
         }

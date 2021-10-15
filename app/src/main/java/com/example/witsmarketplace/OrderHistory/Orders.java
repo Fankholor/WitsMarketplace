@@ -34,7 +34,7 @@ import java.util.ArrayList;
 public class Orders extends AppCompatActivity {
     private static String date_str, street_name, surburb_name, city_name, country_name, items, order_no_str, total_str, email_str;
     private static String[] names;
-    private static int[] prices;
+    private static String[] prices;
     private Bitmap bitmap;
 
     @Override
@@ -63,11 +63,8 @@ public class Orders extends AppCompatActivity {
         total_str = intent.getStringExtra("total");
         email_str = intent.getStringExtra("user");
         names = intent.getStringArrayExtra("names");
-        prices = intent.getIntArrayExtra("prices");
+        prices = intent.getStringArrayExtra("prices");
 
-        for (int s: prices){
-            System.out.println("INTENT " + s);
-        }
         street.setText(street_name);
         surburb.setText(surburb_name);
         city.setText(city_name);
@@ -83,7 +80,7 @@ public class Orders extends AppCompatActivity {
             public void onClick(View v) {
 
                 Toast.makeText(getApplicationContext(), "Invoice Downloaded", Toast.LENGTH_SHORT).show();
-                System.out.println("W: " + pdf.getWidth() + " H: " + pdf.getHeight());
+//                System.out.println("W: " + pdf.getWidth() + " H: " + pdf.getHeight());
 
                 int width = pdf.getWidth(), height = pdf.getHeight();
                 bitmap = loadBitmap(pdf, width, height);

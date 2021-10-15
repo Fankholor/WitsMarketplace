@@ -118,7 +118,7 @@ public class Address extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            OrderHistory_Item v = new OrderHistory_Item("R " + total_pmt, date, street, surburb, city, country, items, name_str, total_int, order_no);
+            OrderHistory_Item v = new OrderHistory_Item("R " + total_pmt, date, street, surburb, city, country, items, name_str, total_str, order_no);
 //            order_history_items.add(v);
             System.out.println(address);
             streets.setText(street + ", " + surburb + ", " + city + ", " + country);

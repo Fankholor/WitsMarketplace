@@ -140,7 +140,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                         Intent intent = new Intent(context, LandingPage.class);
                         context.startActivity(intent);
-                        Toast.makeText(context ,"You have Succesfully registered",Toast.LENGTH_LONG).show();
+                        Toast.makeText(context ,"You have Successfully registered",Toast.LENGTH_LONG).show();
                     }
                     else{
                         Toast.makeText(context, message , Toast.LENGTH_LONG).show();

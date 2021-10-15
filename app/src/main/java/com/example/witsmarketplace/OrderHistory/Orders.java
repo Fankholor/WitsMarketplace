@@ -1,19 +1,28 @@
 package com.example.witsmarketplace.OrderHistory;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
@@ -33,9 +42,12 @@ import java.util.ArrayList;
 
 public class Orders extends AppCompatActivity {
     private static String date_str, street_name, surburb_name, city_name, country_name, items, order_no_str, total_str, email_str;
-    private static String[] names;
-    private static String[] prices;
-    private Bitmap bitmap;
+    private static String[] names, prices;
+    private Bitmap bitmap, scaled_bmp;
+    // constant code for runtime permissions
+    private static final int PERMISSION_REQUEST_CODE = 200;
+    //width and height for our PDF file.
+    int pageHeight = 1336, pagewidth = 720;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,88 +87,125 @@ public class Orders extends AppCompatActivity {
         email.setText(email_str);
 
         renderer();
+
+        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
+        scaled_bmp = Bitmap.createScaledBitmap(bitmap, 240, 240, false);
+
+//        pagewidth = pdf.getWidth();
+//        pageHeight = pdf.getHeight();
+        // checking our permissions.
+        if (checkPermission()) {
+            Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
+        } else {
+            requestPermission();
+        }
+
         downloadPDF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Toast.makeText(getApplicationContext(), "Invoice Downloaded", Toast.LENGTH_SHORT).show();
-//                System.out.println("W: " + pdf.getWidth() + " H: " + pdf.getHeight());
-
-                int width = pdf.getWidth(), height = pdf.getHeight();
-                bitmap = loadBitmap(pdf, width, height);
-                createPDF();
+                System.out.println("W: " + pdf.getWidth() + " H: " + pdf.getHeight());
+                generatePDF();
+//                int width = pdf.getWidth(), height = pdf.getHeight();
+//                bitmap = loadBitmap(pdf, width, height);
+//                createPDF();
             }
         });
     }
 
-    private Bitmap loadBitmap(View pdf, int width, int height) {
-        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        pdf.draw(canvas);
+    private void generatePDF() {
+        // creating an object variable for our PDF document.
+        PdfDocument pdfDocument = new PdfDocument();
 
-        return bitmap;
-    }
-
-    private void createPDF() {
-        WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
-        //  Display display = wm.getDefaultDisplay();
-        DisplayMetrics displaymetrics = new DisplayMetrics();
-        this.getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-        float height = displaymetrics.heightPixels;
-        float width = displaymetrics.widthPixels;
-
-        int convertHeight = (int) height, convertWidth = (int) width;
-
-        PdfDocument document = new PdfDocument();
-        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(convertWidth, convertHeight, 1).create();
-        PdfDocument.Page page = document.startPage(pageInfo);
-
-        Canvas canvas = page.getCanvas();
-
+        // two variables for paint "paint" is used for drawing shapes and we will use "title" for adding text in our PDF file.
         Paint paint = new Paint();
-        canvas.drawPaint(paint);
+        Paint title = new Paint();
 
-        bitmap = Bitmap.createScaledBitmap(bitmap, convertWidth, convertHeight, true);
+        // we are adding page info to our PDF file in which we will be passing our pageWidth, pageHeight and number of pages and after that we are calling it to create our PDF.
+        System.out.println(pagewidth + " ///////////////// " + pageHeight);
+        PdfDocument.PageInfo mypageInfo = new PdfDocument.PageInfo.Builder(pagewidth, pageHeight, 1).create();
 
-        paint.setColor(Color.BLUE);
-        canvas.drawBitmap(bitmap, 0, 0, null);
-        document.finishPage(page);
+        // setting start page for our PDF file.
+        PdfDocument.Page myPage = pdfDocument.startPage(mypageInfo);
 
-        // write the document content
-        String targetPdf = "/sdcard/page.pdf";
-        File filePath;
-        filePath = new File(targetPdf);
+        // creating a variable for canvas from our page of PDF.
+        Canvas canvas = myPage.getCanvas();
+
+        // draw our image on our PDF file.
+        // the first parameter is our bitmap || second parameter is position from left || third parameter is position from top and last one is our variable for paint.
+        canvas.drawBitmap(scaled_bmp, 56, 40, paint);
+
+        // adding typeface for our text which we will be adding in our PDF file.
+        title.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+
+        // setting text size which we will be displaying in our PDF file.
+        title.setTextSize(25);
+
+        // setting color of our text inside our PDF file.
+        title.setColor(ContextCompat.getColor(this, R.color.blue));
+        title.setTextAlign(Paint.Align.RIGHT);
+
+        // draw text in our PDF file.
+        // the first parameter is our text, second parameter is position from start, third parameter is position from top and then we are passing our variable of paint which is title.
+        canvas.drawText(street_name, 680, 80, title);
+        canvas.drawText(surburb_name, 680, 120, title);
+        canvas.drawText(city_name, 680, 160, title);
+        canvas.drawText(country_name, 680, 200, title);
+        canvas.drawText(date_str, 680, 250, title);
+        title.setColor(ContextCompat.getColor(this, R.color.lightGrey));
+        canvas.drawText(email_str, 680, 280, title);
+
+        title.setColor(ContextCompat.getColor(this, R.color.blue));
+        title.setTextAlign(Paint.Align.LEFT);
+        canvas.drawText("Order Number: #" + order_no_str, 60, 340, title);
+        title.setTextSize(30);
+
+        canvas.drawLine(60, 370, 680, 370, paint);
+        int k = 0;
+        for (int i = 0; i < prices.length; i++){
+            title.setTextAlign(Paint.Align.LEFT);
+            canvas.drawText(names[i], 60, 420+k, title);
+            title.setTextAlign(Paint.Align.RIGHT);
+            canvas.drawText(prices[i], 680, 420+k, title);
+            k += 60;
+        }
+        canvas.drawLine(60, 400 + k, 680, 400 + k, paint);
+
+        title.setTextAlign(Paint.Align.RIGHT);
+        title.setTextSize(45);
+        canvas.drawText("Total: " + total_str, 680, 470+k, title);
+
+        // after adding all attributes to our
+        // PDF file we will be finishing our page.
+        pdfDocument.finishPage(myPage);
+
+        // set the name of our PDF file and its path.
+        File file = new File(Environment.getExternalStorageDirectory(), "order" + order_no_str + ".pdf");
+
         try {
-            document.writeTo(new FileOutputStream(filePath));
-            Toast.makeText(this, "successfully pdf created", Toast.LENGTH_SHORT).show();
+            // after creating a file name we will write our PDF file to that location.
+            pdfDocument.writeTo(new FileOutputStream(file));
 
+            // print toast message on completion of PDF generation.
+            Toast.makeText(Orders.this, "PDF file generated successfully.", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(this, "Something wrong: " + e.toString(), Toast.LENGTH_LONG).show();
-        }////////////////////
-
-        // close the document
-        document.close();
-
-        openPdf();
-
+        }
+        // after storing our pdf to that location we are closing our PDF file.
+        pdfDocument.close();
     }
 
-    private void openPdf() {
-        File file = new File("/sdcard/page.pdf");
-        
-        if (file.exists()) {
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            Uri uri = Uri.fromFile(file);
-            intent.setDataAndType(uri, "application/pdf");
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    private boolean checkPermission() {
+        // checking of permissions.
+        int permission1 = ContextCompat.checkSelfPermission(getApplicationContext(), WRITE_EXTERNAL_STORAGE);
+        int permission2 = ContextCompat.checkSelfPermission(getApplicationContext(), READ_EXTERNAL_STORAGE);
+        return permission1 == PackageManager.PERMISSION_GRANTED && permission2 == PackageManager.PERMISSION_GRANTED;
+    }
 
-            try {
-                startActivity(intent);
-            } catch (ActivityNotFoundException e) {
-                Toast.makeText(this, "No Application for pdf view", Toast.LENGTH_SHORT).show();
-            }
-        }
+    private void requestPermission() {
+        // requesting permissions if not provided.
+        ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
     }
 
     private void renderer(){

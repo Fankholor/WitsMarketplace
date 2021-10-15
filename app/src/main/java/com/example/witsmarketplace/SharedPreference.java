@@ -3,8 +3,7 @@ package com.example.witsmarketplace;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-
-import androidx.annotation.NonNull;
+import android.widget.EditText;
 
 public class SharedPreference {
     Activity activity;
@@ -30,4 +29,5 @@ public class SharedPreference {
         editor.remove(key);
         editor.apply();
     }
+
 }

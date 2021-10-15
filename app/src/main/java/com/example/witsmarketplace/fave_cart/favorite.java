@@ -9,15 +9,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.witsmarketplace.Account;
 import com.example.witsmarketplace.LandingPage.LandingPage;
+import com.example.witsmarketplace.LandingPage.modal;
 import com.example.witsmarketplace.R;
 import com.example.witsmarketplace.SharedPreference;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -45,12 +49,14 @@ public class favorite extends AppCompatActivity {
 
         sharedPreference = new SharedPreference(this);
         String userEmail = sharedPreference.getSH("email");
+
         requestQueue = Volley.newRequestQueue(this);
         renderItems(userEmail);
 
         //        Bottom Navigation
         BottomNavigationView bnv = findViewById(R.id.bottom_navigation);
         bnv.setOnNavigationItemSelectedListener(navListener);
+        bnv.getMenu().getItem(2).setChecked(true);
 
         backbtn = findViewById(R.id.backbtn);
         backbtn.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +82,10 @@ public class favorite extends AppCompatActivity {
                         intent = new Intent(getApplicationContext(), LandingPage.class);
                         startActivity(intent);
                     }
+                    else if(item.getItemId() == R.id.nav_account) {
+                        intent = new Intent(getApplicationContext(), Account.class);
+                        startActivity(intent);
+                    }
                     return true;
                 }
             };
@@ -86,7 +96,7 @@ public class favorite extends AppCompatActivity {
         Log.d("WishList Items",String.valueOf(array.getJSONObject(0)));
 
 
-        String name="", price="", image="", iCount="", desc="";
+        String name="", price="", image="", iCount="", desc="",email="",productID="";
         for (int i = 0; i < array.length(); i++) {
 
             //Creating the Request object
@@ -100,6 +110,8 @@ public class favorite extends AppCompatActivity {
                 price = json.getString("PRICE");
                 image = json.getString("PICTURE");
                 desc = json.getString("DESCRIPTION");
+                email = json.getString("EMAIL");
+                productID = json.getString("PRODUCT_ID");
                 //iCount = json.getString("COUNT");
 
             } catch (JSONException e) {
@@ -109,7 +121,7 @@ public class favorite extends AppCompatActivity {
             String[] imageURLs = image.split(",");
             String image_url = imageURLs[0];
 
-            favItems.add(new FavItem(name, price, image_url, iCount,desc));
+            favItems.add(new FavItem(name, price, image_url, iCount,desc,email,productID));
         }
         //Notifying the adapter that data has been added or changed
 //        adapter.notifyDataSetChanged();
@@ -157,7 +169,6 @@ public class favorite extends AppCompatActivity {
 
         FavItemAdapter ad = new FavItemAdapter(favorite.this, R.layout.fave_item, favItems);
         wishList.setAdapter(ad);
-
     }
 
 }

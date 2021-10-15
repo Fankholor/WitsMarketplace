@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
+import com.example.witsmarketplace.Account;
 import com.example.witsmarketplace.Login.LoginActivity;
 import com.example.witsmarketplace.R;
 
@@ -44,7 +47,7 @@ import java.util.Objects;
 @SuppressWarnings("ALL")
 public class LandingPage extends AppCompatActivity implements RecyclerView.OnScrollChangeListener {
 
-    String webURL = "https://lamp.ms.wits.ac.za/home/s2172765/product.php?ID="; // 1 = computer/electronics >>> 3 = books >>> 6 = clothing >>> 8 = health/hygiene >>> 10 = sports
+    String webURL = "https://lamp.ms.wits.ac.za/home/s2172765/product.php?ID=";
     String searchURL = "https://lamp.ms.wits.ac.za/home/s2172765/Search.php?ID=";
     private RecyclerView recyclerView;
     private RequestQueue requestQueue;
@@ -92,7 +95,6 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
             }
         });
 
-        // 1 = computer/electronics >>> 3 = books >>> 6 = clothing >>> 8 = health/hygiene >>> 10 = sports
 
 //********************************************************* Click Listeners for ViewMore ********************************************************//
         Button books_vm = (Button) findViewById(R.id.vm_books);
@@ -140,7 +142,6 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
         search_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 openSearch();
             }
         });
@@ -148,11 +149,13 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
 //        Bottom Navigation
         BottomNavigationView bnv = findViewById(R.id.bottom_navigation);
         bnv.setOnNavigationItemSelectedListener(navListener);
+        bnv.getMenu().getItem(0).setChecked(true);
     }
 
 //    Bottom Navigation
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
         new BottomNavigationView.OnNavigationItemSelectedListener() {
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Intent intent = null;
@@ -164,7 +167,11 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
             intent = new Intent(getApplicationContext(), favorite.class);
             startActivity(intent);
         }
-            return true;
+        else if(item.getItemId() == R.id.nav_account){
+            intent = new Intent(getApplicationContext(), Account.class);
+            startActivity(intent);
+        }
+        return true;
     }
 };
 
@@ -199,6 +206,7 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
 
     //  Parsing data from database and adding it to an arraylist (for easy access)
     private void parseData(JSONArray array, String count) {
+        int productID = 0;
         String name="", price="", image="", description="";
         for (int i = 0; i < array.length(); i++) {
 
@@ -209,6 +217,7 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
                 json = array.getJSONObject(i);
 
                 //Adding data to the request object
+                productID = json.getInt("PRODUCT_ID");
                 name = json.getString("NAME");
                 price = json.getString("PRICE");
                 image = json.getString("PICTURE");
@@ -224,16 +233,15 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
 
             String image_url = imageURLs[0];
 
-            if (count.equals("1")) computers_list.add(new ItemBox(name, "R " + price, image_url, description,images));
-            else if (count.equals("3")) books_list.add(new ItemBox(name, "R " + price, image_url, description,images));
-            else if (count.equals("6")) clothes_list.add(new ItemBox(name, "R " + price, image_url, description,images));
-            else if (count.equals("8")) health_list.add(new ItemBox(name, "R " + price, image_url, description,images));
-            else if (count.equals("10")) sports_list.add(new ItemBox(name, "R " + price, image_url, description,images));
-            else search_results.add(new ItemBox(name, "R " + price, image_url, description,images));
+            if (count.equals("1")) computers_list.add(new ItemBox(productID,name,  price, image_url, description,images));
+            else if (count.equals("3")) books_list.add(new ItemBox(productID,name, price, image_url, description,images));
+            else if (count.equals("6")) clothes_list.add(new ItemBox(productID,name, price, image_url, description,images));
+            else if (count.equals("8")) health_list.add(new ItemBox(productID,name,  price, image_url, description,images));
+            else if (count.equals("10")) sports_list.add(new ItemBox(productID,name,  price, image_url, description,images));
+            else search_results.add(new ItemBox(productID,name, price, image_url, description,images));
 
         }
-        //Notifying the adapter that data has been added or changed
-        //adapter.notifyDataSetChanged();
+
     }
 
     //  Fetching the data from the database as a JSON array
@@ -241,19 +249,19 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
 
         //JsonArrayRequest of volley
         return new JsonArrayRequest(url + String.valueOf(requestCount),
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        //Calling method to parse the json response
-                        parseData(response, requestCount);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //If an error occurs that means end of the list has reached
-                    }
-                });
+        new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                //Calling method to parse the json response
+                parseData(response, requestCount);
+            }
+        },
+        new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //If an error occurs that means end of the list has reached
+            }
+        });
     }
 
     private void getData(int count){

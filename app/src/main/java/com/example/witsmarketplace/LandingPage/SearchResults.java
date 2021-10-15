@@ -95,15 +95,11 @@ public class SearchResults extends AppCompatActivity {
 
     void openSearch(){
         Intent intent = new Intent(this, Search.class);
-//        intent.putExtra("search", search);
-
-//        Bundle bundle = new Bundle();
-//        bundle.putSerializable("search_results", search_results);
-//        intent.putExtra("search_bundle", bundle);
         startActivity(intent);
     }
 
     private void parseData(JSONArray array, String count) {
+        int productID=0;
         String name="", price="", image="", description="";
         for (int i = 0; i < array.length(); i++) {
 
@@ -118,6 +114,7 @@ public class SearchResults extends AppCompatActivity {
                 price = json.getString("PRICE");
                 image = json.getString("PICTURE");
                 description = json.getString("DESCRIPTION");
+                productID = json.getInt("PRODUCT_ID");
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -128,10 +125,8 @@ public class SearchResults extends AppCompatActivity {
             images.addAll(Arrays.asList(imageURLs));
             String image_url = imageURLs[0];
 
-            search_results.add(new ItemBox(name, "R " + price, image_url, description,images));
+            search_results.add(new ItemBox(productID,name, "R " + price, image_url, description,images));
         }
-        //Notifying the adapter that data has been added or changed
-        //adapter.notifyDataSetChanged();
         renderer(search_results);
     }
 

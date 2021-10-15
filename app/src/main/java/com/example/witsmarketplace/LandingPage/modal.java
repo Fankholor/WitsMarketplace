@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ public class modal extends AppCompatActivity
     private static String name;
     private static String price;
     private static String description;
+    private static String productID;
     private static ArrayList<String> images = new ArrayList<>();
     private static ExtendedFloatingActionButton cartBtn;
     private static ExtendedFloatingActionButton faveBtn;
@@ -50,6 +52,8 @@ public class modal extends AppCompatActivity
         price = intent.getStringExtra("price");
         description = intent.getStringExtra("description");
         images = intent.getStringArrayListExtra("images_array");
+        productID = intent.getStringExtra("productID");
+
 
         name_text.setText(name);
         price_text.setText(price);
@@ -63,13 +67,14 @@ public class modal extends AppCompatActivity
         cartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddToCart(email,name,description,images.get(0),price);
+                AddToCart(email,name,description,images.get(0),price,productID);
             }
         });
         faveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddToFav(email,name,description,images.get(0),price);
+                AddToFav(email,name,description,images.get(0),price,productID);
+                Log.d("ADD TO WISHLIST","PRODUCT ADDED TO WISHLIST HAS ID ==    "+productID);
             }
         });
 
@@ -82,13 +87,14 @@ public class modal extends AppCompatActivity
     }
 
     // add to cart button implementation
-    public void AddToCart(String email, String name, String description, String picture, String price){
+    public void AddToCart(String email, String name, String description, String picture, String price,String productID){
         ContentValues contentValues = new ContentValues();
         contentValues.put("EMAIL", email);
         contentValues.put("NAME", name);
         contentValues.put("PICTURE", picture);
         contentValues.put("DESCRIPTION", description);
         contentValues.put("PRICE", price);
+        contentValues.put("PRODUCT_ID",productID);
         new ServerCommunicator("https://lamp.ms.wits.ac.za/home/s2172765/app_add_cart.php", contentValues) {
             @Override
             protected void onPreExecute() {}
@@ -119,13 +125,14 @@ public class modal extends AppCompatActivity
     }
 
     // add to favorite button implementation
-    public void AddToFav(String email, String name, String description, String picture, String price){
+    public void AddToFav(String email, String name, String description, String picture, String price,String productID){
         ContentValues contentValues = new ContentValues();
         contentValues.put("EMAIL", email);
         contentValues.put("NAME", name);
         contentValues.put("PICTURE", picture);
         contentValues.put("DESCRIPTION", description);
         contentValues.put("PRICE", price);
+        contentValues.put("PRODUCT_ID",productID);
 
         new ServerCommunicator("https://lamp.ms.wits.ac.za/home/s2172765/app_add_fav.php", contentValues) {
             @Override

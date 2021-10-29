@@ -24,6 +24,10 @@ android:
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
 
+branches:
+  only:
+    - main
+
 env:
   global:
     - TARGET_VERSION=31
@@ -46,8 +50,8 @@ before_script:
   - adb shell settings put global animator_duration_scale 0 &
   - adb shell input keyevent 82 &
 script:
-    - chmod +x gradlew
-    - ./gradlew build jacocoTestReport assembleAndroidTest
+  - chmod +x gradlew
+  - ./gradlew build jacocoTestReport assembleAndroidTest
 
 after_success:
   - export CODECOV_TOKEN="85d3b8be-ce43-4374-8230-15da233d5615"

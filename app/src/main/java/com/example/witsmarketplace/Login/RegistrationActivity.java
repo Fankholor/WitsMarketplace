@@ -72,33 +72,13 @@ public class RegistrationActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(context, LoginActivity.class);
                 context.startActivity(intent);
+                finish();
             }
         });
 
         InputButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (TextUtils.isEmpty(InputFirstname.getText().toString().trim())) {
-                    InputFirstname.setError("input required");
-                }
-                if (TextUtils.isEmpty(InputLastname.getText().toString().trim())) {
-                    InputLastname.setError("input required");
-                }
-                if (TextUtils.isEmpty(InputEmail.getText().toString().trim())) {
-                    InputEmail.setError("input required");
-                }
-                if (TextUtils.isEmpty(InputDate.getText().toString().trim())) {
-                    InputDate.setError("input required");
-                }
-                if (TextUtils.isEmpty(InputPassword.getText().toString().trim())) {
-                    InputPassword.setError("input required");
-                }
-                if (TextUtils.isEmpty(InputConPass.getText().toString().trim())) {
-                    InputConPass.setError("input required");
-                }
-                if (!InputConPass.getText().toString().trim().equals(InputPassword.getText().toString().trim())) {
-                    InputConPass.setError("password doesn't match");
-                }
 
                 String firstname = InputFirstname.getText().toString().trim();
                 String Lastname = InputLastname.getText().toString().trim();
@@ -107,7 +87,30 @@ public class RegistrationActivity extends AppCompatActivity {
                 String Password = InputPassword.getText().toString().trim();
                 String ConfirmPassword = InputConPass.getText().toString().trim();
 
-                register(context , firstname, Lastname, email, date, Password);
+                if (firstname.isEmpty()) {
+                    InputFirstname.setError("input required");
+                }
+                else if (Lastname.isEmpty()) {
+                    InputLastname.setError("input required");
+                }
+                else if (email.isEmpty()) {
+                    InputEmail.setError("input required");
+                }
+                else if (date.isEmpty()) {
+                    InputDate.setError("input required");
+                }
+                else if (Password.isEmpty()) {
+                    InputPassword.setError("input required");
+                }
+                else if (ConfirmPassword.isEmpty()) {
+                    InputConPass.setError("input required");
+                }
+                else if (!ConfirmPassword.equals(Password)) {
+                    InputConPass.setError("password doesn't match");
+                }
+                else{
+                    register(context , firstname, Lastname, email, date, Password);
+                }
             }
         });
     }
@@ -120,8 +123,6 @@ public class RegistrationActivity extends AppCompatActivity {
         contentValues.put("email", email);
         contentValues.put("dateOfBirth", date);
         contentValues.put("password", Password);
-
-
 
         new ServerCommunicator("https://lamp.ms.wits.ac.za/home/s2172765/market_place_app_register.php", contentValues) {
             @Override
@@ -140,6 +141,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                         Intent intent = new Intent(context, LandingPage.class);
                         context.startActivity(intent);
+                        ((RegistrationActivity)context).finish();
                         Toast.makeText(context ,"You have Succesfully registered",Toast.LENGTH_LONG).show();
                     }
                     else{

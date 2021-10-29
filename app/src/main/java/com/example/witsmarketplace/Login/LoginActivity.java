@@ -56,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(context, RegistrationActivity.class);
                 context.startActivity(intent);
+                finish();
             }
         });
 
@@ -75,7 +76,12 @@ public class LoginActivity extends AppCompatActivity {
                 String userNameinput = userName.getText().toString().trim();
                 String userPasswordInput = userPassword.getText().toString().trim();
 
-                if(userNameinput.isEmpty() || userPasswordInput.isEmpty()){
+                if(userNameinput.isEmpty()){
+                    userName.setError("Required");
+                    Toast.makeText(LoginActivity.this,"Incomplete fields",Toast.LENGTH_SHORT).show();
+                }
+                else if(userPasswordInput.isEmpty()){
+                    userPassword.setError("Required");
                     Toast.makeText(LoginActivity.this,"Incomplete fields",Toast.LENGTH_SHORT).show();
                 }
                 else{
@@ -83,10 +89,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
-
     }
 
     private static void ServerLogin(final Context c, final String email, String password)
@@ -113,14 +115,11 @@ public class LoginActivity extends AppCompatActivity {
                     int statusNum = Integer.parseInt(mstatus);
 
                     if (statusNum == 1){
-                        // store email in shared preference everytime after logging in
                         sharedPreference.setSH("email", email);
-//                        System.out.println(sharedPreference.getSH("email"));
-
                         Intent intent = new Intent(context, LandingPage.class);
                         context.startActivity(intent);
+                        ((LoginActivity)context).finish();
                     }
-
                 }
                 catch(JSONException e){
 
@@ -129,8 +128,4 @@ public class LoginActivity extends AppCompatActivity {
             }
         }.execute();
     }
-
-
-
-
 }

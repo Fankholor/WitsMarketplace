@@ -8,7 +8,7 @@ import android.widget.EditText;
 
 import androidx.test.rule.ActivityTestRule;
 
-import com.example.witsmarketplace.Login.LandingPageActivity;
+import com.example.witsmarketplace.LandingPage.LandingPage;
 import com.example.witsmarketplace.Login.RegistrationActivity;
 
 import org.junit.After;
@@ -22,7 +22,7 @@ public class RegistrationActivityTest {
     private RegistrationActivity mActivity = null;
     public String wrongDetails = "you have already registered , Please Login";
     public String correctDetails = "Registered successfully";
-    Instrumentation.ActivityMonitor monitor = getInstrumentation().addMonitor(LandingPageActivity.class.getName(),null,false);
+    Instrumentation.ActivityMonitor monitor = getInstrumentation().addMonitor(LandingPage.class.getName(),null,false);
 
     @Test
     public void FirstnameCheck(){

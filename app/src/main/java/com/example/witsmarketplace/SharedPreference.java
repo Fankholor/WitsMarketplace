@@ -3,8 +3,7 @@ package com.example.witsmarketplace;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-
-import androidx.annotation.NonNull;
+import android.widget.EditText;
 
 public class SharedPreference {
     Activity activity;
@@ -23,4 +22,12 @@ public class SharedPreference {
         SharedPreferences s = activity.getSharedPreferences("application", Context.MODE_PRIVATE);
         return s.getString(key, null);
     }
+
+    public void RemoveKey(String key){
+        SharedPreferences s = activity.getSharedPreferences("application", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = s.edit();
+        editor.remove(key);
+        editor.apply();
+    }
+
 }

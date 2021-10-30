@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -13,14 +14,16 @@ import android.widget.TextView;
 import com.example.witsmarketplace.LandingPage.LandingPage;
 import com.example.witsmarketplace.Login.LoginActivity;
 import com.example.witsmarketplace.OrderHistory.OrderHistory;
+import com.example.witsmarketplace.ProfilePage.Profile;
 import com.example.witsmarketplace.fave_cart.cart;
 import com.example.witsmarketplace.fave_cart.favorite;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Account extends AppCompatActivity {
-    TextView orders;
+    TextView orders,profile;
     ImageButton back;
     BottomNavigationView bnv;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +37,19 @@ public class Account extends AppCompatActivity {
     public void navigations(){
         bnv = findViewById(R.id.bottom_navigation);
         orders = (TextView) findViewById(R.id.orders);
+        profile = (TextView)findViewById(R.id.profile);
         back = (ImageButton) findViewById(R.id.backbtn);
 
         bnv.setOnNavigationItemSelectedListener(navListener);
-        bnv.getMenu().getItem(0).setChecked(true);
+        bnv.getMenu().getItem(3).setChecked(true);
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Profile.class);
+                startActivity(intent);
+            }
+        });
 
         orders.setOnClickListener(new View.OnClickListener() {
             @Override

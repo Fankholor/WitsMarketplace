@@ -9,17 +9,22 @@ import android.view.MenuItem;
 
 import com.example.witsmarketplace.Account;
 import com.example.witsmarketplace.R;
+import com.example.witsmarketplace.SharedPreference;
 import com.example.witsmarketplace.fave_cart.cart;
 import com.example.witsmarketplace.fave_cart.favorite;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Profile extends AppCompatActivity {
 
+    String webURL = "https://lamp.ms.wits.ac.za/home/s2172765/app_fetch_profile.php?ID="; // id == email
+    public static SharedPreference sharedPreference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        sharedPreference = new SharedPreference(this);
+        String userEmail = sharedPreference.getSH("email");
         //Bottom Navigation
         BottomNavigationView bnv = findViewById(R.id.bottom_navigation);
         bnv.setOnNavigationItemSelectedListener(navListener);

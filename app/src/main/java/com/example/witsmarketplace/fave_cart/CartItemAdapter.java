@@ -34,7 +34,7 @@ public class CartItemAdapter extends ArrayAdapter<CartItem> {
     private int resource;
     private  int itemCount = 1;
     private String productID;
-    public int InStock;
+    public static String InStock;
 
     String removeUrl = "https://lamp.ms.wits.ac.za/home/s2172765/app_rm_item_cart.php"; // remove cart item
 
@@ -54,13 +54,15 @@ public class CartItemAdapter extends ArrayAdapter<CartItem> {
         String price = getItem(position).getPrice();
         String image = getItem(position).getImage();
         productID = getItem(position).getProductID();
+        InStock = getItem(position).getStock();
+        System.out.println(InStock + "," + name);
 
 //        String count = getItem(position).getCount();
 //        String quantity = getItem(position).getQuantity();
 
 
         //create cart object with info
-        CartItem cartItem = new CartItem(email, name, price, image, productID);
+        CartItem cartItem = new CartItem(email, name, price, image, productID, InStock);
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(resource, parent, false);
@@ -68,6 +70,7 @@ public class CartItemAdapter extends ArrayAdapter<CartItem> {
         ImageView itemImage = (ImageView) convertView.findViewById(R.id.cart_image);
         TextView itemName = (TextView) convertView.findViewById(R.id.cart_name);
         TextView itemPrice = (TextView) convertView.findViewById(R.id.cart_item_price);
+        TextView stockCount = (TextView) convertView.findViewById(R.id.inStock);
 
         Button increment = (Button) convertView.findViewById(R.id.increase);
         Button decrement = (Button) convertView.findViewById(R.id.decrease);
@@ -78,21 +81,22 @@ public class CartItemAdapter extends ArrayAdapter<CartItem> {
         itemName.setText(name);
         itemPrice.setText(price);
         itemQuantity.setText(String.valueOf(itemCount));
+        stockCount.setText(InStock);
         Glide.with(mContext).load(image).into(itemImage);
 
         cartRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //tell the server to remove this cart item entry
-                Log.d("Cart Item clicked", "Cart item clicked: Email =" + cartItem.getEmail() + "    ProductID = " + cartItem.getProductID());
                 removeItem(cartItem.getEmail(), cartItem.getProductID());
             }
         });
 
+
         increment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(itemCount < 5){
+                if(itemCount < Integer.parseInt(InStock)){
                     itemCount = itemCount + 1;
                     // update item count
                     itemQuantity.setText(String.valueOf(itemCount));
@@ -123,31 +127,6 @@ public class CartItemAdapter extends ArrayAdapter<CartItem> {
         });
 
         return convertView;
-    }
-
-    // GET THE AMOUNT OF STOCK GIVEN ID PRODUCT
-    public void getStock(String productID){
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("PRODUCT_ID", productID);
-        new ServerCommunicator("url", contentValues){
-
-            @Override
-            protected void onPreExecute() {
-            }
-
-            @Override
-            protected void onPostExecute(String output) {
-                try {
-                    JSONArray json = new JSONArray(output);
-                    JSONObject object = json.getJSONObject(0);
-                    // now we index the object.
-                    InStock = Integer.parseInt(object.getString("ON_HAND"));
-
-                }catch (JSONException e){
-                    e.printStackTrace();
-                }
-            }
-        }.execute();
     }
 
     public void removeItem(String email, String productID) {

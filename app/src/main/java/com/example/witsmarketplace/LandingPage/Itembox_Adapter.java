@@ -141,7 +141,7 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
     }
 
     // add to cart button implementation
-    public void AddToCart(String email, String name, String description, String picture, String price,int productID){
+    public void AddToCart(String email, String name, String description, String picture, String price,int productID, String stock){
         Log.d("Int id for ths 1 is : ", String.valueOf(productID));
         ContentValues contentValues = new ContentValues();
         contentValues.put("EMAIL", email);
@@ -150,6 +150,8 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
         contentValues.put("DESCRIPTION", description);
         contentValues.put("PRICE", price);
         contentValues.put("PRODUCT_ID",productID);
+        contentValues.put("STOCK", stock);
+        System.out.println(stock);
 
         new ServerCommunicator("https://lamp.ms.wits.ac.za/home/s2172765/app_add_cart.php", contentValues) {
             @Override
@@ -219,6 +221,7 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
                 intent.putExtra("description",currentItem.getDescription());
                 intent.putExtra("productID",currentItem.getProductID());
                 intent.putStringArrayListExtra("images_array", currentItem.getImageUrls());
+                intent.putExtra("stock", currentItem.getStock());
                 mContext.startActivity(intent);
             }
         });
@@ -228,7 +231,7 @@ public class Itembox_Adapter extends RecyclerView.Adapter<Itembox_Adapter.Itembo
             public void onClick(View view) {
 
                 String email = sharedPreference.getSH("email");
-                AddToCart(email, currentItem.getName(), currentItem.getDescription(), currentItem.getImage(), currentItem.getPrice(), currentItem.getProductID());
+                AddToCart(email, currentItem.getName(), currentItem.getDescription(), currentItem.getImage(), currentItem.getPrice(), currentItem.getProductID(), currentItem.getStock());
             }
         });
     }

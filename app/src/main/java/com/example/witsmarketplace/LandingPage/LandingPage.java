@@ -87,6 +87,7 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
             }
         });
 //      Categories draw-bar button
+
         ImageButton cat = (ImageButton) findViewById(R.id.btn_categories);
         cat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -207,7 +208,7 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
     //  Parsing data from database and adding it to an arraylist (for easy access)
     private void parseData(JSONArray array, String count) {
         int productID = 0;
-        String name="", price="", image="", description="";
+        String name="", price="", image="", description="", Stock = "";
         for (int i = 0; i < array.length(); i++) {
 
             //Creating the Request object
@@ -222,7 +223,7 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
                 price = json.getString("PRICE");
                 image = json.getString("PICTURE");
                 description = json.getString("DESCRIPTION");
-
+                Stock = json.getString("ON_HAND");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -233,12 +234,12 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
 
             String image_url = imageURLs[0];
 
-            if (count.equals("1")) computers_list.add(new ItemBox(productID,name,  price, image_url, description,images));
-            else if (count.equals("3")) books_list.add(new ItemBox(productID,name, price, image_url, description,images));
-            else if (count.equals("6")) clothes_list.add(new ItemBox(productID,name, price, image_url, description,images));
-            else if (count.equals("8")) health_list.add(new ItemBox(productID,name,  price, image_url, description,images));
-            else if (count.equals("10")) sports_list.add(new ItemBox(productID,name,  price, image_url, description,images));
-            else search_results.add(new ItemBox(productID,name, price, image_url, description,images));
+            if (count.equals("1")) computers_list.add(new ItemBox(productID,name,  price, image_url, description,images,Stock));
+            else if (count.equals("3")) books_list.add(new ItemBox(productID,name, price, image_url, description,images,Stock));
+            else if (count.equals("6")) clothes_list.add(new ItemBox(productID,name, price, image_url, description,images,Stock));
+            else if (count.equals("8")) health_list.add(new ItemBox(productID,name,  price, image_url, description,images,Stock));
+            else if (count.equals("10")) sports_list.add(new ItemBox(productID,name,  price, image_url, description,images,Stock));
+            else search_results.add(new ItemBox(productID,name, price, image_url, description,images,Stock));
 
         }
 

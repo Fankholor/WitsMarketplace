@@ -59,7 +59,6 @@ public class OrderItem_Adapter extends RecyclerView.Adapter<OrderItem_Adapter.Or
         this.mContext = mContext;
         this.itemsList = itemsList;
         this.context = mContext;
-//        Itembox_Adapter.n = n;
     }
 
     @NonNull
@@ -76,9 +75,6 @@ public class OrderItem_Adapter extends RecyclerView.Adapter<OrderItem_Adapter.Or
 //      Set the view holders with details from the items list
         OrderHistory_Item currentItem = itemsList.get(position);
 
-//        Glide.with(mContext).load(currentItem.getImage()).into(holder.itemImage);
-
-//        holder.itemImage.setImageDrawable(drawable);
         holder.itemsDate.setText(currentItem.getDate());
         holder.itemsTotal.setText(currentItem.getTotal());
 
@@ -94,11 +90,6 @@ public class OrderItem_Adapter extends RecyclerView.Adapter<OrderItem_Adapter.Or
             public void onClick(View v) {
                 SharedPreference sharedPreference = new SharedPreference(context);
                 String Email = sharedPreference.getSH("email");
-
-                for (int d : currentItem.getPrice()){
-                    System.out.println("PUTEXTRA " + d);
-
-                }
 
                 Intent intent = new Intent(mContext, Orders.class);
                 intent.putExtra("date", currentItem.getDate());

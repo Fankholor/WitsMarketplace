@@ -28,6 +28,7 @@ import java.util.List;
 public class modal extends AppCompatActivity
 {
     private static String name;
+    private static String stock;
     private static String price;
     private static String description;
     private static String productID;
@@ -53,6 +54,7 @@ public class modal extends AppCompatActivity
         description = intent.getStringExtra("description");
         images = intent.getStringArrayListExtra("images_array");
         productID = intent.getStringExtra("productID");
+        stock = intent.getStringExtra("stock");
 
 
         name_text.setText(name);
@@ -67,7 +69,7 @@ public class modal extends AppCompatActivity
         cartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddToCart(email,name,description,images.get(0),price,productID);
+                AddToCart(email,name,description,images.get(0),price,productID,stock);
             }
         });
         faveBtn.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +89,7 @@ public class modal extends AppCompatActivity
     }
 
     // add to cart button implementation
-    public void AddToCart(String email, String name, String description, String picture, String price,String productID){
+    public void AddToCart(String email, String name, String description, String picture, String price,String productID, String stock){
         ContentValues contentValues = new ContentValues();
         contentValues.put("EMAIL", email);
         contentValues.put("NAME", name);
@@ -95,6 +97,7 @@ public class modal extends AppCompatActivity
         contentValues.put("DESCRIPTION", description);
         contentValues.put("PRICE", price);
         contentValues.put("PRODUCT_ID",productID);
+        contentValues.put("STOCK", stock);
         new ServerCommunicator("https://lamp.ms.wits.ac.za/home/s2172765/app_add_cart.php", contentValues) {
             @Override
             protected void onPreExecute() {}

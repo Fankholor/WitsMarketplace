@@ -53,19 +53,53 @@
                     android:textStyle="bold" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/incre_decr_btn"
-                    android:layout_width="60dp"
-                    android:layout_height="30dp"
+                    android:id="@+id/increase"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="65dp"
+                    android:background="@color/lightGrey"
+                    android:text="+" />
+                <TextView
+                    android:id="@+id/count"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:text="1"
+                    android:textSize="11sp"
+                    android:layout_marginLeft="25dp"
+                    android:textStyle="bold"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/decrease"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_marginLeft="25dp"
                     android:background="@color/lightGrey"
-                    android:drawableRight="@drawable/dropdown"
-                    android:text="1" />
+                    android:text="-" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_remove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/blue"
+                    android:src="@drawable/shopping_cart2"
+                    android:textAllCaps="false"
+                    android:text="remove"
+                    android:textColor="@color/white"
+                    android:textSize="12dp" />
 
                 <TextView
                     android:id="@+id/cart_instock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="50dp"
                     android:text="Stock: "
                     android:textColor="@color/black" />
 
@@ -74,20 +108,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="5"
+                    android:layout_marginTop="15dp"
                     android:textColor="@color/black" />
             </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_remove"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginTop="15dp"
-                android:background="@color/blue"
-                android:src="@drawable/shopping_cart2"
-                android:textAllCaps="false"
-                android:text="remove"
-                android:textColor="@color/white"
-                android:textSize="12dp" />
         </LinearLayout>
 
     </LinearLayout>

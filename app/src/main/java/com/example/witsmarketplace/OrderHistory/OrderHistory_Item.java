@@ -4,10 +4,10 @@ import java.util.Dictionary;
 
 public class OrderHistory_Item implements java.io.Serializable {
     private final String total, date, street, surburb, city, country, items, order_no;
-    private int[] price;
+    private String[] price;
     private String[] name;
     //  constructor fetching all data required on an itemBox
-    public OrderHistory_Item(String total, String date, String street,String surburb,String city,String country, String items, String[] name, int[] price, String order_no) {
+    public OrderHistory_Item(String total, String date, String street,String surburb,String city,String country, String items, String[] name, String[] price, String order_no) {
         this.total = total;
         this.date = date;
         this.street = street;
@@ -42,5 +42,5 @@ public class OrderHistory_Item implements java.io.Serializable {
     public String getItems(){ return items; }
     public String getOrder_no(){ return order_no; }
     public String[] getName(){ return name; }
-    public int[] getPrice(){ return price; }
+    public String[] getPrice(){ return price; }
 }

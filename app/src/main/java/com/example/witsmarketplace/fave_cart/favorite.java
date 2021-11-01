@@ -86,6 +86,7 @@ public class favorite extends AppCompatActivity {
                         intent = new Intent(getApplicationContext(), Account.class);
                         startActivity(intent);
                     }
+
                     return true;
                 }
             };

@@ -86,15 +86,16 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
 
             }
         });
+
 //      Categories draw-bar button
 
-        ImageButton cat = (ImageButton) findViewById(R.id.btn_categories);
-        cat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPopup(view);
-            }
-        });
+//        ImageButton cat = (ImageButton) findViewById(R.id.btn_categories);
+//        cat.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                showPopup(view);
+//            }
+//        });
 
 
 //********************************************************* Click Listeners for ViewMore ********************************************************//
@@ -182,12 +183,12 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
     }
 
     //  Pop up menu for the categories draw-bar
-    public void showPopup(View view){
-        PopupMenu popupMenu = new PopupMenu(this, view);
-        MenuInflater inflater = popupMenu.getMenuInflater();
-        inflater.inflate(R.menu.categories_menu, popupMenu.getMenu());
-        popupMenu.show();
-    }
+//    public void showPopup(View view){
+//        PopupMenu popupMenu = new PopupMenu(this, view);
+//        MenuInflater inflater = popupMenu.getMenuInflater();
+//        inflater.inflate(R.menu.categories_menu, popupMenu.getMenu());
+//        popupMenu.show();
+//    }
 
     //  Open View More page
     void openViewMore(int code, ArrayList<ItemBox> list){

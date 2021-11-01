@@ -96,6 +96,7 @@ public class SearchResults extends AppCompatActivity {
     void openSearch(){
         Intent intent = new Intent(this, Search.class);
         startActivity(intent);
+        finish();
     }
 
     private void parseData(JSONArray array, String count) {

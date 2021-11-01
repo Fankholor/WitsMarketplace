@@ -137,7 +137,7 @@ public class Profile extends AppCompatActivity {
                 lname = json.getString("lastname");
                 date_birth = json.getString("dateofbirth");
                 email = json.getString("email");
-                balance = json.getString("Balance");
+                balance = json.getString("balance");
 
 
             } catch (JSONException e) {
@@ -151,7 +151,7 @@ public class Profile extends AppCompatActivity {
        String Full = fname + " " + lname;
 
         String B = "";
-        if(balance == ""){
+        if(balance == "null"){
             B ="R0";
         }
         else

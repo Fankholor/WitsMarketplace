@@ -15,18 +15,18 @@
         android:layout_marginBottom="10dp"
         android:background="@color/blue">
 
-        <ImageButton
-            android:id="@+id/btn_categories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="10dp"
-            android:background="#06042E"
-            android:contentDescription="@string/categories_drawbar"
-            android:onClick="showPopup"
-            app:srcCompat="@drawable/yellow_categories"
-            tools:ignore="SpeakableTextPresentCheck" />
+<!--        <ImageButton-->
+<!--            android:id="@+id/btn_categories"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:layout_marginEnd="10dp"-->
+<!--            android:background="#06042E"-->
+<!--            android:contentDescription="@string/categories_drawbar"-->
+<!--            android:onClick="showPopup"-->
+<!--            app:srcCompat="@drawable/yellow_categories"-->
+<!--            tools:ignore="SpeakableTextPresentCheck" />-->
 
         <ImageButton
             android:id="@+id/logout"
@@ -35,7 +35,7 @@
             android:background="@color/blue"
             android:src="@drawable/ic_baseline_login_24"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="60dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="25dp"/>
 
         <LinearLayout

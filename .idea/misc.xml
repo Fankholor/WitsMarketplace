@@ -3,17 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout/activity_account.xml" value="0.26145833333333335" />
-        <entry key="app/src/main/res/layout/activity_favorite.xml" value="0.26132246376811596" />
-        <entry key="app/src/main/res/layout/activity_landing_page.xml" value="0.26132246376811596" />
-        <entry key="app/src/main/res/layout/activity_order_history.xml" value="0.26145833333333335" />
-        <entry key="app/src/main/res/layout/activity_orders.xml" value="0.26145833333333335" />
-        <entry key="app/src/main/res/layout/itembox_added.xml" value="0.26145833333333335" />
-        <entry key="app/src/main/res/layout/order_history_item.xml" value="0.26145833333333335" />
-        <entry key="../../../../layout/custom_preview.xml" value="0.15" />
-        <entry key="app/src/main/res/layout/activity_account.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_address.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_cart.xml" value="0.17844202898550723" />
         <entry key="../../../../layout/custom_preview.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_account.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_address.xml" value="0.33" />
@@ -26,19 +15,15 @@
         <entry key="app/src/main/res/layout/activity_order_history.xml" value="0.22010869565217392" />
         <entry key="app/src/main/res/layout/activity_orders.xml" value="0.26197916666666665" />
         <entry key="app/src/main/res/layout/activity_registration.xml" value="0.25271739130434784" />
-        <entry key="app/src/main/res/layout/activity_landing_page.xml" value="0.22010869565217392" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.26197916666666665" />
-        <entry key="app/src/main/res/layout/activity_modal.xml" value="0.26197916666666665" />
-        <entry key="app/src/main/res/layout/activity_order_history.xml" value="0.22010869565217392" />
-        <entry key="app/src/main/res/layout/activity_orders.xml" value="0.26197916666666665" />
+        <entry key="app/src/main/res/layout/activity_search.xml" value="0.25794871794871793" />
+        <entry key="app/src/main/res/layout/activity_search_results.xml" value="0.25794871794871793" />
         <entry key="app/src/main/res/layout/cart_item.xml" value="0.1956521739130435" />
         <entry key="app/src/main/res/layout/fave_item.xml" value="0.1956521739130435" />
         <entry key="app/src/main/res/layout/itembox.xml" value="0.26197916666666665" />
+        <entry key="app/src/main/res/layout/itembox_added.xml" value="0.26145833333333335" />
         <entry key="app/src/main/res/layout/order_history_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/orders_item.xml" value="0.26197916666666665" />
         <entry key="app/src/main/res/layout/sum_item.xml" value="0.1956521739130435" />
-        <entry key="app/src/main/res/layout/order_history_item.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/orders_item.xml" value="0.26197916666666665" />
         <entry key="app/src/main/res/menu/bottom_navigation.xml" value="0.26197916666666665" />
         <entry key="app/src/main/res/menu/categories_menu.xml" value="0.26197916666666665" />
         <entry key="app/src/main/res/menu/game_menu.xml" value="0.26197916666666665" />

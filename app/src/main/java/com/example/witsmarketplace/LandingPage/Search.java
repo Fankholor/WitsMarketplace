@@ -107,11 +107,8 @@ public class Search extends AppCompatActivity {
     void openSearchResults(String search){
         Intent intent = new Intent(this, SearchResults.class);
         intent.putExtra("search", search);
-
-//        Bundle bundle = new Bundle();
-//        bundle.putSerializable("search_results", search_results);
-//        intent.putExtra("search_bundle", bundle);
         startActivity(intent);
+        finish();
     }
 
 //    CHANGES

@@ -151,7 +151,7 @@ public class Profile extends AppCompatActivity {
        String Full = fname + " " + lname;
 
         String B = "";
-        if(balance == ""){
+        if(balance == "null"){
             B ="R0";
         }
         else

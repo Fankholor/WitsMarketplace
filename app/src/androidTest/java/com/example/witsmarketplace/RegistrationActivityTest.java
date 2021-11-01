@@ -1,11 +1,26 @@
 package com.example.witsmarketplace;
 
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.intent.Intents.intended;
+import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
+import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.*;
 
 import android.app.Instrumentation;
 import android.widget.EditText;
 
+import androidx.test.espresso.Espresso;
+import androidx.test.espresso.intent.Intents;
+import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.rule.ActivityTestRule;
 
 import com.example.witsmarketplace.LandingPage.LandingPage;
@@ -18,11 +33,11 @@ import org.junit.Test;
 
 public class RegistrationActivityTest {
     @Rule
-    public ActivityTestRule<RegistrationActivity> rActivityTestRule = new ActivityTestRule<>(RegistrationActivity.class);
+    public IntentsTestRule<RegistrationActivity> rActivityTestRule = new IntentsTestRule<>(RegistrationActivity.class);
     private RegistrationActivity mActivity = null;
-    public String wrongDetails = "you have already registered , Please Login";
+    public String wrongDetails = "You are already registered, click the link above to login.";
     public String correctDetails = "Registered successfully";
-    Instrumentation.ActivityMonitor monitor = getInstrumentation().addMonitor(LandingPage.class.getName(),null,false);
+    Instrumentation.ActivityMonitor monitor = getInstrumentation().addMonitor(RegistrationActivity.class.getName(),null,false);
 
     @Test
     public void FirstnameCheck(){
@@ -48,6 +63,20 @@ public class RegistrationActivityTest {
     public void ConPassword(){
         EditText ConnPassowrd = mActivity.findViewById(R.id.ConfirmPassword);
         assertNotNull(ConnPassowrd);
+    }
+
+    @Test
+    public void enterOldDetails(){
+        Espresso.onView(withId(R.id.Firstname)).perform(typeText("Neal")).perform(closeSoftKeyboard());
+        Espresso.onView(withId(R.id.Lastname)).perform(typeText("Neal")).perform(closeSoftKeyboard());
+        Espresso.onView(withId(R.id.email)).perform(typeText("nealneal@gmail.com")).perform(closeSoftKeyboard());
+        Espresso.onView(withId(R.id.Password)).perform(typeText("123")).perform(closeSoftKeyboard());
+        Espresso.onView(withId(R.id.ConfirmPassword)).perform(typeText("123")).perform(closeSoftKeyboard());
+        Espresso.onView(withId(R.id.date)).perform(typeText("2000-01-01")).perform(closeSoftKeyboard());
+        Espresso.onView(withId(R.id.SignUp)).perform(click());
+        RegistrationActivity activity = rActivityTestRule.getActivity();
+        Espresso.onView(withText(wrongDetails)).inRoot(withDecorView(not(is(activity.getWindow().getDecorView())))).check(matches(isDisplayed()));
+
     }
 
     @Before

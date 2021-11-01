@@ -12,4 +12,16 @@
     <color name="blue">#06042E</color>
     <color name="lightGrey">#B9B9B9</color>
     <color name="red">#780000</color>
+    <color name="colorAccent">#0D5D98</color>
+
+    <color name="address">#2F7092</color>
+    <color name="balance">#0D5D98</color>
+    <color name = "headings">#3797CF</color>
+    <color name = "solidCircle">#AAFFFFFF</color>
+    <color name = "circleBorder">#50FFFFFF</color>
+    <color name="gradEnd">#1e81b0</color>
+    <color name="gradStart">#063970</color>
+    <color name="follwersBg">#65DCE5</color>
+    <color name="followingBg">#49BEFE</color>
+    <color name = "grey">#E5E5E5</color>
 </resources>

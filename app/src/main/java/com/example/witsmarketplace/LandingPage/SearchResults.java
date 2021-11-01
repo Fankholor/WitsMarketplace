@@ -96,11 +96,12 @@ public class SearchResults extends AppCompatActivity {
     void openSearch(){
         Intent intent = new Intent(this, Search.class);
         startActivity(intent);
+        finish();
     }
 
     private void parseData(JSONArray array, String count) {
         int productID=0;
-        String name="", price="", image="", description="";
+        String name="", price="", image="", description="", stock ="";
         for (int i = 0; i < array.length(); i++) {
 
             //Creating the Request object
@@ -115,6 +116,7 @@ public class SearchResults extends AppCompatActivity {
                 image = json.getString("PICTURE");
                 description = json.getString("DESCRIPTION");
                 productID = json.getInt("PRODUCT_ID");
+                stock = json.getString("ON_HAND");
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -125,7 +127,7 @@ public class SearchResults extends AppCompatActivity {
             images.addAll(Arrays.asList(imageURLs));
             String image_url = imageURLs[0];
 
-            search_results.add(new ItemBox(productID,name, "R " + price, image_url, description,images));
+            search_results.add(new ItemBox(productID,name, "R " + price, image_url, description,images,stock));
         }
         renderer(search_results);
     }

@@ -15,6 +15,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.witsmarketplace.Account;
+import com.example.witsmarketplace.LandingPage.LandingPage;
 import com.example.witsmarketplace.R;
 import com.example.witsmarketplace.SharedPreference;
 import com.example.witsmarketplace.fave_cart.FavItem;
@@ -75,6 +76,10 @@ public class Profile extends AppCompatActivity {
                     }
                     else if(item.getItemId() == R.id.nav_account){
                         intent = new Intent(getApplicationContext(), Account.class);
+                        startActivity(intent);
+                    }
+                    else if (item.getItemId() == R.id.nav_home) {
+                        intent = new Intent(getApplicationContext(), LandingPage.class);
                         startActivity(intent);
                     }
                     return true;

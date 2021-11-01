@@ -31,7 +31,7 @@ import java.util.ArrayList;
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersViewHolder>  {
     private Context mContext;
     private Activity context;
-    private int[] prices;
+    private String[] prices;
     private String[] names;
 
     public static class OrdersViewHolder extends RecyclerView.ViewHolder {
@@ -48,7 +48,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersView
         }
     }
 
-    public OrdersAdapter(String[] names, int[] prices){
+    public OrdersAdapter(String[] names, String[] prices){
         this.names = names;
         this.prices = prices;
     }
@@ -66,17 +66,11 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersView
     public void onBindViewHolder(@NonNull OrdersAdapter.OrdersViewHolder holder, int position) {
 //      Set the view holders with details from the items list
         String current_name = names[position];
-        int current_price = prices[position];
-//        Glide.with(mContext).load(currentItem.getImage()).into(holder.itemImage);
+        String current_price = prices[position];
 
-        for (int s: prices){
-            System.out.println("ADAPTER PRICES" + s);
-        }
-//        holder.itemImage.setImageDrawable(drawable);
         holder.order_name.setText(current_name);
         holder.order_price.setText(String.valueOf(current_price));
 
-        System.out.println(current_name + " " + current_price);
     }
 
     @Override

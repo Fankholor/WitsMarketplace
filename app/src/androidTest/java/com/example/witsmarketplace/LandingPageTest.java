@@ -2,10 +2,14 @@ package com.example.witsmarketplace;
 
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.pressImeActionButton;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
+import static androidx.test.espresso.action.ViewActions.swipeDown;
 import static androidx.test.espresso.action.ViewActions.swipeLeft;
 import static androidx.test.espresso.action.ViewActions.swipeRight;
+import static androidx.test.espresso.action.ViewActions.swipeUp;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.contrib.RecyclerViewActions.scrollToHolder;
+import static androidx.test.espresso.contrib.RecyclerViewActions.scrollToPosition;
 import static androidx.test.espresso.intent.Intents.intended;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -35,7 +39,7 @@ import com.example.witsmarketplace.ViewMore.ViewMore;
 import com.example.witsmarketplace.fave_cart.*;
 
 import org.junit.After;
-import org.junit.Assert;
+import org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -53,9 +57,7 @@ public class LandingPageTest {
 
     @Test
     public void ViewMoreBooksTest(){
-        EditText txt_search = mActivity.findViewById(R.id.txt_search);
-        Espresso.onView(withId(R.id.txt_search)).perform(typeText(""));
-        ViewActions.closeSoftKeyboard();
+
         Espresso.onView(withId(R.id.vm_books)).perform(click());
         Instrumentation.ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ViewMore.class.getName(),null,false);
         assertNotNull(activityMonitor);
@@ -64,9 +66,7 @@ public class LandingPageTest {
 
     @Test
     public void ViewMoreCompsTest(){
-        EditText txt_search = mActivity.findViewById(R.id.txt_search);
-        Espresso.onView(withId(R.id.txt_search)).perform(typeText(""));
-        ViewActions.closeSoftKeyboard();
+
         Espresso.onView(withId(R.id.vm_computers)).perform(click());
         Instrumentation.ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ViewMore.class.getName(),null,false);
         assertNotNull(activityMonitor);
@@ -89,8 +89,6 @@ public class LandingPageTest {
 
     @Test
     public void searchItems(){
-        EditText txt_search = mActivity.findViewById(R.id.txt_search);
-        Espresso.onView(withId(R.id.txt_search)).perform(click());
         Espresso.onView(withId(R.id.txt_search)).perform(click(),typeText("Phone"));
         Espresso.onView(withId(R.id.btn_search)).perform(click());
         ViewActions.closeSoftKeyboard();
@@ -113,6 +111,22 @@ public class LandingPageTest {
                 RecyclerViewActions.actionOnItemAtPosition(0, click())
         });
     }
+    @Test
+    public void clickableElectronics1(){
+        Espresso.onView(withId(R.id.vm_computers)).perform(click());
+        Espresso.onView(allOf(ViewMatchers.withId(R.id.rv_viewMore), isDisplayed())).perform(new ViewAction[] {
+                RecyclerViewActions.actionOnItemAtPosition(0, click())
+        });
+    }
+
+    @Test
+    public void reachOrderHistory(){
+        Espresso.onView(withId(R.id.nav_account)).perform(click());
+        Espresso.onView(withId(R.id.orders)).perform(click());
+
+    }
+
+
 
 
 

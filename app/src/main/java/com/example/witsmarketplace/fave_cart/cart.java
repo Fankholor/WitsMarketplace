@@ -131,7 +131,7 @@ public class cart extends AppCompatActivity {
         Log.d("Cart Items",String.valueOf(array.getJSONObject(0)));
 
         int tprice =0;
-        String email="",name="", price="", image="", productID="";
+        String email="",name="", price="", image="", productID="", stock ="";
         for (int i = 0; i < array.length(); i++) {
 
             //Creating the Request object
@@ -146,7 +146,7 @@ public class cart extends AppCompatActivity {
                 price = json.getString("PRICE");
                 image = json.getString("PICTURE");
                 productID = json.getString("PRODUCT_ID");
-                //iCount = json.getString("COUNT");
+                stock = json.getString("STOCK");
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -157,7 +157,7 @@ public class cart extends AppCompatActivity {
             price = "R " + price;
             System.out.println(price);
 
-            cartItems.add(new CartItem(email,name, price, image_url,productID));
+            cartItems.add(new CartItem(email,name, price, image_url,productID,stock));
             price = price.substring(2);///////////////added this
             tprice += Integer.parseInt(price);
         }

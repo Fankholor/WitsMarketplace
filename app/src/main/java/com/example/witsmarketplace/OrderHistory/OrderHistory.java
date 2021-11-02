@@ -128,21 +128,15 @@ public class OrderHistory extends AppCompatActivity implements RecyclerView.OnSc
                     name = arr.getString("NAME");
                     total = arr.getString("PRICE");
 
-                    System.out.println("PRICES ///////////////// " + total);
                     total_str = total.split(",");
                     total_int = new int[total_str.length];
                     total_pmt = 0;
 
-                    for (String d: total_str){
-                        System.out.println("FROM APP " + d);
-                    }
-
                     items = String.valueOf(total_str.length);
-                    for(int k = 0; k < total_str.length-1; k++) {
+                    for(int k = 0; k < total_str.length; k++) {
                         total_int[k] = Integer.parseInt(total_str[k]);
                         total_pmt += total_int[k];
                     }
-
 
 //                  split product names
                     name = name.substring(0, name.length()-1);
@@ -163,10 +157,6 @@ public class OrderHistory extends AppCompatActivity implements RecyclerView.OnSc
                     total_int = new int[total_str.length];
                     total_pmt = 0;
 
-                    for (String d: total_str){
-                        System.out.println(" FROM WEBSTITE "+ d);
-                    }
-
                     items = String.valueOf(total_str.length);
                     for(int k = 0; k < total_str.length; k++) {
                         total_int[k] = Integer.parseInt(total_str[k]);
@@ -182,7 +172,7 @@ public class OrderHistory extends AppCompatActivity implements RecyclerView.OnSc
                 e.printStackTrace();
             }
 
-            OrderHistory_Item v = new OrderHistory_Item("R " + total_pmt, date, street, surburb, city, country, items, name_str, total_int, order_no);
+            OrderHistory_Item v = new OrderHistory_Item("R " + total_pmt, date, street, surburb, city, country, items, name_str, total_str, order_no);
             order_history_items.add(v);
         }
         //Notifying the adapter that data has been added or changed

@@ -9,12 +9,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.witsmarketplace.Login.LoginActivity;
 import com.example.witsmarketplace.OrderHistory.OrderHistory_Item;
 import com.example.witsmarketplace.R;
 import com.example.witsmarketplace.SharedPreference;
@@ -68,10 +70,13 @@ public class Address extends AppCompatActivity {
                     Street_Name.setError("This Field Is Required");
                 else if(Suburb.isEmpty())
                     Suburb_Name.setError("This Field Is Required");
-                if(City.isEmpty())
+                else if(City.isEmpty())
                     City_Name.setError("This Field Is Required");
-                if(Country.isEmpty())
+                else if(Country.isEmpty())
                     Country_Name.setError("This Field Is Required");
+                else if(Street.isEmpty() && Suburb.isEmpty() && City.isEmpty() && Country.isEmpty()){
+                    Toast.makeText(Address.this,"Incomplete fields",Toast.LENGTH_SHORT).show();
+                }
                 else{
                     String address = Street + "," + City + "," + Suburb +"," + Country;
                     sharedPreference.setSH("Address", address);
@@ -118,7 +123,7 @@ public class Address extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            OrderHistory_Item v = new OrderHistory_Item("R " + total_pmt, date, street, surburb, city, country, items, name_str, total_int, order_no);
+            OrderHistory_Item v = new OrderHistory_Item("R " + total_pmt, date, street, surburb, city, country, items, name_str, total_str, order_no);
 //            order_history_items.add(v);
             System.out.println(address);
             streets.setText(street + ", " + surburb + ", " + city + ", " + country);

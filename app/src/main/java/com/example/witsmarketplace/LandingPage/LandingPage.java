@@ -83,18 +83,8 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
                 finish();
-
             }
         });
-//      Categories draw-bar button
-        ImageButton cat = (ImageButton) findViewById(R.id.btn_categories);
-        cat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPopup(view);
-            }
-        });
-
 
 //********************************************************* Click Listeners for ViewMore ********************************************************//
         Button books_vm = (Button) findViewById(R.id.vm_books);
@@ -180,13 +170,6 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
         imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
     }
 
-    //  Pop up menu for the categories draw-bar
-    public void showPopup(View view){
-        PopupMenu popupMenu = new PopupMenu(this, view);
-        MenuInflater inflater = popupMenu.getMenuInflater();
-        inflater.inflate(R.menu.categories_menu, popupMenu.getMenu());
-        popupMenu.show();
-    }
 
     //  Open View More page
     void openViewMore(int code, ArrayList<ItemBox> list){
@@ -204,45 +187,6 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
         startActivity(intent);
     }
 
-    //  Parsing data from database and adding it to an arraylist (for easy access)
-    private void parseData(JSONArray array, String count) {
-        int productID = 0;
-        String name="", price="", image="", description="";
-        for (int i = 0; i < array.length(); i++) {
-
-            //Creating the Request object
-            JSONObject json = null;
-
-            try {
-                json = array.getJSONObject(i);
-
-                //Adding data to the request object
-                productID = json.getInt("PRODUCT_ID");
-                name = json.getString("NAME");
-                price = json.getString("PRICE");
-                image = json.getString("PICTURE");
-                description = json.getString("DESCRIPTION");
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            //Adding the request object to the list
-            String[] imageURLs = image.split(",");
-            ArrayList<String> images = new ArrayList<>();
-            images.addAll(Arrays.asList(imageURLs));
-
-            String image_url = imageURLs[0];
-
-            if (count.equals("1")) computers_list.add(new ItemBox(productID,name,  price, image_url, description,images));
-            else if (count.equals("3")) books_list.add(new ItemBox(productID,name, price, image_url, description,images));
-            else if (count.equals("6")) clothes_list.add(new ItemBox(productID,name, price, image_url, description,images));
-            else if (count.equals("8")) health_list.add(new ItemBox(productID,name,  price, image_url, description,images));
-            else if (count.equals("10")) sports_list.add(new ItemBox(productID,name,  price, image_url, description,images));
-            else search_results.add(new ItemBox(productID,name, price, image_url, description,images));
-
-        }
-
-    }
 
     //  Fetching the data from the database as a JSON array
     private JsonArrayRequest getDataFromServer(String url, String requestCount) {
@@ -264,25 +208,65 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
         });
     }
 
-    private void getData(int count){
-        requestQueue.add(getDataFromServer(webURL, String.valueOf(count)));
+    //  Parsing data from database and adding it to an arraylist (for easy access)
+    private void parseData(JSONArray array, String count) {
+        int productID = 0;
+        String name="", price="", image="", description="", Stock = "";
+        for (int i = 0; i < array.length(); i++) {
+
+            //Creating the Request object
+            JSONObject json = null;
+
+            try {
+                json = array.getJSONObject(i);
+
+                //Adding data to the request object
+                productID = json.getInt("PRODUCT_ID");
+                name = json.getString("NAME");
+                price = json.getString("PRICE");
+                image = json.getString("PICTURE");
+                description = json.getString("DESCRIPTION");
+                Stock = json.getString("ON_HAND");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            //Adding the request object to the list
+            String[] imageURLs = image.split(",");
+            ArrayList<String> images = new ArrayList<>();
+            images.addAll(Arrays.asList(imageURLs));
+
+            String image_url = imageURLs[0];
+
+            if (count.equals("1")) {
+                computers_list.add(new ItemBox(productID,name,  price, image_url, description,images,Stock));
+                renderer(R.id.rv_computers, computers_list);
+            }
+            else if (count.equals("3")) {
+                books_list.add(new ItemBox(productID,name, price, image_url, description,images,Stock));
+                renderer(R.id.rv_books, books_list);
+            }
+            else if (count.equals("6")) {
+                clothes_list.add(new ItemBox(productID, name, price, image_url, description, images, Stock));
+                renderer(R.id.rv_clothes, clothes_list);
+            }
+            else if (count.equals("8")) {
+                health_list.add(new ItemBox(productID, name, price, image_url, description, images, Stock));
+                renderer(R.id.rv_health, health_list);
+            }
+            else if (count.equals("10")) {
+                sports_list.add(new ItemBox(productID, name, price, image_url, description, images, Stock));
+                renderer(R.id.rv_sports, sports_list);
+            }
+            else search_results.add(new ItemBox(productID,name, price, image_url, description,images,Stock));
+
+        }
+
     }
 
     private void renderCategories(){
         // 1 = computer/electronics >>> 3 = books >>> 6 = clothing >>> 8 = health/hygiene >>> 10 = sports
         int[] arr = {1, 3, 6, 8, 10};
-
-        for (int i : arr){
-            //get data from database
-            getData(i);
-
-            //display the data in a recyclerview according to each category
-            if (i == 1) renderer(R.id.rv_computers, computers_list);
-            else if (i == 3) renderer(R.id.rv_books, books_list);
-            else if (i == 6) renderer(R.id.rv_clothes, clothes_list);
-            else if (i == 8) renderer(R.id.rv_health, health_list);
-            else renderer(R.id.rv_sports, sports_list);
-        }
+        for (int i : arr) requestQueue.add(getDataFromServer(webURL, String.valueOf(i)));
     }
 
     private void renderer(int rv, ArrayList<ItemBox> list){
@@ -293,7 +277,6 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
         RecyclerView.Adapter adapter = new Itembox_Adapter(list, this, 1);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-
     }
 
     private boolean isLastItemDisplaying(RecyclerView recyclerView) {

@@ -83,19 +83,8 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
                 finish();
-
             }
         });
-//      Categories draw-bar button
-
-        ImageButton cat = (ImageButton) findViewById(R.id.btn_categories);
-        cat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPopup(view);
-            }
-        });
-
 
 //********************************************************* Click Listeners for ViewMore ********************************************************//
         Button books_vm = (Button) findViewById(R.id.vm_books);
@@ -153,41 +142,34 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
         bnv.getMenu().getItem(0).setChecked(true);
     }
 
-//    Bottom Navigation
+    //    Bottom Navigation
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
-        new BottomNavigationView.OnNavigationItemSelectedListener() {
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Intent intent = null;
-        if (item.getItemId() == R.id.nav_cart){
-            intent = new Intent(getApplicationContext(), cart.class);
-            startActivity(intent);
-        }
-        else if (item.getItemId() == R.id.nav_favorite) {
-            intent = new Intent(getApplicationContext(), favorite.class);
-            startActivity(intent);
-        }
-        else if(item.getItemId() == R.id.nav_account){
-            intent = new Intent(getApplicationContext(), Account.class);
-            startActivity(intent);
-        }
-        return true;
-    }
-};
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    Intent intent = null;
+                    if (item.getItemId() == R.id.nav_cart){
+                        intent = new Intent(getApplicationContext(), cart.class);
+                        startActivity(intent);
+                    }
+                    else if (item.getItemId() == R.id.nav_favorite) {
+                        intent = new Intent(getApplicationContext(), favorite.class);
+                        startActivity(intent);
+                    }
+                    else if(item.getItemId() == R.id.nav_account){
+                        intent = new Intent(getApplicationContext(), Account.class);
+                        startActivity(intent);
+                    }
+                    return true;
+                }
+            };
 
     public void hideKeyboard(View view) {
         InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
     }
 
-    //  Pop up menu for the categories draw-bar
-    public void showPopup(View view){
-        PopupMenu popupMenu = new PopupMenu(this, view);
-        MenuInflater inflater = popupMenu.getMenuInflater();
-        inflater.inflate(R.menu.categories_menu, popupMenu.getMenu());
-        popupMenu.show();
-    }
 
     //  Open View More page
     void openViewMore(int code, ArrayList<ItemBox> list){
@@ -203,6 +185,27 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
     void openSearch(){
         Intent intent = new Intent(this, Search.class);
         startActivity(intent);
+    }
+
+
+    //  Fetching the data from the database as a JSON array
+    private JsonArrayRequest getDataFromServer(String url, String requestCount) {
+
+        //JsonArrayRequest of volley
+        return new JsonArrayRequest(url + String.valueOf(requestCount),
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        //Calling method to parse the json response
+                        parseData(response, requestCount);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //If an error occurs that means end of the list has reached
+                    }
+                });
     }
 
     //  Parsing data from database and adding it to an arraylist (for easy access)
@@ -234,56 +237,36 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
 
             String image_url = imageURLs[0];
 
-            if (count.equals("1")) computers_list.add(new ItemBox(productID,name,  price, image_url, description,images,Stock));
-            else if (count.equals("3")) books_list.add(new ItemBox(productID,name, price, image_url, description,images,Stock));
-            else if (count.equals("6")) clothes_list.add(new ItemBox(productID,name, price, image_url, description,images,Stock));
-            else if (count.equals("8")) health_list.add(new ItemBox(productID,name,  price, image_url, description,images,Stock));
-            else if (count.equals("10")) sports_list.add(new ItemBox(productID,name,  price, image_url, description,images,Stock));
+            if (count.equals("1")) {
+                computers_list.add(new ItemBox(productID,name,  price, image_url, description,images,Stock));
+                renderer(R.id.rv_computers, computers_list);
+            }
+            else if (count.equals("3")) {
+                books_list.add(new ItemBox(productID,name, price, image_url, description,images,Stock));
+                renderer(R.id.rv_books, books_list);
+            }
+            else if (count.equals("6")) {
+                clothes_list.add(new ItemBox(productID, name, price, image_url, description, images, Stock));
+                renderer(R.id.rv_clothes, clothes_list);
+            }
+            else if (count.equals("8")) {
+                health_list.add(new ItemBox(productID, name, price, image_url, description, images, Stock));
+                renderer(R.id.rv_health, health_list);
+            }
+            else if (count.equals("10")) {
+                sports_list.add(new ItemBox(productID, name, price, image_url, description, images, Stock));
+                renderer(R.id.rv_sports, sports_list);
+            }
             else search_results.add(new ItemBox(productID,name, price, image_url, description,images,Stock));
 
         }
 
     }
 
-    //  Fetching the data from the database as a JSON array
-    private JsonArrayRequest getDataFromServer(String url, String requestCount) {
-
-        //JsonArrayRequest of volley
-        return new JsonArrayRequest(url + String.valueOf(requestCount),
-        new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                //Calling method to parse the json response
-                parseData(response, requestCount);
-            }
-        },
-        new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                //If an error occurs that means end of the list has reached
-            }
-        });
-    }
-
-    private void getData(int count){
-        requestQueue.add(getDataFromServer(webURL, String.valueOf(count)));
-    }
-
     private void renderCategories(){
         // 1 = computer/electronics >>> 3 = books >>> 6 = clothing >>> 8 = health/hygiene >>> 10 = sports
         int[] arr = {1, 3, 6, 8, 10};
-
-        for (int i : arr){
-            //get data from database
-            getData(i);
-
-            //display the data in a recyclerview according to each category
-            if (i == 1) renderer(R.id.rv_computers, computers_list);
-            else if (i == 3) renderer(R.id.rv_books, books_list);
-            else if (i == 6) renderer(R.id.rv_clothes, clothes_list);
-            else if (i == 8) renderer(R.id.rv_health, health_list);
-            else renderer(R.id.rv_sports, sports_list);
-        }
+        for (int i : arr) requestQueue.add(getDataFromServer(webURL, String.valueOf(i)));
     }
 
     private void renderer(int rv, ArrayList<ItemBox> list){
@@ -294,7 +277,6 @@ public class LandingPage extends AppCompatActivity implements RecyclerView.OnScr
         RecyclerView.Adapter adapter = new Itembox_Adapter(list, this, 1);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-
     }
 
     private boolean isLastItemDisplaying(RecyclerView recyclerView) {

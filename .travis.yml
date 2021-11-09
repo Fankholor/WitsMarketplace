@@ -24,10 +24,6 @@ android:
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
 
-branches:
-  only:
-    - main
-
 env:
   global:
     - TARGET_VERSION=31
